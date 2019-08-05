@@ -1,0 +1,26 @@
+#description {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+#ContentContainer {
+	display: grid;
+	grid-template-columns: repeat(1, 100%);
+	grid-template-rows: repeat(autofit, 100px);
+	grid-gap: 0% 0%;
+}
+
+@media (min-width: 700px){
+	#ContentContainer {
+	grid-template-columns: repeat(2, 49.5%);
+	grid-gap: 0% 1%;
+	}
+}
+
+@media (min-width: 900px){
+	#ContentContainer {
+	grid-template-columns: repeat(3, 33%);
+	grid-gap: 0% 0.5%;
+	}
+}
