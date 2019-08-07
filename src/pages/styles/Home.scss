@@ -1,0 +1,54 @@
+@import "../../globals.sass";
+
+.home {
+  .category-display {
+    .title {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1.45em;
+    }
+
+    .card-row {
+      margin-top: 20px;
+      height: 30vh;
+      overflow-x: auto;
+      white-space: nowrap;
+      min-height: 220px;
+      max-height: 400px;
+
+      .card {
+        display: inline-block;
+        text-align: center;
+        width: 24vw;
+        min-width: 340px;
+        max-width: 650px;
+        height: 99.3%;
+
+        border: 1px solid #707070;
+        border-radius: 5px;
+        margin-right: 5%;
+
+        // Last card should have set margin
+        &:last-child {
+          margin-right: 20px;
+        }
+
+        // Set smallest margin possible to 40px
+        @media only screen and (max-width: 1000px) {
+          margin-right: 40px;
+        }
+
+        // Set largest margin possible to 70px
+        @media only screen and (min-width: 1750px) {
+          margin-right: 70px;
+        }
+
+        .title {
+          font-family: Helvetica, Arial, sans-serif;
+          font-size: 1.15em;
+          font-weight: 600;
+          margin-top: 12px;
+        }
+      }
+    }
+  }
+}
