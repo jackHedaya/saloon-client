@@ -19,7 +19,7 @@ function Header() {
 function Search(props) {
   return (
     <div className="search-wrapper">
-      <input />
+      <input placeholder="Search..." />
       <div>
         <div className="body">
           <GoSearch size={20} className="icon" color="white" />
