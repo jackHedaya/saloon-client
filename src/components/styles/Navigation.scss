@@ -10,12 +10,27 @@
   width: 15vw;
   min-width: 200px;
 
-  .nav-item {
-    padding-left: 30px;
-    color: $main-color;
-  }
+  .links {
+    display: block;
+    margin-top: 30px;
 
-  a {
-    font-style: none;
+    .nav-item {
+      @include main-text();
+
+      display: block;
+      font-family: Arial, Helvetica, sans-serif;
+      padding: 10px 0 10px 30px;
+      font-size: 1.2em;
+      font-weight: 200;
+
+      &:hover, &.selected {
+        background-color: $main-color;
+        color: white;
+      }
+    }
+
+    a {
+      font-style: normal;
+    }
   }
 }
