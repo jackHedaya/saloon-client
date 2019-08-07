@@ -2,11 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { GoSearch } from "react-icons/go";
 
-import "./styles/Navigation.scss";
+import "./styles/Header.scss";
 
-function Navigation() {
+function Header() {
   return (
-    <div className={"navigation"}>
+    <div className="header">
       <Link to="/" className="saloon">
         Saloon
       </Link>
@@ -39,4 +39,4 @@ function LoginAccount(props) {
   );
 }
 
-export default Navigation;
+export default Header;
