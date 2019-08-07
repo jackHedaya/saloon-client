@@ -3,8 +3,4 @@
 .content {
   margin-left: calc(#{$navigation-width} + 20px);
   margin-top: calc(#{$header-height} + 20px);
-
-  @media only screen and (max-width: 1334px) {
-    margin-left: calc(#{$navigation-width-min} + 20px);
-  }
 }
