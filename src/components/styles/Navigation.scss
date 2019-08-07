@@ -2,13 +2,14 @@
 
 .navigation {
   position: fixed;
+  top: 0;
   height: 100%;
-  margin-top: 85px;
+  margin-top: $header-height;
   padding-top: 5px;
   box-shadow: 0px 0px 1px 1px lightgray;
   background-color: white;
-  width: 15vw;
-  min-width: 200px;
+  width: $navigation-width;
+  min-width: $navigation-width-min;
 
   .links {
     display: block;

@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-d
 import Header from "./components/Header";
 import Navigation from './components/Navigation';
 
+import "./App.scss"
+
 function App() {
   return (
     <Router>
