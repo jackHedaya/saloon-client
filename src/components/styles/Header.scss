@@ -13,13 +13,8 @@
   height: 85px;
   z-index: 1000;
 
-  @mixin nav-text {
-    font-family: "Rubik", Arial, Helvetica, sans-serif;
-    color: $main-color;
-  }
-
   .saloon {
-    @include nav-text();
+    @include main-text();
 
     font-weight: 600;
     float: left;
@@ -28,7 +23,7 @@
   }
 
   .login-account {
-    @include nav-text();
+    @include main-text();
 
     font-weight: 300;
     font-size: 1.5em;
