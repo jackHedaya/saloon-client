@@ -1,3 +1,9 @@
+## The Plan
+We are using React, node.js, and a relational database. Ultimately, we want isomorphic rendering (ssr for the first page, and csr for subsequent interactions). To start, we will stick with pure csr whic means we need an API. This repo is for the client.
+
+### Front end
+We are using [Ant Design](https://ant.design) with React for some of their components. The structure should be as modular as possible. React components should go in the components folder, and the app will be a collection of components with certain props and state.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
