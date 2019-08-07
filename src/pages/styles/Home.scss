@@ -2,8 +2,15 @@
 
 .home {
   .category-display {
+    margin-bottom: 30px;
+
+    // Last row should be vertically symmetrical
+    &:last-child {
+      margin-bottom: 20px;
+    }
+
     .title {
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: $main-body-font;
       font-size: 1.45em;
     }
 
@@ -17,7 +24,6 @@
 
       .card {
         display: inline-block;
-        text-align: center;
         width: 24vw;
         min-width: 340px;
         max-width: 650px;
@@ -42,13 +48,63 @@
           margin-right: 70px;
         }
 
-        .title {
-          font-family: Helvetica, Arial, sans-serif;
-          font-size: 1.15em;
-          font-weight: 600;
-          margin-top: 12px;
+
+          .title {
+            text-align: center;
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 1.15em;
+            font-weight: 600;
+            margin-top: 12px;
+          }
+
+          .discussed-by {
+            margin-top: 5px;
+
+            .sb-avatar {
+              margin-left: -10px;
+              float: left;
+              white-space: normal;
+
+              &:first-of-type {
+                margin-left: 23px;
+              }
+
+              .sb-avatar__text {
+                border: 3px solid white;
+                margin-top: -3px;
+              }
+            }
+
+            .text {
+              margin-left: 20px;
+              width: 200px;
+              height: 40px;
+              line-height: 40px;
+              display: inline-block;
+
+              div {
+                white-space: normal;
+                font-family: $main-body-font;
+                font-size: 0.75em;
+                display: inline-block;
+                line-height: normal;
+                vertical-align: middle;
+              }
+            }
+          }
+
+          .description {
+            width: 300px;
+            text-overflow: ellipsis;
+            overflow-y: hidden;
+            margin-top: 15px;
+            font-family: Roboto, Arial, Helvetica, sans-serif;
+            font-size: 0.9em;
+            margin-left: 23px;
+            height: 100px;
+            white-space: normal;
+          }
         }
       }
     }
-  }
 }
