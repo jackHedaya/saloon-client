@@ -1,5 +1,9 @@
 @import "../../globals.sass";
 
+$card-content-margin-left: 23px;
+$card-width: 500px;
+$between-cards: 15px;
+
 .home {
   .category-display {
     margin-bottom: 30px;
@@ -23,15 +27,17 @@
       max-height: 400px;
 
       .card {
+        cursor: pointer;
         display: inline-block;
         width: 24vw;
         min-width: 340px;
         max-width: 650px;
         height: 99.3%;
 
-        border: 1px solid #707070;
-        border-radius: 5px;
-        margin-right: 5%;
+        border: 1px solid #cecece;
+        background-color: #ffffff;
+        border-radius: 10px;
+        margin-right: $between-cards;
 
         // Last card should have set margin
         &:last-child {
@@ -40,71 +46,65 @@
 
         // Set smallest margin possible to 40px
         @media only screen and (max-width: 1000px) {
-          margin-right: 40px;
+          margin-right: $between-cards;
         }
 
-        // Set largest margin possible to 70px
-        @media only screen and (min-width: 1750px) {
-          margin-right: 70px;
+        .title {
+          text-align: center;
+          font-family: Helvetica, Arial, sans-serif;
+          font-size: 1.15em;
+          font-weight: 600;
+          margin-top: 12px;
         }
 
+        .discussed-by {
+          margin-top: 5px;
 
-          .title {
-            text-align: center;
-            font-family: Helvetica, Arial, sans-serif;
-            font-size: 1.15em;
-            font-weight: 600;
-            margin-top: 12px;
-          }
-
-          .discussed-by {
-            margin-top: 5px;
-
-            .sb-avatar {
-              margin-left: -10px;
-              float: left;
-              white-space: normal;
-
-              &:first-of-type {
-                margin-left: 23px;
-              }
-
-              .sb-avatar__text {
-                border: 3px solid white;
-                margin-top: -3px;
-              }
-            }
-
-            .text {
-              margin-left: 20px;
-              width: 200px;
-              height: 40px;
-              line-height: 40px;
-              display: inline-block;
-
-              div {
-                white-space: normal;
-                font-family: $main-body-font;
-                font-size: 0.75em;
-                display: inline-block;
-                line-height: normal;
-                vertical-align: middle;
-              }
-            }
-          }
-
-          .description {
-            width: 300px;
-            text-overflow: ellipsis;
-            overflow-y: hidden;
-            margin-top: 15px;
-            font-family: Roboto, Arial, Helvetica, sans-serif;
-            font-size: 0.9em;
-            margin-left: 23px;
-            height: 100px;
+          .sb-avatar {
+            margin-left: -10px;
+            float: left;
             white-space: normal;
+
+            &:first-of-type {
+              margin-left: $card-content-margin-left;
+            }
+
+            .sb-avatar__text {
+              border: 3px solid white;
+              margin-top: -3px;
+            }
           }
+
+          .text {
+            margin-left: $card-content-margin-left;
+            width: 200px;
+            height: 40px;
+            line-height: 40px;
+            display: inline-block;
+
+            div {
+              white-space: normal;
+              font-family: $main-body-font;
+              font-size: 0.75em;
+              display: inline-block;
+              line-height: normal;
+              vertical-align: middle;
+            }
+          }
+        }
+
+        .description {
+          width: 300px;
+          text-overflow: ellipsis;
+          overflow-y: hidden;
+          margin-top: 15px;
+          font-family: Roboto, Arial, Helvetica, sans-serif;
+          font-size: 0.9em;
+          margin-left: $card-content-margin-left;
+          height: 100px;
+          white-space: normal;
         }
       }
     }
+  }
 }
