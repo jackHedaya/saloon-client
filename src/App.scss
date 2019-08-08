@@ -1,0 +1,6 @@
+@import "./globals.sass";
+
+.content {
+  margin-left: calc(#{$navigation-width} + 20px);
+  margin-top: calc(#{$header-height} + 20px);
+}
