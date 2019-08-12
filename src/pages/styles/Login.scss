@@ -47,4 +47,16 @@
     outline: none;
     -webkit-appearance: none;
   }
+
+  .register-here {
+    font-style: italic;
+
+    a {
+      color: rgb(68, 112, 255);
+
+      &:hover {
+        color: blueviolet;
+      }
+    }
+  }
 }
