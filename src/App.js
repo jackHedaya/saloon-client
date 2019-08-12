@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Navigation from './components/Navigation';
 
 import Home from "./pages/Home"
+import Login from "./pages/Login";
 
 import "./App.scss"
 
@@ -18,6 +19,7 @@ function App() {
         <Switch>
           <Redirect exact from="/" to="/home" />
           <Route exact path="/home" component={Home} />
+          <Route exact path="/login" component={Login} />
         </Switch>
         </div>
       </div>
