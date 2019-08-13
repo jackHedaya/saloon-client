@@ -22,7 +22,6 @@
         font-family: $main-body-font;
         display: inline-block;
         
-
         .discussed-by {
           .sb-avatar {
             margin-left: -10px;
@@ -88,6 +87,7 @@
 
   .break {
     width: 50%;
+    max-width: 500px;
     height: 2px;
     background-color: #707070;
     margin: 30px auto;
