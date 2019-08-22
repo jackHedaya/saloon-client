@@ -65,7 +65,7 @@ $panel-padding: 20px;
       }
 
       .likes {
-        &:hover {
+        &:hover, &.upvoted {
           cursor: pointer;
           svg { fill: $main-color; }
           

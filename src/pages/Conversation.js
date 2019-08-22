@@ -107,7 +107,7 @@ function Comment(props) {
         <div className="contributor" style={{ color }}>
           {contributor}
         </div>
-        <div className="likes" onClick={() => setUpvoted(!upvoted)}>
+        <div className={`likes ${upvoted ? "upvoted" : ""}`} onClick={() => setUpvoted(!upvoted)}>
           {upvoted ? likes + 1 : likes} <FiThumbsUp style={{ fontSize: "12px" }} />
         </div>
         <div className="time">{time_of_comment}</div>
