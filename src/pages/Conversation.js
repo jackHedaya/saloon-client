@@ -99,6 +99,7 @@ function Comments(props) {
 function Comment(props) {
   const { time_of_comment, contributor, body, _showing, likes } = props;
   const [color] = useState(randomColor());
+  const [upvoted, setUpvoted] = useState(false);
 
   return (
     <div className={`comment ${_showing ? "" : "fade"}`}>
@@ -106,8 +107,8 @@ function Comment(props) {
         <div className="contributor" style={{ color }}>
           {contributor}
         </div>
-        <div className="likes">
-          {likes} <FiThumbsUp style={{ fontSize: "12px" }} />
+        <div className="likes" onClick={() => setUpvoted(!upvoted)}>
+          {upvoted ? likes + 1 : likes} <FiThumbsUp style={{ fontSize: "12px" }} />
         </div>
         <div className="time">{time_of_comment}</div>
       </div>
