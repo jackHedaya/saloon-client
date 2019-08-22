@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { GoChevronLeft } from "react-icons/go";
+import { FiThumbsUp } from "react-icons/fi";
 
-import { randomColor } from "../_helpers"
+import { randomColor } from "../_helpers";
 
 import "./styles/Conversation.scss";
 
@@ -39,8 +40,13 @@ function FAKE_FETCH(id) {
       }
     ],
     comments: [
-      { contributor: "Abraham Kassin", body: "Satan has a good point there", time_of_comment: "9 hours ago" },
-      { contributor: "Creepy Demon #4", body: "Go get 'em boss!", time_of_comment: "9 hours ago" }
+      {
+        contributor: "Abraham Kassin",
+        body: "Satan has a good point there",
+        time_of_comment: "9 hours ago",
+        likes: 99
+      },
+      { contributor: "Creepy Demon #4", body: "Go get 'em boss!", time_of_comment: "9 hours ago", likes: 3 }
     ]
   };
 }
@@ -82,18 +88,30 @@ function Comments(props) {
       {props.comments.map(comment => (
         <Comment key={`${comment.contributor}/${comment.time_of_comment}`} _showing={showing} {...comment} />
       ))}
+      <div className={`add ${showing ? "" : "fade"}`}>
+        <textarea />
+        <button type="submit">Submit</button>
+      </div>
     </div>
   );
 }
 
 function Comment(props) {
-  const { time_of_comment, contributor, body, _showing } = props;
+  const { time_of_comment, contributor, body, _showing, likes } = props;
+  const [color] = useState(randomColor());
+
   return (
     <div className={`comment ${_showing ? "" : "fade"}`}>
-      <div>
-        <span className="contributor" style={{ color: randomColor() }}>{contributor}</span>: {body}
+      <div className="meta">
+        <div className="contributor" style={{ color }}>
+          {contributor}
+        </div>
+        <div className="likes">
+          {likes} <FiThumbsUp style={{ fontSize: "12px" }} />
+        </div>
+        <div className="time">{time_of_comment}</div>
       </div>
-      <div className="time-of-comment">{time_of_comment}</div>
+      <div className="body">{body}</div>
     </div>
   );
 }
