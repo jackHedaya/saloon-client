@@ -61,7 +61,7 @@ $panel-padding: 20px;
       justify-content: space-between;
 
       .contributor {
-        font-weight: 600;
+        font-weight: 400;
       }
 
       .likes {
@@ -72,6 +72,8 @@ $panel-padding: 20px;
           color: $main-color;
         }
       }
+
+      .time { font-style: italic; }
     }
 
     .body {
