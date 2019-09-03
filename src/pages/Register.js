@@ -1,16 +1,29 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, Redirect } from "react-router-dom";
 import { Formik, Form, Field } from "../components/Form";
 import * as Yup from "yup";
 
+import * as authenticationService from "../services/authentication.service";
+import { AuthContext } from "../App";
+
 function Register() {
-  return (
+  const { setToken, setIsLoggedIn, isLoggedIn } = useContext(AuthContext);
+
+  return isLoggedIn ? (
+    <Redirect to="/home" />
+  ) : (
     <div className="form">
       <h1>Register</h1>
       <Formik
         initialValues={{ username: "", password: "", first_name: "", last_name: "" }}
-        onSubmit={vals => {
-          alert(JSON.stringify(vals));
+        onSubmit={(vals, actions) => {
+          authenticationService
+            .register(vals)
+            .then(data => {
+              setToken(data.token);
+              setIsLoggedIn(true);
+            })
+            .catch(_ => actions.setError({ username: "something went wrong" }));
         }} // Handle submitting later
         validationSchema={Yup.object().shape({
           first_name: Yup.string().required(),
