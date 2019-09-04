@@ -15,9 +15,9 @@ function req(url, options) {
 }
 
 export function login(username, password) {
-  return req("/user/login", { method: "POST", body: { user_name: username, password } });
+  return req("/user/login", { method: "POST", body: { username, password } });
 }
 
 export function register({ username, password, first_name, last_name }) {
-  return req("/user/signup", { method: "POST", body: { user_name: username, first_name, last_name, password } });
+  return req("/user/signup", { method: "POST", body: { username, first_name, last_name, password } });
 }
