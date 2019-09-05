@@ -18,7 +18,7 @@ function Login(props) {
         onSubmit={({ username, password }, actions) => {
           authenticationService
             .login(username, password)
-            .catch(data => {
+            .then(data => {
               setToken(data.token);
               setIsLoggedIn(true);
             })
