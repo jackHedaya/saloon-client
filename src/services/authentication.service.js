@@ -18,6 +18,6 @@ export function login(username, password) {
   return req("/user/login", { method: "POST", body: { username, password } });
 }
 
-export function register({ username, password, first_name, last_name }) {
-  return req("/user/signup", { method: "POST", body: { username, first_name, last_name, password } });
+export function register({ username, password, first_name, last_name, email }) {
+  return req("/user/signup", { method: "POST", body: { username, first_name, last_name, password, email } });
 }

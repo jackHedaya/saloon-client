@@ -15,7 +15,7 @@ function Register() {
     <div className="form">
       <h1>Register</h1>
       <Formik
-        initialValues={{ username: "", password: "", first_name: "", last_name: "" }}
+        initialValues={{ username: "", password: "", first_name: "", last_name: "", email: "" }}
         onSubmit={(vals, actions) => {
           authenticationService
             .register(vals)
@@ -34,6 +34,7 @@ function Register() {
       >
         {({ isSubmitting }) => (
           <Form>
+            <Field type="email" name="email" placeholder="email" />
             <Field type="text" name="first_name" placeholder="first name" />
             <Field type="text" name="last_name" placeholder="last name" />
             <Field type="text" name="username" placeholder="username" />
