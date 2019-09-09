@@ -9,7 +9,6 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Conversation from "./pages/Conversation";
-import Post from "./pages/Post";
 
 import "./App.scss";
 
@@ -41,7 +40,7 @@ function App() {
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/conversation/:id" component={Conversation} />
-              <SecuredRoute exact path="/post" component={Post} authenticated={isLoggedIn} />
+              {/* <SecuredRoute exact path="/post" component={Post} authenticated={isLoggedIn} /> */}
             </Switch>
           </div>
         </div>
