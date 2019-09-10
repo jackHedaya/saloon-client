@@ -57,7 +57,7 @@ function Conversation(props) {
   const data = FAKE_FETCH(id);
 
   return (
-    <div>
+    <div className="conversation">
       <Discussion posts={data.posts} />
       <Title title={data.title} />
       <Comments comments={data.comments} />
@@ -70,7 +70,28 @@ function Title(props) {
 }
 
 function Discussion(props) {
-  return <div className="discussion" />;
+  return (
+    <div className="discussion">
+      <div className="inner">
+        {props.posts &&
+          props.posts.map((item, index) => (
+            <DiscussionItem {...item} key={`${item.contributor}/${item.time_of_post}/${index}`} />
+          ))}
+      </div>
+    </div>
+  );
+}
+
+function DiscussionItem(props) {
+  return (
+    <>
+      <div className="item">
+        <span>{props.contributor}: </span>
+        <span>{props.post}</span>
+      </div>
+      <div className="break"></div>
+    </>
+  );
 }
 
 function Comments(props) {
@@ -85,8 +106,8 @@ function Comments(props) {
         </div>
         <div className={`title ${showing ? "" : "fade"}`}>Comments</div>
       </div>
-      {props.comments.map(comment => (
-        <Comment key={`${comment.contributor}/${comment.time_of_comment}`} _showing={showing} {...comment} />
+      {props.comments.map((comment, index) => (
+        <Comment key={`${comment.contributor}/${comment.time_of_comment}/${index}`} _showing={showing} {...comment} />
       ))}
       <div className={`add ${showing ? "" : "fade"}`}>
         <textarea />
