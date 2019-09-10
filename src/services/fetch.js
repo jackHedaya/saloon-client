@@ -3,7 +3,7 @@
  * @param {string} url
  * @param {import("http").RequestOptions} options
  */
-export default function fetch(url, options) {
+export default function newFetch(url, options) {
   return fetch(`https://agile-tor-73556.herokuapp.com/api/v1${url}`, {
     headers: { "Content-Type": "application/json" },
     ...options,
