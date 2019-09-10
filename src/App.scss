@@ -1,6 +1,11 @@
 @import "./globals.sass";
 
+$edge-padding: 20px;
+
 .content {
-  margin-left: calc(#{$navigation-width} + 20px);
-  margin-top: calc(#{$header-height} + 20px);
+  margin-left: calc(#{$navigation-width} + #{$edge-padding});
+  margin-top: calc(#{$header-height} + #{$edge-padding});
+
+  width: calc(100vw - #{$edge-padding} - #{$navigation-width});
+  height: calc(100vh - #{$edge-padding} - #{$header-height});
 }
