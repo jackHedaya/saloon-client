@@ -83,11 +83,13 @@ function Discussion(props) {
 }
 
 function DiscussionItem(props) {
+  const { contributor, post } = props
+
   return (
     <>
       <div className="item">
-        <span>{props.contributor}: </span>
-        <span>{props.post}</span>
+        <span style={{ color: randomColor(contributor) }}>{contributor}: </span>
+        <span>{post}</span>
       </div>
       <div className="break"></div>
     </>
@@ -119,13 +121,12 @@ function Comments(props) {
 
 function Comment(props) {
   const { time_of_comment, contributor, body, _showing, likes } = props;
-  const [color] = useState(randomColor());
   const [upvoted, setUpvoted] = useState(false);
 
   return (
     <div className={`comment ${_showing ? "" : "fade"}`}>
       <div className="meta">
-        <div className="contributor" style={{ color }}>
+        <div className="contributor" style={{ color: randomColor(contributor) }}>
           {contributor}
         </div>
         <div className={`likes ${upvoted ? "upvoted" : ""}`} onClick={() => setUpvoted(!upvoted)}>
