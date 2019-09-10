@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { GoChevronLeft } from "react-icons/go";
-import { FiThumbsUp } from "react-icons/fi";
+import { FiThumbsUp, FiThumbsDown } from "react-icons/fi";
 
 import { randomColor } from "../_helpers";
 
@@ -59,14 +59,43 @@ function Conversation(props) {
   return (
     <div className="conversation">
       <Discussion posts={data.posts} />
-      <Title title={data.title} />
+      <Title title={data.title} views={data.views} likes={data.votes} />
       <Comments comments={data.comments} />
     </div>
   );
 }
 
 function Title(props) {
-  return <div className="title" />;
+  const { title, views, likes } = props;
+
+  const [vote, setVote] = useState("NONE");
+  const handleVote = nVote => {
+    if (nVote === vote) setVote("NONE");
+    else setVote(nVote);
+  };
+
+  return (
+    <div className="d-title">
+      <TitleVote likes={likes} vote={vote} setVote={handleVote} />
+      <div>
+        <div className="text">{title}</div>
+        <div className="join">Join Conversation</div>
+      </div>
+      <div className="views">{views}</div>
+    </div>
+  );
+}
+
+function TitleVote(props) {
+  const { likes = "0", vote, setVote } = props;
+
+  return (
+    <div className="vote">
+      <FiThumbsUp className={`thumb ${vote === "UP" ? "upvoted" : ""}`} onClick={() => setVote("UP")} />
+      <span className="amount">{likes.split(" ")[0]}</span>
+      <FiThumbsDown className={`thumb ${vote === "DOWN" ? "upvoted" : ""}`} onClick={() => setVote("DOWN")} />
+    </div>
+  );
 }
 
 function Discussion(props) {
@@ -83,7 +112,7 @@ function Discussion(props) {
 }
 
 function DiscussionItem(props) {
-  const { contributor, post } = props
+  const { contributor, post } = props;
 
   return (
     <>

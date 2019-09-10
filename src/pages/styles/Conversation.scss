@@ -1,14 +1,24 @@
 @import "../../globals.sass";
 
+// Comment Pane Variables
+$sliding-speed: 0.5s;
+$panel-padding: 20px;
+
+// Content Variables
+$content-width: calc(100% - 60px - #{$panel-padding});
+
 .conversation {
-  $sliding-speed: 0.5s;
-  $panel-padding: 20px;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
 
   .discussion {
     display: flex;
-    width: calc(100% - 60px - #{$panel-padding});
+    flex: 1;
+    width: $content-width;
     justify-content: center;
     white-space: pre-wrap;
+    overflow: scroll;
 
     .inner {
       width: 65%;
@@ -24,21 +34,73 @@
             font-style: italic;
             color: #44127e;
           }
-
-          &:last-of-type {}
         }
       }
 
       .break {
         width: 40%;
-        height: 1px;
-        background-color: black;
+        height: 2px;
+        background-color: #6f6f6f99;
         margin: 30px auto;
+        border-radius: 100px;
 
         &:last-of-type {
           display: none;
         }
       }
+    }
+  }
+
+  .d-title {
+    height: 65px;
+    margin-left: -20px;
+    width: calc(#{$content-width} + 40px);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    border-top: 2px solid rgb(175, 175, 175);
+    text-align: center;
+
+    .text {
+      margin-top: 4px;
+      font-family: "Helvetica Neue";
+      font-weight: bold;
+      font-size: 1.15em;
+      text-align: center;
+      color: #000;
+    }
+
+    .vote {
+      font-size: 1.1em;
+      display: flex;
+
+      .amount {
+        padding: 0 3px;
+      }
+      
+      .thumb {
+        @extend .likes;
+      }
+    }
+
+    .join {
+      font-weight: bold;
+      color: $main-color;
+      font-size: 1em;
+      font-family: Arial;
+      cursor: pointer;
+      user-select: none;
+      text-align: center;
+
+      &:hover {
+        color: $secondary-color;
+      }
+    }
+
+    .views {
+      font-family: Arial;
+      font-size: 1.1em;
     }
   }
 
@@ -103,19 +165,6 @@
           font-weight: 400;
         }
 
-        .likes {
-
-          &:hover,
-          &.upvoted {
-            cursor: pointer;
-
-            svg {
-              fill: $main-color;
-            }
-
-            color: $main-color;
-          }
-        }
 
         .time {
           font-style: italic;
@@ -165,5 +214,20 @@
         border-radius: 12px;
       }
     }
+  }
+}
+
+.likes {
+
+  &:hover,
+  &.upvoted {
+    cursor: pointer;
+    fill: $main-color;
+
+    svg {
+      fill: $main-color;
+    }
+
+    color: $main-color;
   }
 }
