@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { GoChevronLeft } from "react-icons/go";
-import { FiThumbsUp } from "react-icons/fi";
+import { FiThumbsUp, FiThumbsDown } from "react-icons/fi";
 
 import { randomColor } from "../_helpers";
 
@@ -57,20 +57,72 @@ function Conversation(props) {
   const data = FAKE_FETCH(id);
 
   return (
-    <div>
+    <div className="conversation">
       <Discussion posts={data.posts} />
-      <Title title={data.title} />
+      <Title title={data.title} views={data.views} likes={data.votes} />
       <Comments comments={data.comments} />
     </div>
   );
 }
 
 function Title(props) {
-  return <div className="title" />;
+  const { title, views, likes } = props;
+
+  const [vote, setVote] = useState("NONE");
+  const handleVote = nVote => {
+    if (nVote === vote) setVote("NONE");
+    else setVote(nVote);
+  };
+
+  return (
+    <div className="d-title">
+      <TitleVote likes={likes} vote={vote} setVote={handleVote} />
+      <div>
+        <div className="text">{title}</div>
+        <div className="join">Join Conversation</div>
+      </div>
+      <div className="views">{views}</div>
+    </div>
+  );
+}
+
+function TitleVote(props) {
+  const { likes = "0", vote, setVote } = props;
+
+  return (
+    <div className="vote">
+      <FiThumbsUp className={`thumb ${vote === "UP" ? "upvoted" : ""}`} onClick={() => setVote("UP")} />
+      <span className="amount">{likes.split(" ")[0]}</span>
+      <FiThumbsDown className={`thumb ${vote === "DOWN" ? "upvoted" : ""}`} onClick={() => setVote("DOWN")} />
+    </div>
+  );
 }
 
 function Discussion(props) {
-  return <div className="discussion" />;
+  return (
+    <div className="discussion">
+      <div className="inner">
+        {props.posts &&
+          props.posts.map((item, index) => (
+            <DiscussionItem {...item} key={`${item.contributor}/${item.time_of_post}/${index}`} />
+          ))}
+      </div>
+    </div>
+  );
+}
+
+function DiscussionItem(props) {
+  const { contributor, post } = props;
+
+  return (
+    <>
+      <div className="item">
+        <span style={{ color: randomColor(contributor) }}>{contributor}: </span>
+        <span>{post}</span>
+      </div>
+      <div className="break"></div>
+    </>
+  );
 }
 
 function Comments(props) {
@@ -85,8 +137,8 @@ function Comments(props) {
         </div>
         <div className={`title ${showing ? "" : "fade"}`}>Comments</div>
       </div>
-      {props.comments.map(comment => (
-        <Comment key={`${comment.contributor}/${comment.time_of_comment}`} _showing={showing} {...comment} />
+      {props.comments.map((comment, index) => (
+        <Comment key={`${comment.contributor}/${comment.time_of_comment}/${index}`} _showing={showing} {...comment} />
       ))}
       <div className={`add ${showing ? "" : "fade"}`}>
         <textarea />
@@ -98,13 +150,12 @@ function Comments(props) {
 
 function Comment(props) {
   const { time_of_comment, contributor, body, _showing, likes } = props;
-  const [color] = useState(randomColor());
   const [upvoted, setUpvoted] = useState(false);
 
   return (
     <div className={`comment ${_showing ? "" : "fade"}`}>
       <div className="meta">
-        <div className="contributor" style={{ color }}>
+        <div className="contributor" style={{ color: randomColor(contributor) }}>
           {contributor}
         </div>
         <div className={`likes ${upvoted ? "upvoted" : ""}`} onClick={() => setUpvoted(!upvoted)}>

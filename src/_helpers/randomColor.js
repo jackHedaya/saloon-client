@@ -1,8 +1,9 @@
-export function randomColor() {
-  var letters = '0123456789ABCDEF';
-  var color = '#';
-  for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
+import * as randCol from "randomcolor";
+
+/**
+ *
+ * @param {string} username to be used as seed
+ */
+export function randomColor(username) {
+  return randCol({ seed: username, luminosity: "dark" });
 }
