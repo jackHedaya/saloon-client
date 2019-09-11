@@ -12,11 +12,14 @@ import Conversation from "./pages/Conversation";
 
 import "./App.scss";
 
-const AuthContext = React.createContext()
+/**
+ * @type {React.Context<{ isLoggedIn: boolean, setIsLoggedIn: ()=> void, token: string, setToken: () => void }>}
+ */
+const AuthContext = React.createContext();
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [token, setToken] = useState(null)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [token, setToken] = useState(null);
 
   return (
     <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, token, setToken }}>
@@ -65,4 +68,4 @@ function SecuredRoute({ component: Component, authenticated, ...rest }) {
 }
 
 export default App;
-export { AuthContext }
+export { AuthContext };
