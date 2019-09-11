@@ -14,20 +14,23 @@ function Login(props) {
     <div className="form">
       <h1>Login</h1>
       <Formik
-        initialValues={{ username: "", password: "" }}
-        onSubmit={({ username, password }, actions) => {
+        initialValues={{ email: "", password: "" }}
+        onSubmit={({ email, password }, actions) => {
           authenticationService
-            .login(username, password)
+            .login(email, password)
             .then(data => {
-              setToken(data.token);
+              setToken(data);
               setIsLoggedIn(true);
             })
-            .catch(_ => actions.setErrors({ password: "incorrect password" }));
+            .catch(_ => {
+              actions.setErrors({ password: "incorrect password" });
+              actions.setSubmitting(false)
+            });
         }}
       >
         {({ isSubmitting }) => (
           <Form>
-            <Field type="text" name="username" placeholder="username" />
+            <Field type="text" name="email" placeholder="email" />
             <Field type="password" name="password" placeholder="password" />
             <button type="submit" disabled={isSubmitting}>
               Submit

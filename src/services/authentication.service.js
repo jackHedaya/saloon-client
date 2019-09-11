@@ -1,7 +1,7 @@
 import fetch from './fetch'
 
-export function login(username, password) {
-  return fetch("/user/login", { method: "POST", body: { username, password } });
+export function login(email, password) {
+  return fetch("/user/login", { method: "POST", body: { email, password } });
 }
 
 export function register({ username, password, first_name, last_name, email }) {
