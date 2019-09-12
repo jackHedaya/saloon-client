@@ -1,14 +1,36 @@
 import React, { useState } from "react";
 import Avatar from "react-avatar";
+import ReactQuill from "react-quill";
+import { RingLoader } from "react-spinners";
 import { FiArrowRightCircle } from "react-icons/fi";
 
-import "react-quill/dist/quill.snow.css";
+import * as conversationService from "../services/conversation.service";
+import useAuth from "../hooks/useAuth";
+
 import "./styles/Post.scss";
-import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 export default function Post() {
+  const [token] = useAuth();
+
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
+
+  const [submitting, setSubmitting] = useState(false);
+
+  function uploadPost() {
+    setSubmitting(true);
+
+    conversationService
+      .postConversation(token, { title, body })
+      .then(data => {
+        console.log(data);
+        setSubmitting(false);
+      })
+      .catch(_ => {
+        setSubmitting(false);
+      });
+  }
 
   return (
     <div className="post">
@@ -18,8 +40,20 @@ export default function Post() {
         <CollaboratorSection>Active</CollaboratorSection>
         <CollaboratorSection color="gray">Invited</CollaboratorSection>
         <Invite />
-        <div className="post-button">
-          <div>Post</div>
+        <div className="post-button" onClick={uploadPost}>
+          {!submitting ? (
+            <div className="text">Post</div>
+          ) : (
+            <RingLoader
+              css={`
+                width: 50px;
+                height: 50px;
+                top: 12.5px;
+                left: 65px;
+              `}
+              size={40}
+            />
+          )}
         </div>
       </div>
     </div>
