@@ -19,7 +19,7 @@ function Login(props) {
           authenticationService
             .login(email, password)
             .then(data => {
-              setToken(data);
+              setToken(data.token);
               setIsLoggedIn(true);
             })
             .catch(_ => {
