@@ -2,7 +2,8 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { GoSearch } from "react-icons/go";
 
-import { AuthContext } from "../App";
+import useUser from "../hooks/useUser";
+import { AuthContext } from "../App"
 
 import "./styles/Header.scss";
 
@@ -33,7 +34,8 @@ function Search(props) {
 
 function LoginAccount(props) {
   const { accountName } = props;
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn } = useContext(AuthContext)
+  const user = useUser()
 
   return (
     <>
@@ -43,7 +45,7 @@ function LoginAccount(props) {
         </Link>
       )}
       <Link to="/login" className="login-account">
-        {accountName ? `Hello, ${accountName}` : "Login"}
+        {user ? `Hello, ${user.first_name}` : "Login"}
       </Link>
     </>
   );
