@@ -1,0 +1,58 @@
+@import "../../globals.sass";
+
+$collaborator-width: 180px;
+$collaborator-color: white;
+
+@mixin title-text() {
+  color: rgb(36, 36, 36);
+  font-family: Arial;
+  font-weight: bold;
+  text-align: center;
+}
+
+.post {
+  .inner {
+    width: calc(100% - #{$collaborator-width});
+    height: 100%;
+
+    .post-title {
+      @include title-text();
+
+      margin: 0 auto;
+      display: block;
+      font-size: 1.45em;
+      box-shadow: none;
+      outline: none;
+      border: none;
+    }
+  }
+
+  .collaborators {
+    @include title-text();
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    margin-top: $header-height;
+    padding-top: 1.2em;
+    box-shadow: 0px 0px 7px 1px lightgray;
+    background-color: $collaborator-color;
+    width: $collaborator-width;
+    font-size: 1.3em;
+
+    .section {
+      width: 75%;
+      margin-top: 10px;
+      text-align: left;
+      margin-right: auto;
+      margin-left: auto;
+      
+      .title {
+        color: #2C2C2C;
+        font-size: 0.6em;
+      }
+    }
+
+  }
+}
