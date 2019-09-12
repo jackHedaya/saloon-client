@@ -13,7 +13,7 @@ $collaborator-color: white;
 .post {
   height: 100%;
 
-  .inner {
+  .editor {
     width: calc(100% - #{$collaborator-width} - 20px);
     height: 100%;
 
