@@ -10,6 +10,6 @@ export default function newFetch(url, options) {
     body: JSON.stringify(options.body)
   }).then(resp => {
     if (resp.ok) return resp.json();
-    throw new Error("Request Error");
+    throw resp;
   });
 }
