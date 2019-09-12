@@ -12,7 +12,7 @@ export default function useUser() {
       .getUser(token)
       .then(u => setUser(u))
       .catch(_ => setUser(null));
-  });
+  }, [token]);
 
   return user;
 }
