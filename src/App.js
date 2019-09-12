@@ -11,6 +11,7 @@ import Register from "./pages/Register";
 import Conversation from "./pages/Conversation";
 
 import "./App.scss";
+import Post from "./pages/Post";
 
 /**
  * @type {React.Context<{ isLoggedIn: boolean, setIsLoggedIn: ()=> void, token: string, setToken: () => void }>}
@@ -43,6 +44,7 @@ function App() {
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/conversation/:id" component={Conversation} />
+              <SecuredRoute exact path="/post" component={Post} authenticated={isLoggedIn} />
             </Switch>
           </div>
         </div>
