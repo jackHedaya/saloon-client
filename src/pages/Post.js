@@ -12,6 +12,9 @@ export default function Post() {
         <div>Collaborators</div>
         <CollaboratorSection>Active</CollaboratorSection>
         <CollaboratorSection>Invited</CollaboratorSection>
+        <div className="post-button">
+          <div>Post</div>
+        </div>
       </div>
     </div>
   );
