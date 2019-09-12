@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik, Form, Field as FormikField, ErrorMessage } from "formik";
 
-import "./styles/Form.scss"
+import "./styles/Form.scss";
 
 function Field(props) {
   return (

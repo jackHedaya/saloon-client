@@ -1,4 +1,4 @@
-import fetch from './fetch'
+import fetch from "./fetch";
 
 export function login(email, password) {
   return fetch("/user/login", { method: "POST", body: { email, password } });
