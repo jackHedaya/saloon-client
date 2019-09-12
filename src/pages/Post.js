@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "react-avatar";
 import { FiArrowRightCircle } from "react-icons/fi";
 
@@ -7,9 +7,12 @@ import "./styles/Post.scss";
 import ReactQuill from "react-quill";
 
 export default function Post() {
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
+
   return (
     <div className="post">
-      <Editor />
+      <Editor title={title} setTitle={setTitle} body={body} setBody={setBody} />
       <div className="collaborators">
         <div>Collaborators</div>
         <CollaboratorSection>Active</CollaboratorSection>
@@ -23,14 +26,18 @@ export default function Post() {
   );
 }
 
-function Editor() {
+function Editor(props) {
+  const { title, setTitle, body, setBody } = props;
+
   return (
     <div className="editor">
-      <input className="post-title" placeholder="Title" />
+      <input className="post-title" placeholder="Title" value={title} onChange={e => setTitle(e.currentTarget.value)} />
       <ReactQuill
         theme="snow"
         modules={{ toolbar: [["bold", "italic", "underline", "strike"], ["link"]] }}
         formats={["bold", "italic", "underline", "strike", "link"]}
+        value={body}
+        onChange={val => setBody(val)}
       />
     </div>
   );
