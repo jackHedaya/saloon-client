@@ -33,7 +33,6 @@ function Search(props) {
 }
 
 function LoginAccount(props) {
-  const { accountName } = props;
   const { isLoggedIn } = useContext(AuthContext)
   const user = useUser()
 
