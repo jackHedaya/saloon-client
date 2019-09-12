@@ -11,8 +11,10 @@ $collaborator-color: white;
 }
 
 .post {
+  height: 100%;
+
   .inner {
-    width: calc(100% - #{$collaborator-width});
+    width: calc(100% - #{$collaborator-width} - 20px);
     height: 100%;
 
     .post-title {
@@ -24,6 +26,31 @@ $collaborator-color: white;
       box-shadow: none;
       outline: none;
       border: none;
+    }
+
+    .quill {
+      margin: 0 auto;
+      margin-top: 20px;
+      width: 95%;
+      height: 80%;
+
+      .ql-toolbar {
+        border: none;
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+        z-index: 10;
+        position: relative;
+        
+      }
+      
+      .ql-container {
+        padding: 5px 3px;
+        font-size: 0.95em;
+        z-index: 1;
+        height: 100%;
+        background: #fff;
+        border: none;
+        box-shadow: 0 9px 0px 0px white, 0 -9px 0px 0px white, 0px 3px 6px rgba(0, 0, 0, 0.1), 0px 3px 6px rgba(0, 0, 0, 0.1);
+      }
     }
   }
 
@@ -47,7 +74,7 @@ $collaborator-color: white;
       text-align: left;
       margin-right: auto;
       margin-left: auto;
-      
+
       .title {
         color: #2C2C2C;
         font-size: 0.6em;
