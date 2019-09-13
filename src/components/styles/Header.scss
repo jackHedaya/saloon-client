@@ -1,4 +1,5 @@
 @import "../../globals.sass";
+@import "~bootstrap/dist/css/bootstrap.min.css";
 
 .header {
   position: fixed;
@@ -23,14 +24,31 @@
     font-size: 2em;
   }
 
+  li { list-style: none; }
+
   .login-account {
     @include main-text();
-
+    
     font-weight: 300;
     font-size: 1.5em;
     flex: unset;
     margin-right: 35px;
     padding-left: 0.5em;
+    
+    &.btn-secondary,
+    &.dropdown-toggle,
+    &.btn {
+      @include counter-bootstrap();
+
+      margin-right: 50px;
+      margin-left: 10px;
+      color: $main-color !important;
+      background: none !important;
+    }
+
+    .dropdown-item {
+      outline: none;
+    }
   }
 
   .search-wrapper {
