@@ -1,20 +1,36 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
+import { withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { GoSearch } from "react-icons/go";
+import { Dropdown, DropdownMenu, DropdownToggle, DropdownItem } from "reactstrap";
 
 import useUser from "../hooks/useUser";
-import { AuthContext } from "../App"
+import { AuthContext } from "../App";
 
 import "./styles/Header.scss";
 
-function Header() {
+function Header(props) {
+  const { isLoggedIn } = useContext(AuthContext);
+  const user = useUser();
+
   return (
     <div className="header">
       <Link to="/" className="saloon">
         Saloon
       </Link>
       <Search />
-      <LoginAccount />
+      {isLoggedIn && (
+        <Link to="/post" className="login-account">
+          Post
+        </Link>
+      )}
+      {isLoggedIn ? (
+        <UserDropdown name={user ? user.first_name : undefined} redirect={props.history.push} />
+      ) : (
+        <Link to="/login" className="login-account">
+          Login
+        </Link>
+      )}
     </div>
   );
 }
@@ -32,22 +48,33 @@ function Search(props) {
   );
 }
 
-function LoginAccount(props) {
-  const { isLoggedIn } = useContext(AuthContext)
-  const user = useUser()
+function UserDropdown(props) {
+  const [open, setOpen] = useState(false);
+  const { setIsLoggedIn, setToken } = useContext(AuthContext);
+
+  const toggle = () => setOpen(!open);
+
+  const signOut = () => {
+    setToken(null);
+    setIsLoggedIn(false);
+    props.redirect("/");
+  };
+
+  const DropdownLink = ({ to, ...other }) => <DropdownItem onClick={() => props.redirect(to)} {...other} />;
 
   return (
-    <>
-      {isLoggedIn && (
-        <Link to="/post" className="login-account">
-          Post
-        </Link>
-      )}
-      <Link to="/login" className="login-account">
-        {user ? `Hello, ${user.first_name}` : "Login"}
-      </Link>
-    </>
+    <Dropdown isOpen={open} toggle={toggle} nav>
+      <DropdownToggle caret className="login-account">
+        Hey, {props.name}
+      </DropdownToggle>
+      <DropdownMenu right>
+        <DropdownLink to="/user">Profile</DropdownLink>
+        <DropdownLink to="/add-issue">Saved Conversations</DropdownLink>
+        <DropdownItem divider />
+        <DropdownItem onClick={signOut}>Log Out</DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
   );
 }
 
-export default Header;
+export default withRouter(Header);
