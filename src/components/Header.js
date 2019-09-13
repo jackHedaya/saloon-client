@@ -69,7 +69,10 @@ function UserDropdown(props) {
       </DropdownToggle>
       <DropdownMenu right>
         <DropdownLink to="/user">Profile</DropdownLink>
-        <DropdownLink to="/add-issue">Saved Conversations</DropdownLink>
+        <DropdownLink to="/saved-conversations">Saved Conversations</DropdownLink>
+        <DropdownLink to="/history">History</DropdownLink>
+        <DropdownItem divider />
+        <DropdownLink to="/settings">Settings</DropdownLink>
         <DropdownItem divider />
         <DropdownItem onClick={signOut}>Log Out</DropdownItem>
       </DropdownMenu>
