@@ -109,7 +109,7 @@ $collaborator-color: white;
 
       .field {
         margin-top: 5px;
-        
+
         input {
           font-size: 0.6em;
           color: $secondary-color;
@@ -137,8 +137,11 @@ $collaborator-color: white;
       margin: auto auto;
       cursor: pointer;
       bottom: 0;
+      display: flex;
       position: absolute;
+      justify-content: center;
       color: $main-color;
+      align-items: center;
 
       &:hover {
         color: $secondary-color;
@@ -150,10 +153,7 @@ $collaborator-color: white;
         font-style: italic;
         font-size: 1.2em;
         text-align: center;
-        position: absolute;
-        bottom: 50%;
-        right: 0;
-        left: 0;
+        flex: 1;
       }
     }
   }

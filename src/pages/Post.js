@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Avatar from "react-avatar";
 import ReactQuill from "react-quill";
-import { RingLoader } from "react-spinners";
+import { Spinner } from "reactstrap";
 import { FiArrowRightCircle } from "react-icons/fi";
 
 import * as conversationService from "../services/conversation.service";
@@ -44,12 +44,11 @@ export default function Post() {
           {!submitting ? (
             <div className="text">Post</div>
           ) : (
-            <RingLoader
+            <Spinner
               css={`
                 width: 50px;
                 height: 50px;
-                top: 12.5px;
-                left: 65px;
+                flex: 1;
               `}
               size={40}
             />
