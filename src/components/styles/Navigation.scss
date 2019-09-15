@@ -23,7 +23,8 @@
       font-size: 1.2em;
       font-weight: 200;
 
-      &:hover, &.selected {
+      &:hover,
+      &.selected {
         background-color: $main-color;
         color: white;
       }

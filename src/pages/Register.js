@@ -23,8 +23,8 @@ function Register() {
               setToken(data.token);
               setIsLoggedIn(true);
             })
-            .catch(_ => actions.setFieldError("email", "something went wrong"))
-        }} // Handle submitting later
+            .catch(_ => actions.setFieldError("email", "something went wrong"));
+        }}
         validationSchema={Yup.object().shape({
           first_name: Yup.string().required(),
           last_name: Yup.string().required(),

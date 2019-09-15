@@ -24,7 +24,7 @@ function Login(props) {
             })
             .catch(_ => {
               actions.setErrors({ password: "incorrect password" });
-              actions.setSubmitting(false)
+              actions.setSubmitting(false);
             });
         }}
       >

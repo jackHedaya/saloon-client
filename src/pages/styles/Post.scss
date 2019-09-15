@@ -1,0 +1,160 @@
+@import "../../globals.sass";
+
+$collaborator-width: 180px;
+$collaborator-color: white;
+
+@mixin title-text() {
+  color: rgb(36, 36, 36);
+  font-family: Arial;
+  font-weight: bold;
+  text-align: center;
+}
+
+.post {
+  height: 100%;
+
+  .editor {
+    width: calc(100% - #{$collaborator-width} - 20px);
+    height: 100%;
+
+    .post-title {
+      @extend .clear-input;
+      @include title-text();
+
+      margin: 0 auto;
+      font-size: 1.7em;
+      width: 80%;
+    }
+
+    .quill {
+      margin: 0 auto;
+      margin-top: 20px;
+      width: 95%;
+      height: 80%;
+
+      .ql-toolbar {
+        border: none;
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.13);
+        z-index: 10;
+        position: relative;
+      }
+
+      .ql-container {
+        padding: 5px 3px;
+        font-size: 0.95em;
+        z-index: 1;
+        height: 100%;
+        background: #fff;
+        border: none;
+        box-shadow: 0 9px 0px 0px white, 0 -9px 0px 0px white, 0px 3px 6px rgba(0, 0, 0, 0.1), 0px 3px 6px rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+
+  .collaborators {
+    @include title-text();
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin-top: $header-height;
+    padding-top: 1.2em;
+    box-shadow: 0px 0px 7px 1px lightgray;
+    background-color: $collaborator-color;
+    width: $collaborator-width;
+    height: calc(100% - #{$header-height});
+    font-size: 1.3em;
+
+    .section {
+      width: 75%;
+      margin: 0 auto;
+      text-align: left;
+
+      .title {
+        margin-top: 15px;
+        color: #2C2C2C;
+        font-size: 0.6em;
+      }
+
+      .users {
+        max-height: 80px;
+        overflow: scroll;
+
+        .user {
+          margin-top: 5px;
+          font-size: 0.6em;
+          line-height: 25px;
+          font-weight: normal;
+          font-family: Arial, Helvetica, sans-serif;
+
+          .name {
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+
+    .invite {
+      padding-top: 25px;
+      font-weight: bold;
+      width: 75%;
+      margin: 0 auto;
+
+      .title {
+        text-align: left;
+        color: #2C2C2C;
+        font-size: 0.7em;
+        font-family: Arial;
+      }
+
+      .field {
+        margin-top: 5px;
+
+        input {
+          font-size: 0.6em;
+          color: $secondary-color;
+          font-weight: bold;
+          float: left;
+          width: 75%;
+          margin-right: 5px;
+          border-bottom: 2px solid black;
+        }
+
+        .submit {
+          display: block;
+          width: 0.6em;
+          cursor: pointer;
+          height: 15px;
+        }
+      }
+    }
+
+    .post-button {
+      width: inherit;
+      height: 100px;
+      background: #fff;
+      box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.16);
+      margin: auto auto;
+      cursor: pointer;
+      bottom: 0;
+      display: flex;
+      position: absolute;
+      justify-content: center;
+      color: $main-color;
+      align-items: center;
+
+      &:hover {
+        color: $secondary-color;
+      }
+
+      .text {
+        font-family: Arial;
+        font-weight: bold;
+        font-style: italic;
+        font-size: 1.2em;
+        text-align: center;
+        flex: 1;
+      }
+    }
+  }
+}

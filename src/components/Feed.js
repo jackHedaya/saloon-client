@@ -34,14 +34,14 @@ function Feed(props) {
 function FeedItem(props) {
   return (
     <>
-    <div className="item">
-      <div className="title">{props.title}</div>
-      <div className="inner">
-        <Metadata {...props} />
-        <div className="body">{props.description}</div>
+      <div className="item">
+        <div className="title">{props.title}</div>
+        <div className="inner">
+          <Metadata {...props} />
+          <div className="body">{props.description}</div>
+        </div>
       </div>
-    </div>
-    <div className="break" />
+      <div className="break" />
     </>
   );
 }
