@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-import { Persist } from "react-persist";
+import Persist from "./components/Persist";
 
 import Header from "./components/Header";
 import Navigation from "./components/Navigation";
@@ -25,7 +25,6 @@ function App() {
   return (
     <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, token, setToken }}>
       <Persist
-        name="saloon"
         data={{ token, isLoggedIn }}
         debounce={500}
         onMount={data => {
