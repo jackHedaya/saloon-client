@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-import Persist from "./components/Persist";
 
 import Header from "./components/Header";
 import Navigation from "./components/Navigation";
+import Persist from "./components/Persist";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Conversation from "./pages/Conversation";
+import Post from "./pages/Post";
 
 import "./App.scss";
-import Post from "./pages/Post";
 
 /**
  * @type {React.Context<{ isLoggedIn: boolean, setIsLoggedIn: ()=> void, token: string, setToken: () => void }>}
