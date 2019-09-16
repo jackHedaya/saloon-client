@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { GoChevronLeft } from "react-icons/go";
 import { FiThumbsUp, FiThumbsDown } from "react-icons/fi";
+import Interweave from "interweave";
+import { UrlMatcher } from "interweave-autolink";
 
 import { randomColor } from "../_helpers";
 
@@ -118,7 +120,7 @@ function DiscussionItem(props) {
     <>
       <div className="item">
         <span style={{ color: randomColor(contributor) }}>{contributor}: </span>
-        <span>{post}</span>
+        <Interweave content={post} matchers={[new UrlMatcher("url")]} />
       </div>
       <div className="break"></div>
     </>
