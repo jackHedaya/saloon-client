@@ -80,8 +80,9 @@
 
 a {
   text-decoration: none;
-
+  
   &:hover {
-    color: purple;
+    text-decoration: none;
+    color: $secondary-color !important;
   }
 }
