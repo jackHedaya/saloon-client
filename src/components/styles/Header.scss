@@ -24,17 +24,19 @@
     font-size: 2em;
   }
 
-  li { list-style: none; }
+  li {
+    list-style: none;
+  }
 
   .login-account {
     @include main-text();
-    
+
     font-weight: 300;
     font-size: 1.5em;
     flex: unset;
     margin-right: 35px;
     padding-left: 0.5em;
-    
+
     &.btn-secondary,
     &.dropdown-toggle,
     &.btn {
@@ -76,13 +78,18 @@
       font-size: 0.2em;
     }
   }
+
+  a {
+    &:hover {
+      color: $secondary-color !important;
+    }
+  }
 }
 
 a {
   text-decoration: none;
-  
+
   &:hover {
     text-decoration: none;
-    color: $secondary-color !important;
   }
 }
