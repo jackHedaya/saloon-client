@@ -50,7 +50,6 @@ export default function Post() {
                 height: 50px;
                 flex: 1;
               `}
-              size={40}
             />
           )}
         </div>
