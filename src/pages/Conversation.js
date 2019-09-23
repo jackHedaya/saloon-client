@@ -4,6 +4,10 @@ import { FiThumbsUp, FiThumbsDown } from "react-icons/fi";
 import Interweave from "interweave";
 import { UrlMatcher } from "interweave-autolink";
 
+import ConfiguredQuill from "../components/ConfiguredQuill";
+
+import useAuth from "../hooks/useAuth";
+
 import { randomColor } from "../_helpers";
 
 import "./styles/Conversation.scss";
@@ -24,6 +28,21 @@ function FAKE_FETCH(id) {
     ],
     postCount: "29 posts",
     posts: [
+      {
+        contributor: "Jack Hedaya",
+        post: "I am a proud member of Medium and Quora, but I must say Saloon is just so much better!",
+        time_of_post: "9 hours ago"
+      },
+      {
+        contributor: "Jack Hedaya",
+        post: "I am a proud member of Medium and Quora, but I must say Saloon is just so much better!",
+        time_of_post: "9 hours ago"
+      },
+      {
+        contributor: "Jack Hedaya",
+        post: "I am a proud member of Medium and Quora, but I must say Saloon is just so much better!",
+        time_of_post: "9 hours ago"
+      },
       {
         contributor: "Jack Hedaya",
         post: "I am a proud member of Medium and Quora, but I must say Saloon is just so much better!",
@@ -57,6 +76,7 @@ function Conversation(props) {
   const id = props.match.params;
 
   const data = FAKE_FETCH(id);
+  const [token] = useAuth();
 
   return (
     <div className="conversation">
@@ -101,6 +121,8 @@ function TitleVote(props) {
 }
 
 function Discussion(props) {
+  const [body, setBody] = useState("");
+
   return (
     <div className="discussion">
       <div className="inner">
@@ -108,6 +130,10 @@ function Discussion(props) {
           props.posts.map((item, index) => (
             <DiscussionItem {...item} key={`${item.contributor}/${item.time_of_post}/${index}`} />
           ))}
+      </div>
+      <div className="editor-wrapper">
+        <ConfiguredQuill value={body} setValue={setBody} />
+        <div className="post-button">Submit</div>
       </div>
     </div>
   );

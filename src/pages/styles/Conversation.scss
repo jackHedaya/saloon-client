@@ -13,16 +13,20 @@ $content-width: calc(100% - 60px - #{$panel-padding});
   flex-direction: column;
 
   .discussion {
-    display: flex;
+    display: block;
     flex: 1;
     width: $content-width;
-    justify-content: center;
     white-space: pre-wrap;
     overflow: scroll;
 
     .inner {
-      width: 65%;
+      box-sizing: content-box;
+      margin: 0 auto;
+      flex-direction: column;
+      display: flex;
+      max-width: 65%;
       margin-top: 30px;
+      justify-content: space-evenly;
 
       .item {
         font-size: 1.05em;
@@ -47,6 +51,34 @@ $content-width: calc(100% - 60px - #{$panel-padding});
         &:last-of-type {
           display: none;
         }
+      }
+
+      &.addable {
+        .break:last-of-type {
+          display: block;
+        }
+      }
+    }
+
+    .editor-wrapper {
+      position: relative;
+
+      .quill {
+        width: 85%;
+        margin: 30px auto;
+        margin-bottom: 60px;
+      }
+
+      .post-button {
+        position: absolute;
+        top: 12px;
+        right: calc(7.5% + 12px);
+        font-weight: bold;
+        color: #002366;
+        font-size: 1em;
+        font-family: Arial;
+        cursor: pointer;
+        user-select: none;
       }
     }
   }
