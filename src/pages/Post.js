@@ -9,6 +9,7 @@ import useAuth from "../hooks/useAuth";
 
 import "./styles/Post.scss";
 import "react-quill/dist/quill.snow.css";
+import ConfiguredQuill from "../components/ConfiguredQuill";
 
 export default function Post() {
   const [token] = useAuth();
@@ -64,13 +65,7 @@ function Editor(props) {
   return (
     <div className="editor">
       <input className="post-title" placeholder="Title" value={title} onChange={e => setTitle(e.currentTarget.value)} />
-      <ReactQuill
-        theme="snow"
-        modules={{ toolbar: [["bold", "italic", "underline", "strike"], ["link"]] }}
-        formats={["bold", "italic", "underline", "strike", "link"]}
-        value={body}
-        onChange={val => setBody(val)}
-      />
+      <ConfiguredQuill value={body} onChange={val => setBody(val)} />
     </div>
   );
 }
