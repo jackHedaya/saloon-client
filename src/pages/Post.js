@@ -3,12 +3,13 @@ import Avatar from "react-avatar";
 import { Spinner } from "reactstrap";
 import { FiArrowRightCircle } from "react-icons/fi";
 
+import ConfiguredQuill from "../components/ConfiguredQuill";
+
 import * as conversationService from "../services/conversation.service";
 import useAuth from "../hooks/useAuth";
 
 import "./styles/Post.scss";
 import "react-quill/dist/quill.snow.css";
-import ConfiguredQuill from "../components/ConfiguredQuill";
 
 export default function Post() {
   const [token] = useAuth();

@@ -2,10 +2,15 @@ import React from "react";
 
 import Feed from "../components/Feed";
 
+import useFeed from "../hooks/useFeed";
+
 function Home() {
+  const feed = useFeed()
+  console.log(feed)
+
   return (
     <div className="home">
-      <Feed />
+      <Feed items={feed} />
     </div>
   );
 }
