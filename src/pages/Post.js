@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Avatar from "react-avatar";
-import ReactQuill from "react-quill";
 import { Spinner } from "reactstrap";
 import { FiArrowRightCircle } from "react-icons/fi";
 

@@ -6,7 +6,7 @@ import { UrlMatcher } from "interweave-autolink";
 
 import ConfiguredQuill from "../components/ConfiguredQuill";
 
-import useAuth from "../hooks/useAuth";
+// import useAuth from "../hooks/useAuth";
 
 import { randomColor } from "../_helpers";
 
@@ -76,7 +76,6 @@ function Conversation(props) {
   const id = props.match.params;
 
   const data = FAKE_FETCH(id);
-  const [token] = useAuth();
 
   return (
     <div className="conversation">
