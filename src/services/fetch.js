@@ -1,10 +1,14 @@
+import path from "path";
+
 /**
  *
  * @param {string} url
  * @param {import("http").RequestOptions} options
  */
 export default function newFetch(url, { headers, body, ...options }) {
-  return fetch(`https://agile-tor-73556.herokuapp.com/api/v1${url}`, {
+  const fullUrl = path.join("https://agile-tor-73556.herokuapp.com/api/v1", url);
+
+  return fetch(fullUrl, {
     headers: { "Content-Type": "application/json", ...headers },
     ...options,
     body: JSON.stringify(body)
