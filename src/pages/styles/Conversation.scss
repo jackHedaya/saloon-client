@@ -79,6 +79,10 @@ $content-width: calc(100% - 60px - #{$panel-padding});
         font-family: Arial;
         cursor: pointer;
         user-select: none;
+
+        &:hover {
+          color: $secondary-color;
+        }
       }
     }
   }
