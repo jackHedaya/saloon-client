@@ -1,7 +1,7 @@
 import fetch from "./fetch";
 
 export function getFeed(token) {
-  return fetch("/feed", { method: "GET", headers: { Authorization: token } });
+  return fetch("/feed", { method: "GET", headers: token ? { Authorization: token } : undefined });
 }
 
 export function postConversation(token, { title, body }) {

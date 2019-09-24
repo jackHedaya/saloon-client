@@ -8,8 +8,6 @@ export default function useFeed() {
   const [feed, setFeed] = useState(null);
 
   useEffect(() => {
-    if (!token || !isLoggedIn) return;
-
     const logout = () => {
       setToken(null);
       setIsLoggedIn(false);
