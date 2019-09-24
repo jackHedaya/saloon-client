@@ -8,8 +8,8 @@ function Navigation() {
     <div className="navigation">
       <div className="links">
         <NavLink to="/home">Home</NavLink>
-        <NavLink to="/popular">Popular</NavLink>
-        <NavLink to="/tags">Tags</NavLink>
+        {/* <NavLink to="/popular">Popular</NavLink>
+        <NavLink to="/tags">Tags</NavLink> */}
       </div>
     </div>
   );
