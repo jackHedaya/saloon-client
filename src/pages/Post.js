@@ -11,7 +11,7 @@ import useAuth from "../hooks/useAuth";
 import "./styles/Post.scss";
 import "react-quill/dist/quill.snow.css";
 
-export default function Post() {
+export default function Post(props) {
   const [token] = useAuth();
 
   const [title, setTitle] = useState("");
@@ -25,8 +25,8 @@ export default function Post() {
     conversationService
       .postConversation(token, { title, body })
       .then(data => {
-        console.log(data);
         setSubmitting(false);
+        props.history.push(`/conversation/${data.convo_id}`)
       })
       .catch(_ => {
         setSubmitting(false);
@@ -38,7 +38,6 @@ export default function Post() {
       <Editor title={title} setTitle={setTitle} body={body} setBody={setBody} />
       <div className="collaborators">
         <div>Collaborators</div>
-        <CollaboratorSection>Active</CollaboratorSection>
         <CollaboratorSection color="gray">Invited</CollaboratorSection>
         <Invite />
         <div className="post-button" onClick={uploadPost}>
