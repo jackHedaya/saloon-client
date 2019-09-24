@@ -8,6 +8,8 @@ export default function useFeed() {
   const [feed, setFeed] = useState(null);
 
   useEffect(() => {
+    if (feed) return;
+
     const logout = () => {
       setToken(null);
       setIsLoggedIn(false);
@@ -18,7 +20,7 @@ export default function useFeed() {
       .getFeed(token)
       .then(u => setFeed(u.convos))
       .catch(_ => logout());
-  }, [token, setToken, isLoggedIn, setIsLoggedIn]);
+  }, [token, feed, setToken, isLoggedIn, setIsLoggedIn]);
 
   return feed;
 }
