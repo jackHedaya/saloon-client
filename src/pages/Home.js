@@ -6,7 +6,6 @@ import useFeed from "../hooks/useFeed";
 
 function Home() {
   const feed = useFeed()
-  console.log(feed)
 
   return (
     <div className="home">

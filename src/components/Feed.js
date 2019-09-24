@@ -6,11 +6,18 @@ import "./styles/Feed.scss";
 function Feed(props) {
   const { items } = props;
 
+  var convo_ids = [];
+
   return (
     <div className="feed">
-      {(items || []).map(item => (
-        <FeedItem {...item} key={`Feed/${item.convo_id}`} />
-      ))}
+      {(items || []).map((item, index) => {
+        if (convo_ids.includes(item.convo_id))
+          return <React.Fragment key={`Feed/${item.convo_id}/${index}`}></React.Fragment>;
+        else {
+          convo_ids.push(item.convo_id);
+          return <FeedItem {...item} key={`Feed/${item.convo_id}`} />;
+        }
+      })}
     </div>
   );
 }
