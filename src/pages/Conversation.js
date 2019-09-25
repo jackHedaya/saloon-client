@@ -1,11 +1,10 @@
 import React, { useState, useContext } from "react";
 import { GoChevronLeft } from "react-icons/go";
 import { FiThumbsUp, FiThumbsDown } from "react-icons/fi";
-import Interweave from "interweave";
-import { UrlMatcher } from "interweave-autolink";
 
 import { AuthContext } from "../App";
 import ConfiguredQuill from "../components/ConfiguredQuill";
+import ConfiguredInterweave from "../components/ConfiguredInterweave";
 
 import useConversation from "../hooks/useConversation";
 
@@ -118,7 +117,7 @@ function DiscussionItem(props) {
     <>
       <div className="item">
         <span style={{ color: randomColor(contributor) }}>{contributor}: </span>
-        <Interweave content={post} matchers={[new UrlMatcher("url")]} />
+        <ConfiguredInterweave content={post} />
       </div>
       <div className="break" />
     </>
