@@ -22,13 +22,16 @@ function Conversation(props) {
 
   const { token, isLoggedIn } = useContext(AuthContext);
   const [post, setPost] = useState("");
-  const data = useConversation(id);
+  const data = useConversation(id, reload);
 
   const postAction = () => {
     conversationService
       .postConversationPost(token, { convo_id: id, post })
-      .then(() => toggleReload)
-      .catch(_ => {});
+      .then(() => {
+        toggleReload();
+        setPost("");
+      })
+      .catch(_ => {}); // Handle erroring later
   };
 
   return (
