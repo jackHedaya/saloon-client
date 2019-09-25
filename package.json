@@ -5,7 +5,7 @@
   "dependencies": {
     "bootstrap": "^4.3.1",
     "formik": "^1.5.8",
-    "interweave": "^11.1.0",
+    "interweave": "^11.2.0",
     "interweave-autolink": "^3.0.2",
     "lodash.debounce": "^4.0.8",
     "lodash.isequal": "^4.5.0",

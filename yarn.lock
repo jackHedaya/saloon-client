@@ -4359,11 +4359,10 @@ interweave-autolink@^3.0.2:
     "@types/react" "*"
     prop-types "^15.7.2"
 
-interweave@^11.1.0:
-  version "11.1.0"
-  resolved "https://registry.yarnpkg.com/interweave/-/interweave-11.1.0.tgz#1da968783f248990c814219a16536fb67e49a2f8"
+interweave@^11.2.0:
+  version "11.2.0"
+  resolved "https://registry.yarnpkg.com/interweave/-/interweave-11.2.0.tgz#d0571cdc1002ef08f3b1f64c458bd320780c50c3"
   dependencies:
-    "@types/prop-types" "*"
     "@types/react" "*"
     escape-html "^1.0.3"
     prop-types "^15.7.2"
