@@ -42,6 +42,7 @@ function Conversation(props) {
         views={data.views}
         likes={data.votes}
         isLoggedIn={isLoggedIn}
+        isContributor={data.isContributor}
         navigate={props.history.push}
         id={id}
       />
@@ -51,7 +52,7 @@ function Conversation(props) {
 }
 
 function Title(props) {
-  const { title, views, likes, isLoggedIn, navigate, id } = props;
+  const { title, views, likes, isLoggedIn, isContributor, navigate, id } = props;
 
   const [vote, setVote] = useState("NONE");
   const handleVote = nVote => {
@@ -64,10 +65,14 @@ function Title(props) {
       <TitleVote likes={likes} vote={vote} setVote={handleVote} />
       <div>
         <div className="text">{title}</div>
-        {!isLoggedIn && (
+        {(!isLoggedIn || !isContributor) && (
           <div
             className="join"
-            onClick={() => navigate({ pathname: "/login", state: { from: { pathname: `/conversation/${id}` } } })}
+            onClick={() =>
+              isContributor
+                ? false // Handle contributor request
+                : navigate({ pathname: "/login", state: { from: { pathname: `/conversation/${id}` } } })
+            }
           >
             Join Conversation
           </div>
