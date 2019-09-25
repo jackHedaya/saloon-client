@@ -39,6 +39,10 @@ $content-width: calc(100% - 60px - #{$panel-padding});
             color: #44127e;
           }
         }
+
+        p {
+          display: inline;
+        }
       }
 
       .break {

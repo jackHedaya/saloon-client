@@ -1,93 +1,55 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { GoChevronLeft } from "react-icons/go";
 import { FiThumbsUp, FiThumbsDown } from "react-icons/fi";
 import Interweave from "interweave";
 import { UrlMatcher } from "interweave-autolink";
 
+import { AuthContext } from "../App";
 import ConfiguredQuill from "../components/ConfiguredQuill";
 
-// import useAuth from "../hooks/useAuth";
+import useConversation from "../hooks/useConversation";
+
+import * as conversationService from "../services/conversation.service";
 
 import { randomColor } from "../_helpers";
 
 import "./styles/Conversation.scss";
 
-function FAKE_FETCH(id) {
-  if (!id === "73ba0853-0324-430d-87ab-8c6355b15df2") return;
-
-  return {
-    title: "An Extremely Controversial Topic",
-    views: "1.1M views",
-    votes: "10K upvotes",
-    contributorCount: "19 contributors",
-    contributors: [
-      { username: "johnny_appleseed", first_name: "Johnny", last_name: "Appleseed", email: "john@seedfund.com" },
-      { username: "billy_joel", first_name: "Billy", last_name: "Joel", email: "billy@joelmusic.com" },
-      { username: "jack_hedaya", first_name: "Jack", last_name: "Hedaya", email: "jackehedaya@gmail.com" },
-      { username: "prince_of_darkness", first_name: "Satan", last_name: "Evil", email: "satan@hell.edu" }
-    ],
-    postCount: "29 posts",
-    posts: [
-      {
-        contributor: "Jack Hedaya",
-        post: "I am a proud member of Medium and Quora, but I must say Saloon is just so much better!",
-        time_of_post: "9 hours ago"
-      },
-      {
-        contributor: "Jack Hedaya",
-        post: "I am a proud member of Medium and Quora, but I must say Saloon is just so much better!",
-        time_of_post: "9 hours ago"
-      },
-      {
-        contributor: "Jack Hedaya",
-        post: "I am a proud member of Medium and Quora, but I must say Saloon is just so much better!",
-        time_of_post: "9 hours ago"
-      },
-      {
-        contributor: "Jack Hedaya",
-        post: "I am a proud member of Medium and Quora, but I must say Saloon is just so much better!",
-        time_of_post: "9 hours ago"
-      },
-      {
-        contributor: "Satan",
-        post:
-          "You have no idea what you're talking about. You can only use one and that is that. Choose or forever burn in hell.",
-        time_of_post: "9 hours ago"
-      },
-      {
-        contributor: "Jack Hedaya",
-        post: "Only Sith Lords deal in absolutes!",
-        time_of_post: "9 hours ago"
-      }
-    ],
-    comments: [
-      {
-        contributor: "Abraham Kassin",
-        body: "Satan has a good point there",
-        time_of_comment: "9 hours ago",
-        likes: 99
-      },
-      { contributor: "Creepy Demon #4", body: "Go get 'em boss!", time_of_comment: "9 hours ago", likes: 3 }
-    ]
-  };
-}
-
 function Conversation(props) {
-  const id = props.match.params;
+  const id = props.match.params.id;
 
-  const data = FAKE_FETCH(id);
+  const [reload, setReload] = useState(1);
+  const toggleReload = () => setReload(-reload);
+
+  const { token, isLoggedIn } = useContext(AuthContext);
+  const [post, setPost] = useState("");
+  const data = useConversation(id);
+
+  const postAction = () => {
+    conversationService
+      .postConversationPost(token, { convo_id: id, post })
+      .then(() => toggleReload)
+      .catch(_ => {});
+  };
 
   return (
     <div className="conversation">
-      <Discussion posts={data.posts} />
-      <Title title={data.title} views={data.views} likes={data.votes} />
-      <Comments comments={data.comments} />
+      <Discussion posts={data.posts} submit={postAction} body={post} setBody={setPost} isLoggedIn={isLoggedIn} />
+      <Title
+        title={data.title}
+        views={data.views}
+        likes={data.votes}
+        isLoggedIn={isLoggedIn}
+        navigate={props.history.push}
+        id={id}
+      />
+      <Comments comments={data.comments || []} />
     </div>
   );
 }
 
 function Title(props) {
-  const { title, views, likes } = props;
+  const { title, views, likes, isLoggedIn, navigate, id } = props;
 
   const [vote, setVote] = useState("NONE");
   const handleVote = nVote => {
@@ -100,9 +62,16 @@ function Title(props) {
       <TitleVote likes={likes} vote={vote} setVote={handleVote} />
       <div>
         <div className="text">{title}</div>
-        <div className="join">Join Conversation</div>
+        {!isLoggedIn && (
+          <div
+            className="join"
+            onClick={() => navigate({ pathname: "/login", state: { from: { pathname: `/conversation/${id}` } } })}
+          >
+            Join Conversation
+          </div>
+        )}
       </div>
-      <div className="views">{views}</div>
+      <div className="views">{views} views</div>
     </div>
   );
 }
@@ -113,27 +82,31 @@ function TitleVote(props) {
   return (
     <div className="vote">
       <FiThumbsUp className={`thumb ${vote === "UP" ? "upvoted" : ""}`} onClick={() => setVote("UP")} />
-      <span className="amount">{likes.split(" ")[0]}</span>
+      <span className="amount">{likes}</span>
       <FiThumbsDown className={`thumb ${vote === "DOWN" ? "upvoted" : ""}`} onClick={() => setVote("DOWN")} />
     </div>
   );
 }
 
 function Discussion(props) {
-  const [body, setBody] = useState("");
+  const { posts, body, setBody, submit, isLoggedIn } = props;
 
   return (
     <div className="discussion">
       <div className="inner">
-        {props.posts &&
-          props.posts.map((item, index) => (
+        {posts &&
+          posts.map((item, index) => (
             <DiscussionItem {...item} key={`${item.contributor}/${item.time_of_post}/${index}`} />
           ))}
       </div>
-      <div className="editor-wrapper">
-        <ConfiguredQuill value={body} setValue={setBody} />
-        <div className="post-button">Submit</div>
-      </div>
+      {isLoggedIn && (
+        <div className="editor-wrapper">
+          <ConfiguredQuill value={body} setValue={setBody} />
+          <div className="post-button" onClick={submit}>
+            Submit
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -147,7 +120,7 @@ function DiscussionItem(props) {
         <span style={{ color: randomColor(contributor) }}>{contributor}: </span>
         <Interweave content={post} matchers={[new UrlMatcher("url")]} />
       </div>
-      <div className="break"></div>
+      <div className="break" />
     </>
   );
 }
