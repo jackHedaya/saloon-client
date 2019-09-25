@@ -3,6 +3,7 @@
 .feed {
   .item {
     display: inline-block;
+    cursor: pointer;
 
     .title {
       width: 100%;
@@ -14,11 +15,15 @@
     $meta-top-margins: 10px;
 
     .inner {
-      width: 90%;
       min-width: 311px;
-      margin-top: 20px;
+      margin-top: 10px;
       margin-left: 5px;
+      display: flex;
 
+      @media only screen and (max-width: 1025px) {
+        display: block;
+      }
+      
       .meta {
         font-family: $main-body-font;
         display: inline-block;
@@ -28,6 +33,9 @@
             margin-left: -10px;
             float: left;
             white-space: normal;
+            display: flex !important;
+            justify-content: center;
+            align-items: center;
 
             .sb-avatar__text {
               border: 3px solid white;
@@ -75,12 +83,20 @@
         }
       }
 
+      // Interweave displaying first post
       .body {
         float: right;
-        width: 50%;
+        margin-left: 100px;
+        align-self: center;
+        color: #707070;
+
+        p {
+          display: inline;
+        }
 
         @media only screen and (max-width: 1025px) {
           margin-top: 25px;
+          margin-left: 0;
           width: 100%;
         }
 

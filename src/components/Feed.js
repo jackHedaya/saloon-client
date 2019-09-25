@@ -1,5 +1,8 @@
 import React from "react";
 import Avatar from "react-avatar";
+import { withRouter } from "react-router-dom";
+
+import ConfiguredInterweave from "../components/ConfiguredInterweave";
 
 import "./styles/Feed.scss";
 
@@ -10,12 +13,18 @@ function Feed(props) {
 
   return (
     <div className="feed">
-      {(items || []).map((item, index) => {
-        if (convo_ids.includes(item.convo_id))
-          return <React.Fragment key={`Feed/${item.convo_id}/${index}`}></React.Fragment>;
+      {(items || []).map(item => {
+        if (convo_ids.includes(item.convo_id)) return false;
         else {
           convo_ids.push(item.convo_id);
-          return <FeedItem {...item} key={`Feed/${item.convo_id}`} />;
+          return (
+            <FeedItem
+              {...item}
+              key={`Feed/${item.convo_id}`}
+              navigate={x => props.history.push(x)}
+              description={item.post}
+            />
+          );
         }
       })}
     </div>
@@ -25,11 +34,13 @@ function Feed(props) {
 function FeedItem(props) {
   return (
     <>
-      <div className="item">
+      <div className="item" onClick={() => props.navigate(`/conversation/${props.convo_id}`)}>
         <div className="title">{props.title}</div>
         <div className="inner">
           <Metadata {...props} />
-          <div className="body">{props.description}</div>
+          <div className="body">
+            <ConfiguredInterweave content={props.description} />
+          </div>
         </div>
       </div>
       <div className="break" />
@@ -40,16 +51,16 @@ function FeedItem(props) {
 function Metadata(props) {
   return (
     <div className="meta">
-      <PeopleInvolved people={props.contributors} description={props.involvedDescription} />
+      <PeopleInvolved people={props.contributors} description={props.contributors} />
       <div className="creator">{props.creator}</div>
       <div className="convo-data">
         <div className="left">
-          <div>Last Post at {props.last_post_at}</div>
-          <div>{props.views} views</div>
+          <div>edited {props.age}</div>
+          <div>viewed {props.views} times</div>
         </div>
         <div className="right">
-          <div>{props.likes}</div>
-          <div>{props.commentCount}</div>
+          <div>{props.votes} votes</div>
+          <div>{props.comments} comments</div>
         </div>
       </div>
     </div>
@@ -57,15 +68,17 @@ function Metadata(props) {
 }
 
 function PeopleInvolved(props) {
+  const trueLength = arr => arr.reduce((prev, val) => (val ? prev + 1 : prev), 0);
+
   return (
     <div className="discussed-by">
       <Avatar name={props.people[0]} round size={42} />
-      <Avatar name={props.people[1]} round size={42} />
+      {trueLength(props.people) > 1 && <Avatar name={props.people[1]} round size={42} />}
       <span className="text">
-        <div>{props.description}</div>
+        <div>Discussion by {props.description}</div>
       </span>
     </div>
   );
 }
 
-export default Feed;
+export default withRouter(Feed);
