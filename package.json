@@ -1,13 +1,12 @@
 {
   "name": "saloon-client",
-  "homepage": "https://jackhedaya.github.com/saloon-client",
+  "homepage": "https://jackhedaya.github.io/saloon-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "bootstrap": "^4.3.1",
     "formik": "^1.5.8",
     "interweave": "^11.2.0",
-    "gh-pages": "^2.1.1",
     "interweave-autolink": "^3.0.2",
     "lodash.debounce": "^4.0.8",
     "lodash.isequal": "^4.5.0",
@@ -22,6 +21,9 @@
     "react-scripts": "3.1.2",
     "reactstrap": "^8.0.1",
     "yup": "^0.27.0"
+  },
+  "devDependencies": {
+    "gh-pages": "^2.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
