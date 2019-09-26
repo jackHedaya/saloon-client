@@ -22,7 +22,7 @@ function Conversation(props) {
 
   const { token, isLoggedIn } = useContext(AuthContext);
   const [post, setPost] = useState("");
-  const data = useConversation(id, reload);
+  const data = useConversation(id, { reload, token });
 
   const postAction = () => {
     conversationService

@@ -4,8 +4,8 @@ export function getFeed(token) {
   return fetch("/feed", { method: "GET", headers: token ? { Authorization: token } : undefined });
 }
 
-export function getConversation(id) {
-  return fetch(`/convo/${id}`, { method: "GET" });
+export function getConversation(id, { token } = {}) {
+  return fetch(`/convo/${id}`, { method: "GET", headers: token ? { Authorization: token } : undefined });
 }
 
 export function postConversation(token, { title, body }) {
