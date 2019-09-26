@@ -36,7 +36,14 @@ function Conversation(props) {
 
   return (
     <div className="conversation">
-      <Discussion posts={data.posts} submit={postAction} body={post} setBody={setPost} isLoggedIn={isLoggedIn} />
+      <Discussion
+        posts={data.posts}
+        submit={postAction}
+        body={post}
+        setBody={setPost}
+        isLoggedIn={isLoggedIn}
+        isContributor={data.isContributor}
+      />
       <Title
         title={data.title}
         views={data.views}
@@ -96,7 +103,7 @@ function TitleVote(props) {
 }
 
 function Discussion(props) {
-  const { posts, body, setBody, submit, isLoggedIn } = props;
+  const { posts, body, setBody, submit, isLoggedIn, isContributor } = props;
 
   return (
     <div className="discussion">
@@ -106,7 +113,7 @@ function Discussion(props) {
             <DiscussionItem {...item} key={`${item.contributor}/${item.time_of_post}/${index}`} />
           ))}
       </div>
-      {isLoggedIn && (
+      {isLoggedIn && isContributor && (
         <div className="editor-wrapper">
           <ConfiguredQuill value={body} setValue={setBody} />
           <div className="post-button" onClick={submit}>
