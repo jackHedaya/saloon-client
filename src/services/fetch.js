@@ -1,6 +1,6 @@
 import path from "path";
 
-const isProd = () => process.env.NODE_ENV || process.env.NODE_ENV === 'development'
+const isDev = () => !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
 
 /**
  *
@@ -8,7 +8,7 @@ const isProd = () => process.env.NODE_ENV || process.env.NODE_ENV === 'developme
  * @param {import("http").RequestOptions} options
  */
 export default function newFetch(url, { headers, body, ...options }) {
-  const fullUrl = isProd() ? path.join("https://agile-tor-73556.herokuapp.com/api/v1", url) : url;
+  const fullUrl = isDev() ? path.join("https://agile-tor-73556.herokuapp.com/api/v1", url) : url;
 
   return fetch(fullUrl, {
     headers: { "Content-Type": "application/json", ...headers },
