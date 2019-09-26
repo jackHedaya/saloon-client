@@ -14,7 +14,7 @@ import "./styles/Post.scss";
 import "react-quill/dist/quill.snow.css";
 
 export default function Post(props) {
-  const [token] = useAuth();
+  const { token } = useAuth();
 
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");

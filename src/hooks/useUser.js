@@ -1,10 +1,11 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import * as userService from "../services/user.service";
-import { AuthContext } from "../App";
+
+import useAuth from "./useAuth";
 
 export default function useUser() {
-  const { token, setToken, isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+  const { token, setToken, isLoggedIn, setIsLoggedIn } = useAuth();
   const [user, setUser] = useState(null);
 
   useEffect(() => {

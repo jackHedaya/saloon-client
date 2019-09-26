@@ -1,12 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import { Formik, Form, Field } from "../components/Form";
 
 import * as authenticationService from "../services/authentication.service";
-import { AuthContext } from "../App";
+
+import useAuth from "../hooks/useAuth";
 
 function Login(props) {
-  const { isLoggedIn, setIsLoggedIn, setToken } = useContext(AuthContext);
+  const { isLoggedIn, setIsLoggedIn, setToken } = useAuth;
 
   return isLoggedIn ? (
     <Redirect to={props.location.state ? props.location.state.from.pathname : "/"} />

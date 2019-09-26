@@ -1,16 +1,16 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { GoSearch } from "react-icons/go";
 import { Dropdown, DropdownMenu, DropdownToggle, DropdownItem } from "reactstrap";
 
 import useUser from "../hooks/useUser";
-import { AuthContext } from "../App";
+import useAuth from "../hooks/useAuth";
 
 import "./styles/Header.scss";
 
 function Header(props) {
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn } = useAuth();
   const user = useUser();
 
   return (
@@ -50,7 +50,7 @@ function Search(props) {
 
 function UserDropdown(props) {
   const [open, setOpen] = useState(false);
-  const { setIsLoggedIn, setToken } = useContext(AuthContext);
+  const { setIsLoggedIn, setToken } = useAuth();
 
   const toggle = () => setOpen(!open);
 

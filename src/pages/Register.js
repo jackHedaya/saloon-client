@@ -1,13 +1,14 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import { Formik, Form, Field } from "../components/Form";
 import * as Yup from "yup";
 
 import * as authenticationService from "../services/authentication.service";
-import { AuthContext } from "../App";
+
+import useAuth from "../hooks/useAuth";
 
 function Register() {
-  const { setToken, setIsLoggedIn, isLoggedIn } = useContext(AuthContext);
+  const { setToken, setIsLoggedIn, isLoggedIn } = useAuth();
 
   return isLoggedIn ? (
     <Redirect to="/home" />

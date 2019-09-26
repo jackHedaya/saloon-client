@@ -1,12 +1,12 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { GoChevronLeft } from "react-icons/go";
 import { FiThumbsUp, FiThumbsDown } from "react-icons/fi";
 
-import { AuthContext } from "../App";
 import ConfiguredQuill from "../components/ConfiguredQuill";
 import ConfiguredInterweave from "../components/ConfiguredInterweave";
 
 import useConversation from "../hooks/useConversation";
+import useAuth from "../hooks/useAuth";
 
 import * as conversationService from "../services/conversation.service";
 
@@ -20,7 +20,7 @@ function Conversation(props) {
   const [reload, setReload] = useState(1);
   const toggleReload = () => setReload(-reload);
 
-  const { token, isLoggedIn } = useContext(AuthContext);
+  const { token, isLoggedIn } = useAuth;
   const [post, setPost] = useState("");
   const data = useConversation(id, { reload, token });
 
