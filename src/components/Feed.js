@@ -51,9 +51,16 @@ function FeedItem(props) {
 }
 
 function Metadata(props) {
+  const format = list => {
+    if (list.length === 1) return list[0];
+    else if (list.length === 2) return `${list[0]} and ${list[1]}`;
+    else if (list.length === 3) return `${list[0]}, ${list[1]} and ${list[2]}`;
+    else if (list.length === 4) return `${list[0]}, ${list[1]}, ${list[2]} and ${list[3]}`;
+  };
+
   return (
     <div className="meta">
-      <PeopleInvolved people={props.contributors} description={props.contributors} />
+      <PeopleInvolved people={props.contributors} description={format(props.contributors)} />
       <div className="creator">{props.creator}</div>
       <div className="convo-data">
         <div className="left">
@@ -70,12 +77,11 @@ function Metadata(props) {
 }
 
 function PeopleInvolved(props) {
-  const trueLength = arr => arr.reduce((prev, val) => (val ? prev + 1 : prev), 0);
 
   return (
     <div className="discussed-by">
       <Avatar name={props.people[0]} color={randomColor(props.people[0])} round size={42} />
-      {trueLength(props.people) > 1 && (
+      {props.people.length > 1 && (
         <Avatar name={props.people[1]} color={randomColor(props.people[1])} round size={42} />
       )}
       <span className="text">
