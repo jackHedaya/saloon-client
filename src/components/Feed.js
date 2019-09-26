@@ -4,6 +4,8 @@ import { withRouter } from "react-router-dom";
 
 import ConfiguredInterweave from "../components/ConfiguredInterweave";
 
+import { randomColor } from "../_helpers";
+
 import "./styles/Feed.scss";
 
 function Feed(props) {
@@ -72,8 +74,10 @@ function PeopleInvolved(props) {
 
   return (
     <div className="discussed-by">
-      <Avatar name={props.people[0]} round size={42} />
-      {trueLength(props.people) > 1 && <Avatar name={props.people[1]} round size={42} />}
+      <Avatar name={props.people[0]} color={randomColor(props.people[0])} round size={42} />
+      {trueLength(props.people) > 1 && (
+        <Avatar name={props.people[1]} color={randomColor(props.people[1])} round size={42} />
+      )}
       <span className="text">
         <div>Discussion by {props.description}</div>
       </span>

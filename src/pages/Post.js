@@ -8,6 +8,8 @@ import ConfiguredQuill from "../components/ConfiguredQuill";
 import * as conversationService from "../services/conversation.service";
 import useAuth from "../hooks/useAuth";
 
+import { randomColor } from "../_helpers";
+
 import "./styles/Post.scss";
 import "react-quill/dist/quill.snow.css";
 
@@ -26,7 +28,7 @@ export default function Post(props) {
       .postConversation(token, { title, body })
       .then(data => {
         setSubmitting(false);
-        props.history.push(`/conversation/${data.convo_id}`)
+        props.history.push(`/conversation/${data.convo_id}`);
       })
       .catch(_ => {
         setSubmitting(false);
@@ -88,7 +90,7 @@ function Collaborator(props) {
   const { color = undefined } = props;
   return (
     <div className="user">
-      <Avatar name={props.children} src={props.image || null} round size={25} />
+      <Avatar name={props.children} src={props.image || null} color={randomColor(props.children)} round size={25} />
       <span className="name" style={{ color }}>
         {props.children}
       </span>
