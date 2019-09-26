@@ -41,7 +41,12 @@ $content-width: calc(100% - 60px - #{$panel-padding});
         }
 
         p {
-          display: inline;
+          display: block;
+          margin-bottom: 0;
+
+          &:first-of-type {
+            display: inline;
+          }
         }
       }
 
