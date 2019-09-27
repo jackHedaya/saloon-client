@@ -12,7 +12,6 @@ function Feed(props) {
   const { items } = props;
 
   var convo_ids = [];
-  console.log(items)
 
   return (
     <div className="feed">
