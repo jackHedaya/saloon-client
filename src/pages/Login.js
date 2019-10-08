@@ -7,7 +7,7 @@ import * as authenticationService from "../services/authentication.service";
 import useAuth from "../hooks/useAuth";
 
 function Login(props) {
-  const { isLoggedIn, setIsLoggedIn, setToken } = useAuth;
+  const { isLoggedIn, setIsLoggedIn, setToken } = useAuth();
 
   return isLoggedIn ? (
     <Redirect to={props.location.state ? props.location.state.from.pathname : "/"} />
@@ -23,7 +23,7 @@ function Login(props) {
               setToken(data.token);
               setIsLoggedIn(true);
             })
-            .catch(_ => {
+            .catch(e => {
               actions.setErrors({ password: "incorrect password" });
               actions.setSubmitting(false);
             });
