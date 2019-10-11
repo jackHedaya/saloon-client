@@ -20,7 +20,7 @@ function Conversation(props) {
   const [reload, setReload] = useState(1);
   const toggleReload = () => setReload(-reload);
 
-  const { token, isLoggedIn } = useAuth;
+  const { token, isLoggedIn } = useAuth();
   const [post, setPost] = useState("");
   const data = useConversation(id, { reload, token });
 
