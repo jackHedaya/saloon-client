@@ -140,7 +140,7 @@ function DiscussionItem(props) {
 }
 
 function Comments(props) {
-  const [showing, setShowing] = useState(true);
+  const [showing, setShowing] = useState(false);
   const toggle = () => setShowing(!showing);
 
   return (
