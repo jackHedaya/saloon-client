@@ -7,6 +7,7 @@ import ConfiguredQuill from "../components/ConfiguredQuill";
 
 import * as conversationService from "../services/conversation.service";
 import useAuth from "../hooks/useAuth";
+import useUser from "../hooks/useUser";
 
 import { randomColor } from "../_helpers";
 
@@ -15,12 +16,16 @@ import "react-quill/dist/quill.snow.css";
 
 export default function Post(props) {
   const { token } = useAuth();
+  const user = useUser();
 
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
   const [invited, setInvited] = useState([]);
-  const addInvited = newUser => (!invited.includes(newUser) ? setInvited([...invited, newUser]) : null);
+  const addInvited = newUser =>
+    !invited.includes(newUser) && newUser.toLowerCase() !== user.username.toLowerCase()
+      ? setInvited([...invited, newUser])
+      : null;
 
   const [submitting, setSubmitting] = useState(false);
 
