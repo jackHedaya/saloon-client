@@ -19,6 +19,9 @@ export default function Post(props) {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
+  const [invited, setInvited] = useState([]);
+  const addInvited = newUser => (!invited.includes(newUser) ? setInvited([...invited, newUser]) : null);
+
   const [submitting, setSubmitting] = useState(false);
 
   function uploadPost() {
@@ -40,8 +43,10 @@ export default function Post(props) {
       <Editor title={title} setTitle={setTitle} body={body} setBody={setBody} />
       <div className="collaborators">
         <div>Collaborators</div>
-        <CollaboratorSection color="gray">Invited</CollaboratorSection>
-        <Invite />
+        <CollaboratorSection color="gray" invited={invited}>
+          Invited
+        </CollaboratorSection>
+        <Invite inviteUser={addInvited} />
         <div className="post-button" onClick={uploadPost}>
           {!submitting ? (
             <div className="text">Post</div>
@@ -72,15 +77,17 @@ function Editor(props) {
 }
 
 function CollaboratorSection(props) {
-  const { color, children } = props;
+  const { color, invited, children } = props;
 
   return (
     <div className="section">
       <div className="title">{children}</div>
       <div className="users">
-        <Collaborator color={color}>Jack Hedaya</Collaborator>
-        <Collaborator color={color}>Abe Kassin</Collaborator>
-        <Collaborator color={color}>Judah Kishk</Collaborator>
+        {invited.map(invite => (
+          <Collaborator key={`invite/${invite}`} color={color}>
+            {invite}
+          </Collaborator>
+        ))}
       </div>
     </div>
   );
@@ -99,12 +106,29 @@ function Collaborator(props) {
 }
 
 function Invite(props) {
+  const [user, setUser] = useState("");
+
+  let inputRef;
+  const inviteUser = () => {
+    props.inviteUser(user);
+    setUser("");
+    inputRef.focus();
+  };
+
   return (
     <div className="invite">
       <div className="title">Invite Someone</div>
       <div className="field">
-        <input className="clear-input" placeholder="username" autoComplete="off" />
-        <FiArrowRightCircle className="submit" />
+        <input
+          className="clear-input"
+          placeholder="username"
+          autoComplete="off"
+          value={user}
+          onChange={e => setUser(e.currentTarget.value)}
+          onKeyDown={e => (e.key === "Enter" ? inviteUser() : null)}
+          ref={input => (inputRef = input)}
+        />
+        <FiArrowRightCircle className="submit" onClick={inviteUser} />
       </div>
     </div>
   );
