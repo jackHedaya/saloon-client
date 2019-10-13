@@ -12,6 +12,10 @@ export function postConversation(token, { title, body }) {
   return fetch("/convo", { method: "POST", headers: { Authorization: token }, body: { title, post: body } });
 }
 
+export function putVote(id, { token, vote }) {
+  return fetch(`/convo/${id}/vote/${vote}`, { method: "PUT", headers: token ? { Authorization: token } : undefined });
+}
+
 export function postConversationPost(token, { convo_id, post }) {
   return fetch("/post", { method: "POST", headers: { Authorization: token }, body: { convo_id, post } });
 }

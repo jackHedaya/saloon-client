@@ -34,6 +34,17 @@ function Conversation(props) {
       .catch(_ => {}); // Handle erroring later
   };
 
+  /**
+   *
+   * @param {'1' | '0' | '-1'} vote
+   */
+  const updateVote = vote => {
+    conversationService
+      .putVote(id, { token, vote })
+      .then(() => toggleReload())
+      .catch(_ => {}); // Handle erroring later
+  };
+
   return (
     <div className="conversation">
       <Discussion
@@ -47,7 +58,9 @@ function Conversation(props) {
       <Title
         title={data.title}
         views={data.views}
-        likes={data.votes}
+        votes={data.votes}
+        userVote={data.vote}
+        updateVote={updateVote}
         isLoggedIn={isLoggedIn}
         isContributor={data.isContributor}
         navigate={props.history.push}
@@ -59,17 +72,16 @@ function Conversation(props) {
 }
 
 function Title(props) {
-  const { title, views, likes, isLoggedIn, isContributor, navigate, id } = props;
+  const { title, views, votes, userVote, updateVote, isLoggedIn, isContributor, navigate, id } = props;
 
-  const [vote, setVote] = useState("NONE");
   const handleVote = nVote => {
-    if (nVote === vote) setVote("NONE");
-    else setVote(nVote);
+    if (nVote === userVote) updateVote(0);
+    else updateVote(nVote);
   };
 
   return (
     <div className="d-title">
-      <TitleVote likes={likes} vote={vote} setVote={handleVote} />
+      <TitleVote votes={votes} userVote={userVote} setVote={handleVote} />
       <div>
         <div className="text">{title}</div>
         {(!isLoggedIn || !isContributor) && (
@@ -91,13 +103,13 @@ function Title(props) {
 }
 
 function TitleVote(props) {
-  const { likes = "0", vote, setVote } = props;
+  const { votes = "0", userVote, setVote } = props;
 
   return (
     <div className="vote">
-      <FiThumbsUp className={`thumb ${vote === "UP" ? "upvoted" : ""}`} onClick={() => setVote("UP")} />
-      <span className="amount">{likes}</span>
-      <FiThumbsDown className={`thumb ${vote === "DOWN" ? "upvoted" : ""}`} onClick={() => setVote("DOWN")} />
+      <FiThumbsUp className={`thumb ${userVote === 1 ? "upvoted" : ""}`} onClick={() => setVote(1)} />
+      <span className="amount">{votes}</span>
+      <FiThumbsDown className={`thumb ${userVote === -1 ? "upvoted" : ""}`} onClick={() => setVote(-1)} />
     </div>
   );
 }
