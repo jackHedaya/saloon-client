@@ -15,7 +15,7 @@ export default class Persist extends React.Component {
     window.localStorage.setItem(this.props.name, JSON.stringify(data));
   }, this.props.debounce);
 
-  componentDidUpdate({ data }) {
+  componentWillReceiveProps({ data }) {
     if (!isEqual(data, this.props.data)) {
       this.persist(this.props.data);
     }
