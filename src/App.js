@@ -14,7 +14,7 @@ import Post from "./pages/Post";
 import "./App.scss";
 
 /**
- * @type {React.Context<{ isLoggedIn: boolean, setIsLoggedIn: (val: boolean)=> void, token: string, setToken: (val: string) => void }>}
+ * @type {React.Context<{ isLoggedIn: boolean, setIsLoggedIn: (val: boolean)=> void, token: string, didPersistLoad: boolean setToken: (val: string) => void }>}
  */
 const AuthContext = React.createContext();
 

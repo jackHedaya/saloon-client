@@ -5,11 +5,11 @@ import * as conversationService from "../services/conversation.service";
 import useAuth from "./useAuth";
 
 export default function useFeed() {
-  const { token, setToken, isLoggedIn, setIsLoggedIn } = useAuth();
+  const { token, setToken, isLoggedIn, setIsLoggedIn, didPersistLoad } = useAuth();
   const [feed, setFeed] = useState(null);
 
   useEffect(() => {
-    if (feed) return;
+    if (feed || !didPersistLoad) return;
 
     const logout = () => {
       setToken(null);
@@ -21,7 +21,7 @@ export default function useFeed() {
       .getFeed(token)
       .then(u => setFeed(u.convos))
       .catch(_ => logout());
-  }, [token, feed, setToken, isLoggedIn, setIsLoggedIn]);
+  }, [token, feed, setToken, isLoggedIn, setIsLoggedIn, didPersistLoad]);
 
   return feed;
 }
