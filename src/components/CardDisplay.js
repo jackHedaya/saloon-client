@@ -1,6 +1,7 @@
 import React from "react";
-
 import Avatar from "react-avatar";
+
+import "./styles/CardDisplay.scss"
 
 function CardDisplay(props) {
   const { title } = props;
