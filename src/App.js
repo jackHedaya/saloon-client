@@ -19,15 +19,18 @@ import "./App.scss";
 const AuthContext = React.createContext();
 
 function App() {
+  const [didPersistLoad, setPersistLoad] = useState(false);
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState(null);
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, token, setToken }}>
+    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, token, setToken, didPersistLoad }}>
       <Persist
         data={{ token, isLoggedIn }}
         debounce={500}
         onMount={data => {
+          setPersistLoad(true);
           setIsLoggedIn(data.isLoggedIn);
           setToken(data.token);
         }}
