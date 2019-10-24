@@ -14,7 +14,10 @@ function Sidebar(props) {
 
   function handleIconClick(index) {
     if (index === selectedIndex) toggleShowing();
-    else setSelected(index);
+    else {
+      if (showing === false) toggleShowing();
+      setSelected(index);
+    }
   }
 
   function ActiveChildElement() {
@@ -27,13 +30,13 @@ function Sidebar(props) {
       React.Children.forEach(children, (child, i) => {
         if (!React.isValidElement(child)) return;
 
-        activeMeta.push({ index: i, Icon: child.props.icon, title: child.props.title });
+        activeMeta.push({ index: i, Icon: child.props.icon, title: child.props.title, style: child.props.style });
       }),
     [children, activeMeta]
   );
 
   return (
-    <div className={`sidebar ${showing ? "" : "minimized"}`}>
+    <div className={`sidebar ${showing ? "" : "minimized"}`} style={activeMeta[selectedIndex].style}>
       <div className="icons">
         {activeMeta.map(({ index, Icon }) => {
           return (
