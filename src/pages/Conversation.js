@@ -7,6 +7,7 @@ import ConfiguredInterweave from "../components/ConfiguredInterweave";
 
 import useConversation from "../hooks/useConversation";
 import useAuth from "../hooks/useAuth";
+import useReload from "../hooks/useReload";
 
 import * as conversationService from "../services/conversation.service";
 
@@ -18,8 +19,8 @@ import Sidebar from "../components/Sidebar";
 function Conversation(props) {
   const id = props.match.params.id;
 
-  const [reload, setReload] = useState(1);
-  const toggleReload = () => setReload(-reload);
+  const [convoReload, reloadConvo] = useReload();
+  const [commentReload, reloadComments] = useReload();
 
   const { token, isLoggedIn } = useAuth();
   const [post, setPost] = useState("");
@@ -29,7 +30,7 @@ function Conversation(props) {
     conversationService
       .postConversationPost(token, { convo_id: id, post })
       .then(() => {
-        toggleReload();
+        reloadConvo();
         setPost("");
       })
       .catch(_ => {}); // Handle erroring later
@@ -42,7 +43,7 @@ function Conversation(props) {
   const updateVote = vote => {
     conversationService
       .putVote(id, { token, vote })
-      .then(() => toggleReload())
+      .then(() => reloadConvo())
       .catch(_ => {}); // Handle erroring later
   };
 
