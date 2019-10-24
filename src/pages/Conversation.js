@@ -6,10 +6,12 @@ import ConfiguredQuill from "../components/ConfiguredQuill";
 import ConfiguredInterweave from "../components/ConfiguredInterweave";
 
 import useConversation from "../hooks/useConversation";
+import useComments from "../hooks/useComments";
 import useAuth from "../hooks/useAuth";
 import useReload from "../hooks/useReload";
 
 import * as conversationService from "../services/conversation.service";
+import * as commentService from "../services/comment.service";
 
 import { randomColor } from "../_helpers";
 
@@ -18,15 +20,17 @@ import Sidebar from "../components/Sidebar";
 
 function Conversation(props) {
   const id = props.match.params.id;
+  const { token, isLoggedIn } = useAuth();
 
   const [convoReload, reloadConvo] = useReload();
   const [commentReload, reloadComments] = useReload();
 
-  const { token, isLoggedIn } = useAuth();
-  const [post, setPost] = useState("");
-  const data = useConversation(id, { reload, token });
+  const convo = useConversation(id, { reload: convoReload, token });
+  const comments = useComments(id, { reload: commentReload, token  })
 
-  const postAction = () => {
+  const [post, setPost] = useState("");
+
+  const postConvoPost = () => {
     conversationService
       .postConversationPost(token, { convo_id: id, post })
       .then(() => {
@@ -35,6 +39,13 @@ function Conversation(props) {
       })
       .catch(_ => {}); // Handle erroring later
   };
+
+  function postComment(comment) {
+    return commentService
+      .postComment(token, { convo_id: id, comment })
+      .then(() => reloadComments())
+      .catch(_ => {}) // Handle erroring later
+  }
 
   /**
    *
@@ -50,28 +61,27 @@ function Conversation(props) {
   return (
     <div className="conversation">
       <Discussion
-        posts={data.posts}
-        submit={postAction}
+        posts={convo.posts}
+        submit={postConvoPost}
         body={post}
         setBody={setPost}
         isLoggedIn={isLoggedIn}
-        isContributor={data.isContributor}
+        isContributor={convo.isContributor}
       />
       <Title
-        title={data.title}
-        views={data.views}
-        votes={data.votes}
-        userVote={data.vote}
+        title={convo.title}
+        views={convo.views}
+        votes={convo.votes}
+        userVote={convo.vote}
         updateVote={updateVote}
         isLoggedIn={isLoggedIn}
-        isContributor={data.isContributor}
+        isContributor={convo.isContributor}
         navigate={props.history.push}
         id={id}
       />
       <Sidebar>
-        <Comments icon={GoCommentDiscussion} title="Comments" comments={data.comments || []} />
+        <Comments icon={GoCommentDiscussion} title="Comments" comments={comments || []} postComment={postComment} />
       </Sidebar>
-      {/* <Comments comments={data.comments || []} /> */}
     </div>
   );
 }
@@ -157,14 +167,29 @@ function DiscussionItem(props) {
 }
 
 function Comments(props) {
+  const [newComment, setNewComment] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  function postComment() {
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+    
+    props
+      .postComment(newComment)
+      .then(_ => {
+        setIsSubmitting(false);
+        setNewComment("");
+      });
+  }
+
   return (
     <>
       {props.comments.map((comment, index) => (
         <Comment key={`${comment.contributor}/${comment.time_of_comment}/${index}`} {...comment} />
       ))}
       <div className="add">
-        <textarea />
-        <button type="submit">Submit</button>
+        <textarea value={newComment} onChange={e => setNewComment(e.currentTarget.value)} />
+        <button type="submit" onClick={postComment}>{!isSubmitting ? "Submit" : "Posting"}</button>
       </div>
     </>
   );
