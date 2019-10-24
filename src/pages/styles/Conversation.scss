@@ -1,8 +1,7 @@
 @import "../../globals.sass";
 
-// Comment Pane Variables
-$sliding-speed: 0.5s;
 $panel-padding: 20px;
+$sliding-speed: 0.5s;
 
 // Content Variables
 $content-width: calc(100% - 60px - #{$panel-padding});
@@ -151,51 +150,7 @@ $content-width: calc(100% - 60px - #{$panel-padding});
     }
   }
 
-  .comments {
-    position: fixed;
-    top: calc(#{$header-height} - 10px);
-    right: 2px;
-    width: 25%;
-    max-width: 400px;
-    min-width: 285px;
-    transition: transform $sliding-speed ease-out;
-    height: 100%;
-    background-color: white;
-    box-shadow: 0px 10px 5px -2px #888;
-    padding: 0 $panel-padding;
-
-    &.minimized {
-      transform: translateX(calc(100% - 60px));
-      transition: all $sliding-speed linear;
-    }
-
-    .fade {
-      opacity: 0;
-      transition: opacity $sliding-speed ease-in-out;
-    }
-
-    .comment-header {
-      font-size: 1.3em;
-      margin-top: 35px;
-      margin-bottom: 20px;
-
-      .button {
-        float: left;
-        cursor: pointer;
-        display: block;
-        position: relative;
-        z-index: 999;
-
-        &.rotate {
-          transform: rotate(180deg)
-        }
-      }
-
-      .title {
-        font-family: $main-font;
-        text-align: center;
-      }
-    }
+  .sidebar {
 
     .comment {
       height: 20%;
@@ -212,7 +167,6 @@ $content-width: calc(100% - 60px - #{$panel-padding});
           font-weight: 400;
         }
 
-
         .time {
           font-style: italic;
         }
@@ -227,9 +181,13 @@ $content-width: calc(100% - 60px - #{$panel-padding});
     .add {
       position: absolute;
       display: flex;
-      bottom: 100px;
+      bottom: 90px;
+      right: 0;
+      left: 0;
+      margin: auto;
       height: 18%;
-      width: calc(100% - #{$panel-padding} * 2);
+      width: 80%;
+      min-width: 220px;
       min-height: 120px;
 
       textarea {

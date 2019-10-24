@@ -1,0 +1,64 @@
+@import "../../globals.sass";
+
+// Comment Pane Variables
+$sliding-speed: 0.5s;
+
+.sidebar {
+  position: fixed;
+  top: $header-height;
+  right: 2px;
+  width: 30%;
+  max-width: 400px;
+  min-width: 300px;
+  transition: transform $sliding-speed ease-out;
+  height: 100%;
+  background-color: white;
+  box-shadow: 0px 0px 5px -2px #888;
+
+  &.minimized {
+    transform: translateX(calc(100% - 58px));
+    transition: all $sliding-speed linear;
+  }
+
+  .fade {
+    opacity: 0;
+    transition: opacity $sliding-speed ease-in-out;
+  }
+
+  .icons {
+    display: block;
+    width: 60px;
+    float: left;
+    height: 100%;
+    font-size: 1.8em;
+
+    .icon {
+      position: relative; // Done to force z-index
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 60px;
+      cursor: pointer;
+      z-index: 999;
+
+      svg {
+        display: block;
+      }
+    }
+  }
+
+  .sidebar-inner {
+    position: relative;
+    height: 100%;
+    width: calc(100% - 60px);
+    float: right;
+
+    .title {
+      font-size: 1.3em;
+      margin-top: calc(30px - (1.3em / 2));
+      margin-bottom: 20px;
+      font-family: $main-font;
+      text-align: center;
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { GoChevronLeft } from "react-icons/go";
+import { GoCommentDiscussion } from "react-icons/go";
 import { FiThumbsUp, FiThumbsDown } from "react-icons/fi";
 
 import ConfiguredQuill from "../components/ConfiguredQuill";
@@ -13,6 +13,7 @@ import * as conversationService from "../services/conversation.service";
 import { randomColor } from "../_helpers";
 
 import "./styles/Conversation.scss";
+import Sidebar from "../components/Sidebar";
 
 function Conversation(props) {
   const id = props.match.params.id;
@@ -66,7 +67,10 @@ function Conversation(props) {
         navigate={props.history.push}
         id={id}
       />
-      <Comments comments={data.comments || []} />
+      <Sidebar>
+        <Comments icon={GoCommentDiscussion} title="Comments" comments={data.comments || []} />
+      </Sidebar>
+      {/* <Comments comments={data.comments || []} /> */}
     </div>
   );
 }
@@ -152,34 +156,25 @@ function DiscussionItem(props) {
 }
 
 function Comments(props) {
-  const [showing, setShowing] = useState(false);
-  const toggle = () => setShowing(!showing);
-
   return (
-    <div className={`comments ${showing ? "" : "minimized"}`}>
-      <div className="comment-header">
-        <div className={`button ${showing ? "rotate" : ""}`} onClick={toggle}>
-          <GoChevronLeft />
-        </div>
-        <div className={`title ${showing ? "" : "fade"}`}>Comments</div>
-      </div>
+    <>
       {props.comments.map((comment, index) => (
-        <Comment key={`${comment.contributor}/${comment.time_of_comment}/${index}`} _showing={showing} {...comment} />
+        <Comment key={`${comment.contributor}/${comment.time_of_comment}/${index}`} {...comment} />
       ))}
-      <div className={`add ${showing ? "" : "fade"}`}>
+      <div className="add">
         <textarea />
         <button type="submit">Submit</button>
       </div>
-    </div>
+    </>
   );
 }
 
 function Comment(props) {
-  const { time_of_comment, contributor, body, _showing, likes } = props;
+  const { time_of_comment, contributor, body, likes } = props;
   const [upvoted, setUpvoted] = useState(false);
 
   return (
-    <div className={`comment ${_showing ? "" : "fade"}`}>
+    <div className="comment">
       <div className="meta">
         <div className="contributor" style={{ color: randomColor(contributor) }}>
           {contributor}
