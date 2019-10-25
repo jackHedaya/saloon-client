@@ -10,10 +10,12 @@ $sliding-speed: 0.5s;
   width: 30%;
   max-width: 400px;
   min-width: 300px;
-  transition: transform $sliding-speed ease-out;
   height: 100%;
-  background-color: white;
   box-shadow: 0px 0px 5px -2px #888;
+  background-color: white;
+  transition-property: width, transform;
+  transition-duration: $sliding-speed;
+  transition-timing-function: ease-out, ease-in;
 
   &.minimized {
     transform: translateX(calc(100% - 58px));
