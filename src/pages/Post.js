@@ -23,7 +23,7 @@ export default function Post(props) {
 
   const [invited, setInvited] = useState([]);
   const addInvited = newUser =>
-    !invited.includes(newUser) && newUser.toLowerCase() !== user.username.toLowerCase()
+    !invited.includes(newUser) && newUser.toLowerCase() !== user.username.toLowerCase() && newUser.trim() !== ""
       ? setInvited([...invited, newUser])
       : null;
 
