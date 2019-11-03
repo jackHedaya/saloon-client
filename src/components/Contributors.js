@@ -8,12 +8,16 @@ import { randomColor } from "../_helpers";
 import "./styles/Contributors.scss";
 
 export default function Contributors(props) {
-  const missingInvite = () => console.warn("Contributors component was not given an onInvite prop")
+  const missingInvite = () => console.warn("Contributors component was not given an `onInvite` prop");
+  const missingInvited = () => {
+    console.warn("Contributors component was not given an `invited` prop");
+    return [];
+  };
 
   return (
     <div className="contributors">
-      <div>Contributors</div>
-      <ContributorSection color="gray" invited={props.invited}>
+      {!props.noTitle && <div>Contributors</div>}
+      <ContributorSection color="gray" invited={props.invited || missingInvited()}>
         Invited
       </ContributorSection>
       <Invite onInvite={props.onInvite || missingInvite} />

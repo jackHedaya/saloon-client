@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { GoCommentDiscussion } from "react-icons/go";
+import { GoCommentDiscussion, GoOrganization } from "react-icons/go";
 import { FiThumbsUp, FiThumbsDown } from "react-icons/fi";
 
 import Sidebar from "../components/Sidebar";
 import ConfiguredQuill from "../components/ConfiguredQuill";
 import ConfiguredInterweave from "../components/ConfiguredInterweave";
+import Contributors from "../components/Contributors";
 
 import useConversation from "../hooks/useConversation";
 import useAuth from "../hooks/useAuth";
@@ -69,7 +70,7 @@ function Conversation(props) {
       />
       <Sidebar>
         <Comments icon={GoCommentDiscussion} title="Comments" comments={data.comments || []} />
-        {/* <Contributors /> */}
+        <Contributors icon={GoOrganization} title="Contributors" style={{ width: "100px" }} noTitle />
       </Sidebar>
       {/* <Comments comments={data.comments || []} /> */}
     </div>

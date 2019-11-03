@@ -9,6 +9,7 @@
 
 .contributors {
   @include title-text();
+  font-size: 1.3em;
 
   .section {
     width: 75%;
