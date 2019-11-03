@@ -70,7 +70,12 @@ function Conversation(props) {
       />
       <Sidebar>
         <Comments icon={GoCommentDiscussion} title="Comments" comments={data.comments || []} />
-        <Contributors icon={GoOrganization} title="Contributors" style={{ width: "100px" }} noTitle />
+        <Contributors
+          icon={GoOrganization}
+          title="Contributors"
+          style={{ width: "100px", transition: "width 0.5s ease-in" }}
+          noTitle
+        />
       </Sidebar>
       {/* <Comments comments={data.comments || []} /> */}
     </div>
