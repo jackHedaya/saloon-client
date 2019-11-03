@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import { FiArrowRightCircle } from 'react-icons/fi'
 import Avatar from 'react-avatar'
 
+import useUser from '../hooks/useUser'
+
 import { randomColor } from '../_helpers'
 
 import './styles/Contributors.scss'
@@ -17,9 +19,20 @@ const missingPropWarning = (propName, noRet) => {
  * @param {{ sections: ["invited" | "active"], ...other }} props
  */
 export default function Contributors(props) {
+  const user = useUser()
+
   const SECTION_COMPONENT_LOOKUP = {
     invited: InvitedSection,
     active: ActiveSection,
+  }
+
+  const invite = newUser => {
+    if (
+      !props.invited.includes(newUser) &&
+      newUser.toLowerCase() !== user.username.toLowerCase() &&
+      newUser.trim() !== ''
+    )
+      props.onInvite(newUser)
   }
 
   const sections = props.sections || []
@@ -30,9 +43,7 @@ export default function Contributors(props) {
         const Component = SECTION_COMPONENT_LOOKUP[section]
         return <Component key={`Contributors/${section}/${i}`} {...props} />
       })}
-      <InviteBar
-        onInvite={props.onInvite || (() => missingPropWarning('onInvite'))}
-      />
+      <InviteBar onInvite={invite || (() => missingPropWarning('onInvite'))} />
       {props.children}
     </div>
   )

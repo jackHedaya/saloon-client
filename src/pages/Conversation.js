@@ -25,6 +25,16 @@ function Conversation(props) {
   const { token, isLoggedIn } = useAuth()
   const [post, setPost] = useState('')
   const data = useConversation(id, { reload, token })
+  const [invited, setInvited] = useState(data.contributors || [])
+
+  const inviteContributor = newUser => {
+    setInvited([...invited, newUser])
+
+    conversationService
+      .postContributor(newUser, { token, convo_id: id })
+      .then(_ => toggleReload())
+      .catch(_ => {}) // Handle erroring later
+  }
 
   const postAction = () => {
     conversationService
@@ -79,9 +89,9 @@ function Conversation(props) {
           title="Contributors"
           style={{ width: '100px', transition: 'all 0.5s ease-in' }}
           sections={['active', 'invited']}
-          invited={[]}
+          invited={invited}
           active={data.contributors}
-          onInvite={() => {}}
+          onInvite={inviteContributor}
           noTitle
         />
       </Sidebar>

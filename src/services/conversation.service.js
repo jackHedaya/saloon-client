@@ -36,3 +36,11 @@ export function postConversationPost(token, { convo_id, post }) {
     body: { convo_id, post },
   })
 }
+
+export function postContributor(user, { convo_id, token }) {
+  return fetch('/contributor', {
+    method: 'POST',
+    headers: { Authorization: token },
+    body: { convo_id, invite: user },
+  })
+}

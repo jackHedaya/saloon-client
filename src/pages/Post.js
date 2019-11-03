@@ -5,26 +5,20 @@ import ConfiguredQuill from '../components/ConfiguredQuill'
 import Contributors from '../components/Contributors'
 
 import * as conversationService from '../services/conversation.service'
+
 import useAuth from '../hooks/useAuth'
-import useUser from '../hooks/useUser'
 
 import './styles/Post.scss'
 import 'react-quill/dist/quill.snow.css'
 
 export default function Post(props) {
   const { token } = useAuth()
-  const user = useUser()
 
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
 
   const [invited, setInvited] = useState([])
-  const addInvited = newUser =>
-    !invited.includes(newUser) &&
-    newUser.toLowerCase() !== user.username.toLowerCase() &&
-    newUser.trim() !== ''
-      ? setInvited([...invited, newUser])
-      : null
+  const addInvited = newUser => setInvited([...invited, newUser])
 
   const [submitting, setSubmitting] = useState(false)
 
