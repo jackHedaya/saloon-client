@@ -8,9 +8,12 @@ import ConfiguredInterweave from '../components/ConfiguredInterweave'
 import Contributors from '../components/Contributors'
 
 import useConversation from '../hooks/useConversation'
+import useComments from '../hooks/useComments'
 import useAuth from '../hooks/useAuth'
+import useReload from '../hooks/useReload'
 
 import * as conversationService from '../services/conversation.service'
+import * as commentService from '../services/comment.service'
 
 import { randomColor } from '../_helpers'
 
@@ -18,31 +21,40 @@ import './styles/Conversation.scss'
 
 function Conversation(props) {
   const id = props.match.params.id
-
-  const [reload, setReload] = useState(1)
-  const toggleReload = () => setReload(-reload)
-
   const { token, isLoggedIn } = useAuth()
+
+  const [convoReload, reloadConvo] = useReload()
+  const [commentReload, reloadComments] = useReload()
+
+  const convo = useConversation(id, { reload: convoReload, token })
+  const comments = useComments(id, { reload: commentReload, token })
+
   const [post, setPost] = useState('')
-  const data = useConversation(id, { reload, token })
-  const [invited, setInvited] = useState(data.contributors || [])
+  const [invited, setInvited] = useState(convo.contributors || [])
 
   const inviteContributor = newUser => {
     setInvited([...invited, newUser])
 
     conversationService
       .postContributor(newUser, { token, convo_id: id })
-      .then(_ => toggleReload())
+      .then(_ => reloadConvo())
       .catch(_ => {}) // Handle erroring later
   }
 
-  const postAction = () => {
+  const postConvoPost = () => {
     conversationService
       .postConversationPost(token, { convo_id: id, post })
       .then(() => {
-        toggleReload()
+        reloadConvo()
         setPost('')
       })
+      .catch(_ => {}) // Handle erroring later
+  }
+
+  function postComment(comment) {
+    return commentService
+      .postComment(token, { convo_id: id, comment })
+      .then(() => reloadComments())
       .catch(_ => {}) // Handle erroring later
   }
 
@@ -53,28 +65,28 @@ function Conversation(props) {
   const updateVote = vote => {
     conversationService
       .putVote(id, { token, vote })
-      .then(() => toggleReload())
+      .then(() => reloadConvo())
       .catch(_ => {}) // Handle erroring later
   }
 
   return (
     <div className="conversation">
       <Discussion
-        posts={data.posts}
-        submit={postAction}
+        posts={convo.posts}
+        submit={postConvoPost}
         body={post}
         setBody={setPost}
         isLoggedIn={isLoggedIn}
-        isContributor={data.isContributor}
+        isContributor={convo.isContributor}
       />
       <Title
-        title={data.title}
-        views={data.views}
-        votes={data.votes}
-        userVote={data.vote}
+        title={convo.title}
+        views={convo.views}
+        votes={convo.votes}
+        userVote={convo.vote}
         updateVote={updateVote}
         isLoggedIn={isLoggedIn}
-        isContributor={data.isContributor}
+        isContributor={convo.isContributor}
         navigate={props.history.push}
         id={id}
       />
@@ -82,7 +94,8 @@ function Conversation(props) {
         <Comments
           icon={GoCommentDiscussion}
           title="Comments"
-          comments={data.comments || []}
+          comments={comments || []}
+          postComment={postComment}
         />
         <Contributors
           icon={GoOrganization}
@@ -90,12 +103,11 @@ function Conversation(props) {
           style={{ width: '100px', transition: 'all 0.5s ease-in' }}
           sections={['active', 'invited']}
           invited={invited}
-          active={data.contributors}
+          active={convo.contributors}
           onInvite={inviteContributor}
           noTitle
         />
       </Sidebar>
-      {/* <Comments comments={data.comments || []} /> */}
     </div>
   )
 }
@@ -207,6 +219,19 @@ function DiscussionItem(props) {
 }
 
 function Comments(props) {
+  const [newComment, setNewComment] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  function postComment() {
+    if (isSubmitting) return
+    setIsSubmitting(true)
+
+    props.postComment(newComment).then(_ => {
+      setIsSubmitting(false)
+      setNewComment('')
+    })
+  }
+
   return (
     <>
       {props.comments.map((comment, index) => (
@@ -216,8 +241,13 @@ function Comments(props) {
         />
       ))}
       <div className="add">
-        <textarea />
-        <button type="submit">Submit</button>
+        <textarea
+          value={newComment}
+          onChange={e => setNewComment(e.currentTarget.value)}
+        />
+        <button type="submit" onClick={postComment}>
+          {!isSubmitting ? 'Submit' : 'Posting'}
+        </button>
       </div>
     </>
   )
