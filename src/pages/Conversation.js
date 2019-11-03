@@ -73,7 +73,11 @@ function Conversation(props) {
         <Contributors
           icon={GoOrganization}
           title="Contributors"
-          style={{ width: "100px", transition: "width 0.5s ease-in" }}
+          style={{ width: "100px", transition: "all 0.5s ease-in" }}
+          sections={["active", "invited"]}
+          invited={[]}
+          active={data.contributors}
+          onInvite={() => {}}
           noTitle
         />
       </Sidebar>

@@ -36,7 +36,7 @@ function Sidebar(props) {
   );
 
   return (
-    <div className={`sidebar ${showing ? "" : "minimized"}`} style={activeMeta[selectedIndex].style}>
+    <div className={`sidebar ${showing ? "" : "minimized"}`} style={activeMeta[selectedIndex].style || {}}>
       <div className="icons">
         {activeMeta.map(({ index, Icon }) => {
           return (

@@ -7,33 +7,59 @@ import { randomColor } from "../_helpers";
 
 import "./styles/Contributors.scss";
 
+const missingPropWarning = (propName, noRet) => {
+  console.warn(`Contributors component was not given an '${propName}' prop`);
+  return !noRet ? null : [];
+};
+
+/**
+ * 
+ * @param {{ sections: ["invited" | "active"], ...other }} props 
+ */
 export default function Contributors(props) {
-  const missingInvite = () => console.warn("Contributors component was not given an `onInvite` prop");
-  const missingInvited = () => {
-    console.warn("Contributors component was not given an `invited` prop");
-    return [];
+  const SECTION_COMPONENT_LOOKUP = {
+    invited: InvitedSection,
+    active: ActiveSection
   };
 
+  const sections = props.sections || [];
   return (
     <div className="contributors">
       {!props.noTitle && <div>Contributors</div>}
-      <ContributorSection color="gray" invited={props.invited || missingInvited()}>
-        Invited
-      </ContributorSection>
-      <Invite onInvite={props.onInvite || missingInvite} />
+      {sections.map((section, i) => {
+        const Component = SECTION_COMPONENT_LOOKUP[section];
+        return <Component key={`Contributors/${section}/${i}`} {...props} />
+      })}
+      <InviteBar onInvite={props.onInvite || (() => missingPropWarning("onInvite"))} />
       {props.children}
     </div>
   );
 }
 
+function ActiveSection(props) {
+  return (
+    <ContributorSection color="black" contributors={props.active || missingPropWarning("active")}>
+      Active
+    </ContributorSection>
+  );
+}
+
+function InvitedSection(props) {
+  return (
+    <ContributorSection color="gray" contributors={props.invited || missingPropWarning("invited")}>
+      Invited
+    </ContributorSection>
+  );
+}
+
 function ContributorSection(props) {
-  const { color, invited, children } = props;
+  const { color, contributors, children } = props;
 
   return (
     <div className="section">
       <div className="title">{children}</div>
       <div className="users">
-        {invited.map(invite => (
+        {(contributors || []).map(invite => (
           <Contributor key={`invite/${invite}`} color={color}>
             {invite}
           </Contributor>
@@ -55,7 +81,7 @@ function Contributor(props) {
   );
 }
 
-function Invite(props) {
+function InviteBar(props) {
   const [user, setUser] = useState("");
 
   let inputRef;

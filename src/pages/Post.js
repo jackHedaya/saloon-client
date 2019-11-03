@@ -44,7 +44,7 @@ export default function Post(props) {
     <div className="post">
       <Editor title={title} setTitle={setTitle} body={body} setBody={setBody} />
       <div className="">
-        <Contributors onInvite={addInvited} invited={invited}>
+        <Contributors sections={["invited"]} onInvite={addInvited} invited={invited}>
           <div className="post-button" onClick={uploadPost}>
             {!submitting ? (
               <div className="text">Post</div>
