@@ -1,7 +1,7 @@
 @import "../../globals.sass";
 
-$collaborator-width: 180px;
-$collaborator-color: white;
+$contributor-width: 180px;
+$contributor-color: white;
 
 @mixin title-text() {
   color: rgb(36, 36, 36);
@@ -14,7 +14,7 @@ $collaborator-color: white;
   height: 100%;
 
   .editor {
-    width: calc(100% - #{$collaborator-width} - 20px);
+    width: calc(100% - #{$contributor-width} - 20px);
     height: 100%;
 
     .post-title {
@@ -51,7 +51,7 @@ $collaborator-color: white;
     }
   }
 
-  .collaborators {
+  .contributors {
     @include title-text();
 
     position: fixed;
@@ -60,101 +60,37 @@ $collaborator-color: white;
     margin-top: $header-height;
     padding-top: 1.2em;
     box-shadow: 0px 0px 7px 1px lightgray;
-    background-color: $collaborator-color;
-    width: $collaborator-width;
+    background-color: $contributor-color;
+    width: $contributor-width;
     height: calc(100% - #{$header-height});
     font-size: 1.3em;
+  }
 
-    .section {
-      width: 75%;
-      margin: 0 auto;
-      text-align: left;
+  .post-button {
+    width: inherit;
+    height: 100px;
+    background: #fff;
+    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.16);
+    margin: auto auto;
+    cursor: pointer;
+    bottom: 0;
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    color: $main-color;
+    align-items: center;
 
-      .title {
-        margin-top: 15px;
-        color: #2C2C2C;
-        font-size: 0.6em;
-      }
-
-      .users {
-        max-height: 80px;
-        overflow: scroll;
-
-        .user {
-          margin-top: 5px;
-          font-size: 0.6em;
-          line-height: 25px;
-          font-weight: normal;
-          font-family: Arial, Helvetica, sans-serif;
-
-          .name {
-            margin-left: 10px;
-          }
-        }
-      }
+    &:hover {
+      color: $secondary-color;
     }
 
-    .invite {
-      padding-top: 25px;
+    .text {
+      font-family: Arial;
       font-weight: bold;
-      width: 75%;
-      margin: 0 auto;
-
-      .title {
-        text-align: left;
-        color: #2C2C2C;
-        font-size: 0.7em;
-        font-family: Arial;
-      }
-
-      .field {
-        margin-top: 5px;
-
-        input {
-          font-size: 0.6em;
-          color: $secondary-color;
-          font-weight: bold;
-          float: left;
-          width: 75%;
-          margin-right: 5px;
-          border-bottom: 2px solid black;
-        }
-
-        .submit {
-          display: block;
-          width: 0.6em;
-          cursor: pointer;
-          height: 19px;
-        }
-      }
-    }
-
-    .post-button {
-      width: inherit;
-      height: 100px;
-      background: #fff;
-      box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.16);
-      margin: auto auto;
-      cursor: pointer;
-      bottom: 0;
-      display: flex;
-      position: absolute;
-      justify-content: center;
-      color: $main-color;
-      align-items: center;
-
-      &:hover {
-        color: $secondary-color;
-      }
-
-      .text {
-        font-family: Arial;
-        font-weight: bold;
-        font-style: italic;
-        font-size: 1.2em;
-        text-align: center;
-        flex: 1;
-      }
+      font-style: italic;
+      font-size: 1.2em;
+      text-align: center;
+      flex: 1;
     }
   }
 }

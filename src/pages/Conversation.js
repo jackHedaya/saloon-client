@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { GoCommentDiscussion } from "react-icons/go";
 import { FiThumbsUp, FiThumbsDown } from "react-icons/fi";
 
+import Sidebar from "../components/Sidebar";
 import ConfiguredQuill from "../components/ConfiguredQuill";
 import ConfiguredInterweave from "../components/ConfiguredInterweave";
 
@@ -13,7 +14,6 @@ import * as conversationService from "../services/conversation.service";
 import { randomColor } from "../_helpers";
 
 import "./styles/Conversation.scss";
-import Sidebar from "../components/Sidebar";
 
 function Conversation(props) {
   const id = props.match.params.id;
@@ -69,6 +69,7 @@ function Conversation(props) {
       />
       <Sidebar>
         <Comments icon={GoCommentDiscussion} title="Comments" comments={data.comments || []} />
+        {/* <Contributors /> */}
       </Sidebar>
       {/* <Comments comments={data.comments || []} /> */}
     </div>
