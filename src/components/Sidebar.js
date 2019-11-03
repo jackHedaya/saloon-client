@@ -47,7 +47,7 @@ function Sidebar(props) {
         })}
       </div>
       <div className={`sidebar-inner ${showing ? "" : "fade"}`}>
-        <div className="title">{activeMeta[selectedIndex].title}</div>
+        <div className="section-title">{activeMeta[selectedIndex].title}</div>
         {<ActiveChildElement />}
       </div>
     </div>
