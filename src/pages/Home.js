@@ -1,17 +1,17 @@
-import React from "react";
+import React from 'react'
 
-import Feed from "../components/Feed";
+import Feed from '../components/Feed'
 
-import useFeed from "../hooks/useFeed";
+import useFeed from '../hooks/useFeed'
 
 function Home() {
-  const feed = useFeed()
+    const feed = useFeed()
 
-  return (
-    <div className="home">
-      <Feed items={feed} />
-    </div>
-  );
+    return (
+        <div className="home">
+            <Feed items={feed} />
+        </div>
+    )
 }
 
-export default Home;
+export default Home
