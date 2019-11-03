@@ -1,17 +1,17 @@
 /**
- * Taken from github:charlax/react-persist#patch-1
+ * Modified from github:charlax/react-persist#patch-1
  */
 
-import React from 'react';
-import debounce from 'lodash.debounce';
-import isEqual from 'lodash.isequal';
+import React from "react";
+import debounce from "lodash.debounce";
+import isEqual from "lodash.isequal";
 
 export default class Persist extends React.Component {
   static defaultProps = {
-    debounce: 300,
+    debounce: 300
   };
 
-  persist = debounce((data) => {
+  persist = debounce(data => {
     window.localStorage.setItem(this.props.name, JSON.stringify(data));
   }, this.props.debounce);
 
@@ -26,6 +26,8 @@ export default class Persist extends React.Component {
     if (data && data !== null) {
       this.props.onMount(JSON.parse(data));
     }
+
+    if (this.props.onComplete) this.props.onComplete();
   }
 
   render() {

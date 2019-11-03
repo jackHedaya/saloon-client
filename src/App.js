@@ -30,10 +30,10 @@ function App() {
         data={{ token, isLoggedIn }}
         debounce={500}
         onMount={data => {
-          setPersistLoad(true);
           setIsLoggedIn(data.isLoggedIn);
           setToken(data.token);
         }}
+        onComplete={() => setPersistLoad(true)}
       />
       <Router>
         <div>
