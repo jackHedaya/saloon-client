@@ -1,10 +1,10 @@
-import React from "react";
-import Avatar from "react-avatar";
+import React from 'react'
+import Avatar from 'react-avatar'
 
-import "./styles/CardDisplay.scss"
+import './styles/CardDisplay.scss'
 
 function CardDisplay(props) {
-  const { title } = props;
+  const { title } = props
 
   return (
     <div className="card-display">
@@ -15,11 +15,11 @@ function CardDisplay(props) {
         <DiscussionCard name="Should Marijuana be Legalized?" />
       </div>
     </div>
-  );
+  )
 }
 
 function DiscussionCard(props) {
-  const { name } = props;
+  const { name } = props
 
   return (
     <div className="card">
@@ -31,9 +31,12 @@ function DiscussionCard(props) {
           <div>Discussion by Jack Hedaya, John Cena, and 19 more</div>
         </span>
       </div>
-      <div className="description">A well thought out discussion on the pros and cons of legalizing marijuana.</div>
+      <div className="description">
+        A well thought out discussion on the pros and cons of legalizing
+        marijuana.
+      </div>
     </div>
-  );
+  )
 }
 
-export default CardDisplay;
+export default CardDisplay

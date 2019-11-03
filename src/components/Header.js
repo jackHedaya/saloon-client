@@ -1,17 +1,22 @@
-import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { GoSearch } from "react-icons/go";
-import { Dropdown, DropdownMenu, DropdownToggle, DropdownItem } from "reactstrap";
+import React, { useState } from 'react'
+import { withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { GoSearch } from 'react-icons/go'
+import {
+  Dropdown,
+  DropdownMenu,
+  DropdownToggle,
+  DropdownItem,
+} from 'reactstrap'
 
-import useUser from "../hooks/useUser";
-import useAuth from "../hooks/useAuth";
+import useUser from '../hooks/useUser'
+import useAuth from '../hooks/useAuth'
 
-import "./styles/Header.scss";
+import './styles/Header.scss'
 
 function Header(props) {
-  const { isLoggedIn } = useAuth();
-  const user = useUser();
+  const { isLoggedIn } = useAuth()
+  const user = useUser()
 
   return (
     <div className="header">
@@ -25,14 +30,17 @@ function Header(props) {
         </Link>
       )}
       {isLoggedIn ? (
-        <UserDropdown name={user ? user.first_name : undefined} redirect={props.history.push} />
+        <UserDropdown
+          name={user ? user.first_name : undefined}
+          redirect={props.history.push}
+        />
       ) : (
         <Link to="/login" className="login-account">
           Login
         </Link>
       )}
     </div>
-  );
+  )
 }
 
 function Search(props) {
@@ -45,22 +53,24 @@ function Search(props) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 function UserDropdown(props) {
-  const [open, setOpen] = useState(false);
-  const { setIsLoggedIn, setToken } = useAuth();
+  const [open, setOpen] = useState(false)
+  const { setIsLoggedIn, setToken } = useAuth()
 
-  const toggle = () => setOpen(!open);
+  const toggle = () => setOpen(!open)
 
   const signOut = () => {
-    setToken(null);
-    setIsLoggedIn(false);
-    props.redirect("/");
-  };
+    setToken(null)
+    setIsLoggedIn(false)
+    props.redirect('/')
+  }
 
-  const DropdownLink = ({ to, ...other }) => <DropdownItem onClick={() => props.redirect(to)} {...other} />;
+  const DropdownLink = ({ to, ...other }) => (
+    <DropdownItem onClick={() => props.redirect(to)} {...other} />
+  )
 
   return (
     <Dropdown isOpen={open} toggle={toggle} nav>
@@ -69,7 +79,9 @@ function UserDropdown(props) {
       </DropdownToggle>
       <DropdownMenu right>
         <DropdownLink to="/user">Profile</DropdownLink>
-        <DropdownLink to="/saved-conversations">Saved Conversations</DropdownLink>
+        <DropdownLink to="/saved-conversations">
+          Saved Conversations
+        </DropdownLink>
         <DropdownLink to="/history">History</DropdownLink>
         <DropdownItem divider />
         <DropdownLink to="/settings">Settings</DropdownLink>
@@ -77,7 +89,7 @@ function UserDropdown(props) {
         <DropdownItem onClick={signOut}>Log Out</DropdownItem>
       </DropdownMenu>
     </Dropdown>
-  );
+  )
 }
 
-export default withRouter(Header);
+export default withRouter(Header)

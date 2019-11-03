@@ -1,54 +1,69 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo } from 'react'
 
-import "./styles/Sidebar.scss";
+import './styles/Sidebar.scss'
 
 function Sidebar(props) {
-  const { children } = props;
+  const { children } = props
 
-  const [showing, setShowing] = useState(false);
-  const toggleShowing = () => setShowing(!showing);
+  const [showing, setShowing] = useState(false)
+  const toggleShowing = () => setShowing(!showing)
 
-  const [selectedIndex, setSelected] = useState(0);
+  const [selectedIndex, setSelected] = useState(0)
 
-  const activeMeta = [];
+  const activeMeta = []
 
   function handleIconClick(index) {
-    if (index === selectedIndex) toggleShowing();
-    else setSelected(index);
+    if (index === selectedIndex) toggleShowing()
+    else {
+      if (showing === false) toggleShowing()
+      setSelected(index)
+    }
   }
 
   function ActiveChildElement() {
-    const count = React.Children.count(children);
-    return count === 0 ? null : count === 1 ? children : children[selectedIndex];
+    const count = React.Children.count(children)
+    return count === 0 ? null : count === 1 ? children : children[selectedIndex]
   }
 
   useMemo(
     () =>
       React.Children.forEach(children, (child, i) => {
-        if (!React.isValidElement(child)) return;
+        if (!React.isValidElement(child)) return
 
-        activeMeta.push({ index: i, Icon: child.props.icon, title: child.props.title });
+        activeMeta.push({
+          index: i,
+          Icon: child.props.icon,
+          title: child.props.title,
+          style: child.props.style,
+        })
       }),
     [children, activeMeta]
-  );
+  )
 
   return (
-    <div className={`sidebar ${showing ? "" : "minimized"}`}>
+    <div
+      className={`sidebar ${showing ? '' : 'minimized'}`}
+      style={activeMeta[selectedIndex].style || {}}
+    >
       <div className="icons">
         {activeMeta.map(({ index, Icon }) => {
           return (
-            <div className="icon" key={`Sidebar/Icon/${index}`} onClick={() => handleIconClick(index)}>
+            <div
+              className="icon"
+              key={`Sidebar/Icon/${index}`}
+              onClick={() => handleIconClick(index)}
+            >
               <Icon />
             </div>
-          );
+          )
         })}
       </div>
-      <div className={`sidebar-inner ${showing ? "" : "fade"}`}>
-        <div className="title">{activeMeta[selectedIndex].title}</div>
+      <div className={`sidebar-inner ${showing ? '' : 'fade'}`}>
+        <div className="section-title">{activeMeta[selectedIndex].title}</div>
         {<ActiveChildElement />}
       </div>
     </div>
-  );
+  )
 }
 
-export default Sidebar;
+export default Sidebar

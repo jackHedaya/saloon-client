@@ -1,32 +1,36 @@
-import React from "react";
-import { Link, Redirect } from "react-router-dom";
-import { Formik, Form, Field } from "../components/Form";
+import React from 'react'
+import { Link, Redirect } from 'react-router-dom'
+import { Formik, Form, Field } from '../components/Form'
 
-import * as authenticationService from "../services/authentication.service";
+import * as authenticationService from '../services/authentication.service'
 
-import useAuth from "../hooks/useAuth";
+import useAuth from '../hooks/useAuth'
 
 function Login(props) {
-  const { isLoggedIn, setIsLoggedIn, setToken } = useAuth();
+  const { isLoggedIn, setIsLoggedIn, setToken } = useAuth()
 
   return isLoggedIn ? (
-    <Redirect to={props.location.state ? props.location.state.from.pathname : "/"} />
+    <Redirect
+      to={props.location.state ? props.location.state.from.pathname : '/'}
+    />
   ) : (
     <div className="form">
       <h1>Login</h1>
       <Formik
-        initialValues={{ email: "", password: "" }}
+        initialValues={{ email: '', password: '' }}
         onSubmit={({ email, password }, actions) => {
           authenticationService
             .login(email, password)
             .then(data => {
-              setToken(data.token);
-              setIsLoggedIn(true);
+              setToken(data.token)
+              setIsLoggedIn(true)
             })
             .catch(e => {
-              actions.setErrors({ password: "incorrect password" });
-              actions.setSubmitting(false);
-            });
+              actions.setErrors({
+                password: 'incorrect password',
+              })
+              actions.setSubmitting(false)
+            })
         }}
       >
         {({ isSubmitting }) => (
@@ -43,7 +47,7 @@ function Login(props) {
         )}
       </Formik>
     </div>
-  );
+  )
 }
 
-export default Login;
+export default Login

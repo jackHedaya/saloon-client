@@ -1,1 +1,1 @@
-export * from "./randomColor"
+export * from './randomColor'

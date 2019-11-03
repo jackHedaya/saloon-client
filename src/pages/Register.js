@@ -1,14 +1,14 @@
-import React from "react";
-import { Link, Redirect } from "react-router-dom";
-import { Formik, Form, Field } from "../components/Form";
-import * as Yup from "yup";
+import React from 'react'
+import { Link, Redirect } from 'react-router-dom'
+import { Formik, Form, Field } from '../components/Form'
+import * as Yup from 'yup'
 
-import * as authenticationService from "../services/authentication.service";
+import * as authenticationService from '../services/authentication.service'
 
-import useAuth from "../hooks/useAuth";
+import useAuth from '../hooks/useAuth'
 
 function Register() {
-  const { setToken, setIsLoggedIn, isLoggedIn } = useAuth();
+  const { setToken, setIsLoggedIn, isLoggedIn } = useAuth()
 
   return isLoggedIn ? (
     <Redirect to="/home" />
@@ -16,21 +16,27 @@ function Register() {
     <div className="form">
       <h1>Register</h1>
       <Formik
-        initialValues={{ username: "", password: "", first_name: "", last_name: "", email: "" }}
+        initialValues={{
+          username: '',
+          password: '',
+          first_name: '',
+          last_name: '',
+          email: '',
+        }}
         onSubmit={(vals, actions) => {
           authenticationService
             .register(vals)
             .then(data => {
-              setToken(data.token);
-              setIsLoggedIn(true);
+              setToken(data.token)
+              setIsLoggedIn(true)
             })
-            .catch(_ => actions.setFieldError("email", "something went wrong"));
+            .catch(_ => actions.setFieldError('email', 'something went wrong'))
         }}
         validationSchema={Yup.object().shape({
           first_name: Yup.string().required(),
           last_name: Yup.string().required(),
           username: Yup.string().required(),
-          password: Yup.string().required()
+          password: Yup.string().required(),
         })}
       >
         {({ isSubmitting }) => (
@@ -50,7 +56,7 @@ function Register() {
         )}
       </Formik>
     </div>
-  );
+  )
 }
 
-export default Register;
+export default Register
