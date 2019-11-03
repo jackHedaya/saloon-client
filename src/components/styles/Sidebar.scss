@@ -11,8 +11,6 @@ $sliding-speed: 0.5s;
   max-width: 400px;
   min-width: 300px;
   height: 100%;
-  box-shadow: 0px 0px 5px -2px #888;
-  background-color: white;
   transition-property: width, transform;
   transition-duration: $sliding-speed;
   transition-timing-function: ease-out, ease-in;
@@ -35,6 +33,10 @@ $sliding-speed: 0.5s;
     font-size: 1.8em;
 
     .icon {
+      background-color: white;
+      border: 1px solid rgba(136, 136, 136, 0.4);
+      border-right: none;
+      transform: translate(1px, 0);
       position: relative; // Done to force z-index
       display: flex;
       align-items: center;
@@ -54,6 +56,8 @@ $sliding-speed: 0.5s;
     height: 100%;
     width: calc(100% - 60px);
     float: right;
+    background-color: white;
+    box-shadow: 0px 0px 5px -2px #888;
 
     .title {
       font-size: 1.3em;
