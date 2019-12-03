@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Feed from '../components/Feed'
+import RowFeed from '../components/RowFeed'
 
 import useFeed from '../hooks/useFeed'
 
@@ -9,7 +9,7 @@ function Home() {
 
   return (
     <div className="home">
-      <Feed items={feed} />
+      <RowFeed items={feed} />
     </div>
   )
 }

@@ -1,4 +1,4 @@
-@import "../../globals.sass";
+@import '../../globals.sass';
 
 .feed {
   .item {
@@ -23,7 +23,7 @@
       @media only screen and (max-width: 1025px) {
         display: block;
       }
-      
+
       .meta {
         font-family: $main-body-font;
         display: inline-block;

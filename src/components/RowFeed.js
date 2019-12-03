@@ -2,13 +2,13 @@ import React from 'react'
 import Avatar from 'react-avatar'
 import { withRouter } from 'react-router-dom'
 
-import ConfiguredInterweave from '../components/ConfiguredInterweave'
+import ConfiguredInterweave from './ConfiguredInterweave'
 
 import { randomColor } from '../_helpers'
 
-import './styles/Feed.scss'
+import './styles/RowFeed.scss'
 
-function Feed(props) {
+function RowFeed(props) {
   const { items } = props
 
   var convo_ids = []
@@ -107,4 +107,4 @@ function PeopleInvolved(props) {
   )
 }
 
-export default withRouter(Feed)
+export default withRouter(RowFeed)
