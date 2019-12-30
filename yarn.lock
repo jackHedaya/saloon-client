@@ -3232,14 +3232,14 @@ core-js@^1.0.0:
   version "1.2.7"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
 
-core-js@^2.4.0, core-js@^2.5.7:
+core-js@^2.4.0:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.9.tgz#6b4b214620c834152e179323727fc19741b084f2"
 
-core-js@^3.4.1:
-  version "3.4.7"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.4.7.tgz#57c35937da80fe494fbc3adcf9cf3dc00eb86b34"
-  integrity sha512-qaPVGw30J1wQ0GR3GvoPqlGf9GZfKKF4kFC7kiHlcsPTqH3txrs9crCp3ZiMAXuSenhz89Jnl4GZs/67S5VOSg==
+core-js@^3.4.1, core-js@^3.6.1:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.6.1.tgz#39d5e2e346258cc01eb7d44345b1c3c014ca3f05"
+  integrity sha512-186WjSik2iTGfDjfdCZAxv2ormxtKgemjC3SI6PL31qOA0j5LhTDVjHChccoc7brwLvpvLPiMyRlcO88C4l1QQ==
 
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
@@ -8585,11 +8585,12 @@ react-app-polyfill@^1.0.5:
     regenerator-runtime "^0.13.3"
     whatwg-fetch "^3.0.0"
 
-react-avatar@^3.7.0:
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/react-avatar/-/react-avatar-3.7.0.tgz#cd73cf1b862be196d95650dd8fc2afda956957d8"
+react-avatar@^3.9.0:
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/react-avatar/-/react-avatar-3.9.0.tgz#a0910c49240388a1f1a6bc74dca7c2b0070174c9"
+  integrity sha512-i9UR3z/Y4JhAb6WH0yaAr6noLwLVgUyp7kOMu48Plc9ch6OQ3k4aDqp+m0TrCbHAn8YfRv2BevK9gA0nIqwVbA==
   dependencies:
-    core-js "^2.5.7"
+    core-js "^3.6.1"
     is-retina "^1.0.3"
     md5 "^2.0.0"
 
