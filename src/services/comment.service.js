@@ -5,7 +5,7 @@ export function getComments(convo_id) {
 }
 
 export function postComment(token, { convo_id, comment }) {
-  return fetch("/comment", { method: "POST", headers: { Authorization: token }, body: { convo_id, post: comment } });
+  return fetch(`/comment/${convo_id}`, { method: "POST", headers: { Authorization: token }, body: { comment: comment } });
 }
 
 export function putVote(id, { token, vote }) {
