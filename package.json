@@ -4,7 +4,7 @@
     "private": true,
     "dependencies": {
         "bootstrap": "^4.4.1",
-        "formik": "^2.0.10",
+        "formik": "^2.1.1",
         "interweave": "^11.2.0",
         "interweave-autolink": "^3.0.2",
         "lodash.debounce": "^4.0.8",
