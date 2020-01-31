@@ -29,7 +29,7 @@ export default function Contributors(props) {
   const invite = newUser => {
     if (
       !props.invited.includes(newUser) &&
-      newUser.toLowerCase() !== user.username.toLowerCase() &&
+      newUser.toLowerCase() !== (user ? user.username.toLowerCase() : null) &&
       newUser.trim() !== ''
     )
       props.onInvite(newUser)
