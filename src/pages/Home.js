@@ -5,16 +5,28 @@ import useFeed from '../hooks/useFeed'
 import { useHistory } from 'react-router-dom'
 
 import chunk from 'lodash.chunk'
-import useWindowSize from '@react-hook/window-size'
+import { useWindowWidth } from '@react-hook/window-size'
 
 import './styles/Home.scss'
 
 function Home() {
   const feed = useFeed()
+  const width = useWindowWidth()
 
-  const [width] = useWindowSize()
+  /**
+   * Dirty way to make sure the api is not sending duplicates
+   */
 
-  const splitFeed = chunk(feed, width < 925 ? 1 : width < 1260 ? 2 : 3)
+  let _unique = []
+  for (const card of feed ?? []) {
+    if (_unique.filter(x => x.convo_id === card.convo_id).length > 0) break
+
+    _unique.push(card)
+  }
+
+  /**       */
+
+  const splitFeed = chunk(_unique, width < 925 ? 1 : width < 1260 ? 2 : 3)
 
   return (
     <div className="home">
@@ -29,7 +41,7 @@ function CardRow(props) {
   return (
     <div className="card-row">
       {props.cards?.length > 1 ? <div className="connector" /> : null}
-      {props.cards.map(card => (
+      {props.cards?.map(card => (
         <Card {...card} key={`CardRow/${card.convo_id}`} />
       ))}
     </div>
