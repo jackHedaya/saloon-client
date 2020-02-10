@@ -20,9 +20,12 @@ function Header(props) {
 
   return (
     <div className="header">
-      <Link to="/" className="saloon">
-        Saloon
-      </Link>
+      <span id="logo">
+        <Link to="/" className="saloon">
+          Saloon
+        </Link>
+        <span id="slogan">Conversation Reimagined</span>
+      </span>
       <Search />
       {isLoggedIn && (
         <Link to="/post" className="login-account">
