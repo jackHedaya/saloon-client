@@ -35,9 +35,10 @@ function Header(props) {
           redirect={props.history.push}
         />
       ) : (
-        <Link to="/login" className="login-account">
-          Login
-        </Link>
+        <div className="login-account">
+          <Link to="/login">Login</Link>
+          <Link to="/register">Sign Up</Link>
+        </div>
       )}
     </div>
   )
