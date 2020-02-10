@@ -1,4 +1,4 @@
-@import "../../globals.sass";
+@import '../../globals.sass';
 
 $panel-padding: 20px;
 $sliding-speed: 0.5s;
@@ -108,7 +108,7 @@ $content-width: calc(100% - 60px - #{$panel-padding});
 
     .text {
       margin-top: 4px;
-      font-family: "Helvetica Neue";
+      font-family: 'Helvetica Neue';
       font-weight: bold;
       font-size: 1.15em;
       text-align: center;
@@ -151,12 +151,12 @@ $content-width: calc(100% - 60px - #{$panel-padding});
   }
 
   .sidebar {
-
     .comment {
       height: 20%;
       position: relative;
       min-height: 120px;
       font-size: 0.9em;
+      padding: 10px;
 
       .meta {
         display: flex;
@@ -223,7 +223,6 @@ $content-width: calc(100% - 60px - #{$panel-padding});
 }
 
 .likes {
-
   &:hover,
   &.upvoted {
     cursor: pointer;

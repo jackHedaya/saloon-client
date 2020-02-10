@@ -254,28 +254,26 @@ function Comments(props) {
 }
 
 function Comment(props) {
-  const { time_of_comment, contributor, body, likes } = props
+  const { comment_at, username, comment, votes } = props
   const [upvoted, setUpvoted] = useState(false)
 
   return (
     <div className="comment">
       <div className="meta">
-        <div
-          className="contributor"
-          style={{ color: randomColor(contributor) }}
-        >
-          {contributor}
+        <div className="contributor" style={{ color: randomColor(username) }}>
+          {username}
         </div>
         <div
           className={`likes ${upvoted ? 'upvoted' : ''}`}
           onClick={() => setUpvoted(!upvoted)}
         >
-          {upvoted ? likes + 1 : likes}{' '}
+          {upvoted ? votes + 1 : votes}{' '}
           <FiThumbsUp style={{ fontSize: '12px' }} />
         </div>
-        <div className="time">{time_of_comment}</div>
+        <div className="time">{'9 hours ago'}</div>{' '}
+        {/* TODO: update when API supports */}
       </div>
-      <div className="body">{body}</div>
+      <div className="body">{comment}</div>
     </div>
   )
 }
