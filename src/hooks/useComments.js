@@ -13,7 +13,7 @@ export default function useComments(id, { reload, token }) {
 
     commentService
       .getComments(id)
-      .then(u => setComments(u.message.comments))
+      .then(u => setComments(u.comments))
       .catch(_ => {})
   }, [id, reload, token, didPersistLoad])
 
