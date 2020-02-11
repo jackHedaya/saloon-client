@@ -254,7 +254,7 @@ function Comments(props) {
 }
 
 function Comment(props) {
-  const { comment_at, username, comment, votes } = props
+  const { age, username, comment, votes } = props
   const [upvoted, setUpvoted] = useState(false)
 
   return (
@@ -270,8 +270,7 @@ function Comment(props) {
           {upvoted ? votes + 1 : votes}{' '}
           <FiThumbsUp style={{ fontSize: '12px' }} />
         </div>
-        <div className="time">{'9 hours ago'}</div>{' '}
-        {/* TODO: update when API supports */}
+        <div className="time">{age}</div>{' '}
       </div>
       <div className="body">{comment}</div>
     </div>
