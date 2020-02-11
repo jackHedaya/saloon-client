@@ -234,12 +234,14 @@ function Comments(props) {
 
   return (
     <>
-      {props.comments.map((comment, index) => (
-        <Comment
-          key={`${comment.contributor}/${comment.time_of_comment}/${index}`}
-          {...comment}
-        />
-      ))}
+      <div className="comment-section">
+        {props.comments.map((comment, index) => (
+          <Comment
+            key={`${comment.contributor}/${comment.time_of_comment}/${index}`}
+            {...comment}
+          />
+        ))}
+      </div>
       <div className="add">
         <textarea
           value={newComment}

@@ -151,30 +151,35 @@ $content-width: calc(100% - 60px - #{$panel-padding});
   }
 
   .sidebar {
-    .comment {
-      height: 20%;
-      position: relative;
-      min-height: 120px;
-      font-size: 0.9em;
-      padding: 10px;
+    .comment-section {
+      height: 55%;
+      overflow-y: scroll;
 
-      .meta {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+      .comment {
+        position: relative;
+        height: 20%;
+        min-height: 120px;
+        font-size: 0.9em;
+        padding: 10px;
 
-        .contributor {
-          font-weight: 400;
+        .meta {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+
+          .contributor {
+            font-weight: 400;
+          }
+
+          .time {
+            font-style: italic;
+          }
         }
 
-        .time {
-          font-style: italic;
+        .body {
+          margin-top: 5px;
+          font-size: 1.15em;
         }
-      }
-
-      .body {
-        margin-top: 5px;
-        font-size: 1.15em;
       }
     }
 
