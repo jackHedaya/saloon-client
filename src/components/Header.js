@@ -51,7 +51,7 @@ function Search(props) {
   return (
     <div className="search-wrapper">
       <input placeholder="Search..." />
-      <div>
+      <div className="i-wrapper">
         <div className="body">
           <GoSearch size={20} className="icon" color="white" />
         </div>

@@ -83,7 +83,7 @@
     input {
       height: 2em;
       font-size: 1em;
-      flex: 0.8;
+      flex: 0.6;
       padding-left: 10px;
     }
 
@@ -94,7 +94,12 @@
       cursor: pointer;
     }
 
+    .i-wrapper {
+      padding: 2px;
+    }
+
     .body {
+      flex: 0.2;
       font-size: 0.2em;
     }
   }
