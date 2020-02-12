@@ -1,18 +1,17 @@
-@import '../../globals.sass';
-
-@mixin title-text() {
-  color: rgb(36, 36, 36);
-  font-family: Arial;
-  font-weight: bold;
-  text-align: center;
-}
-
 .about {
   height: 100%;
   padding-right: 20px;
+  margin-bottom: 20px;
+  text-align: center;
 
   .pad-top {
     padding-top: 20px;
+  }
+
+  .bold-y-margin {
+    margin: 15px 0;
+    font-weight: bold;
+    font-size: 1.2em;
   }
 
   #title {
@@ -21,9 +20,8 @@
   }
 
   .editor {
-    margin: auto;
+    display: inline-block;
     width: calc(100% - 200px);
-    height: 82%;
 
     .quill {
       margin: 0 auto;
@@ -53,10 +51,22 @@
         font-size: 1.1em;
         padding: 20px 100px;
 
-        #how {
-          margin: 15px 0;
-          font-weight: bold;
-          font-size: 1.2em;
+        .tip {
+          text-align: left;
+          margin-left: 10%;
+          margin-bottom: 10px;
+        }
+
+        .last {
+          text-align: left;
+          margin-left: 25%;
+          margin-top: 20px;
+          margin-bottom: 20px;
+        }
+
+        .fun {
+          text-align: left;
+          margin-left: 40%;
         }
       }
     }

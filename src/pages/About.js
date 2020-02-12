@@ -16,7 +16,7 @@ function About() {
               your voices are heard.
             </div>
 
-            <div id="how">How we do it</div>
+            <div className="bold-y-margin">How we do it</div>
 
             <div>We keep conversations CLEAR:</div>
             <div>
@@ -36,6 +36,17 @@ function About() {
               That means posters on Saloon can engage with reader feedback
               during conversations!
             </div>
+
+            <div className="bold-y-margin">
+              Here are some tips to get the most out of your Saloon
+              Conversations
+            </div>
+            <div className="tip">Be Respectful</div>
+            <div className="tip">Be Disagreeable</div>
+            <div className="tip">Be Honest</div>
+            <div className="tip">Be Clear and Consice</div>
+            <div className="last">and last but not least...</div>
+            <div className="bold-y-margin fun">Have Fun!!</div>
           </div>
         </div>
       </div>
