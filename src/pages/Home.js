@@ -13,19 +13,6 @@ function Home() {
   const feed = useFeed()
   const width = useWindowWidth()
 
-  /**
-   * Dirty way to make sure the api is not sending duplicates
-   */
-
-  let _unique = []
-  for (const card of feed ?? []) {
-    if (_unique.filter(x => x.convo_id === card.convo_id).length > 0) break
-
-    _unique.push(card)
-  }
-
-  /**       */
-
   const splitFeed = chunk(_unique, width < 925 ? 1 : width < 1260 ? 2 : 3)
 
   return (
