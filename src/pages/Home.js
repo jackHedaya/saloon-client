@@ -13,7 +13,7 @@ function Home() {
   const feed = useFeed()
   const width = useWindowWidth()
 
-  const splitFeed = chunk(_unique, width < 925 ? 1 : width < 1260 ? 2 : 3)
+  const splitFeed = chunk(feed, width < 925 ? 1 : width < 1260 ? 2 : 3)
 
   return (
     <div className="home">
