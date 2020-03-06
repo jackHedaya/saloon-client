@@ -14,6 +14,7 @@ import Home from './pages/Home'
 import About from './pages/About'
 import Login from './pages/Login'
 import Register from './pages/Register'
+import Account from './pages/Account'
 import Conversation from './pages/Conversation'
 import Post from './pages/Post'
 
@@ -60,6 +61,7 @@ function App() {
               <Route exact path="/about" component={About} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
+              <Route exact path="/account" component={Account} />
               <Route exact path="/conversation/:id" component={Conversation} />
               <SecuredRoute
                 exact

@@ -82,11 +82,7 @@ function UserDropdown(props) {
         Hey, {props.name}
       </DropdownToggle>
       <DropdownMenu right>
-        <DropdownLink to="/user">Profile</DropdownLink>
-        <DropdownLink to="/saved-conversations">
-          Saved Conversations
-        </DropdownLink>
-        <DropdownLink to="/history">History</DropdownLink>
+        <DropdownLink to="/account">My Account</DropdownLink>
         <DropdownItem divider />
         <DropdownLink to="/settings">Settings</DropdownLink>
         <DropdownItem divider />
