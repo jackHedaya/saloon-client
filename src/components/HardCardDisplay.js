@@ -1,9 +1,9 @@
 import React from 'react'
 import Avatar from 'react-avatar'
 
-import './styles/CardDisplay.scss'
+import './styles/HardCardDisplay.scss'
 
-function CardDisplay(props) {
+function HardCardDisplay(props) {
   const { title } = props
 
   return (
@@ -39,4 +39,4 @@ function DiscussionCard(props) {
   )
 }
 
-export default CardDisplay
+export default HardCardDisplay
