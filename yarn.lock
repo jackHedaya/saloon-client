@@ -1114,10 +1114,10 @@
   dependencies:
     "@essentials/request-timeout" "^1.0.1"
 
-"@react-hook/window-size@^1.0.12":
-  version "1.0.12"
-  resolved "https://registry.yarnpkg.com/@react-hook/window-size/-/window-size-1.0.12.tgz#feffac908e1c0a7aa32fe5db7be262dd0dadefb4"
-  integrity sha512-Z2IlQmbCQ7fsLCvn6GnIFFE5Evz+nz1CjC0d+ZDjFnX3pfCJCLc0TlzwSDDOrjYLvqkTC29FUF6wDT6lfbyxzg==
+"@react-hook/window-size@^1.0.13":
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/@react-hook/window-size/-/window-size-1.0.13.tgz#c9f1fcbff36a548c44468d2882858e185c48f154"
+  integrity sha512-9HlEV5vNKNnADaThaD0Qt12uNHzI+G5PC8DalxNbQNFbQROcx9kLeaVowx5Wqp3QKQUEEeeKpUgzW5+WgTOEfQ==
   dependencies:
     "@react-hook/debounce" "^1.0.6"
     "@react-hook/throttle" "^1.0.7"
