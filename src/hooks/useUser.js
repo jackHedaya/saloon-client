@@ -12,9 +12,9 @@ export default function useUser() {
     if (!token || !isLoggedIn) return
 
     const logout = () => {
-      // setToken(null)
-      // setIsLoggedIn(false)
-      // setUser(null)
+      setToken(null)
+      setIsLoggedIn(false)
+      setUser(null)
     }
 
     userService
