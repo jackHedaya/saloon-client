@@ -24,7 +24,7 @@
     "yup": "^0.28.3"
   },
   "devDependencies": {
-    "husky": "^4.2.3",
+    "husky": "^4.2.5",
     "prettier": "1.19.1",
     "pretty-quick": "^2.0.1"
   },
