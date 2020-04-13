@@ -14,13 +14,13 @@ function Account() {
       <div className="user-name">{`${user?.first_name ??
         'John'} ${user?.last_name ?? 'Smith'}`}</div>
 
-      <div>History</div>
+      <div className="section">History</div>
       <CardRow />
 
-      <div>Liked Posts</div>
+      <div className="section">Liked Posts</div>
       <CardRow cards={user?.convos} noflex />
 
-      <div>My Posts</div>
+      <div className="section">My Posts</div>
       <CardRow />
     </div>
   )
