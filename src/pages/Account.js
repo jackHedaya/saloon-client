@@ -18,10 +18,10 @@ function Account() {
       <CardRow />
 
       <div className="section">Liked Posts</div>
-      <CardRow cards={user?.convos} noflex />
+      <CardRow />
 
       <div className="section">My Posts</div>
-      <CardRow />
+      <CardRow cards={user?.convos} noflex />
     </div>
   )
 }

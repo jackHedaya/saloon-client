@@ -9,6 +9,8 @@ import {
   DropdownItem,
 } from 'reactstrap'
 
+import ClearClasses from '../_helpers/ClearClasses'
+
 import useUser from '../hooks/useUser'
 import useAuth from '../hooks/useAuth'
 
@@ -64,7 +66,10 @@ function UserDropdown(props) {
   const [open, setOpen] = useState(false)
   const { setIsLoggedIn, setToken } = useAuth()
 
+  const [subOpen, setSubOpen] = useState(false)
+
   const toggle = () => setOpen(!open)
+  const subToggle = () => setSubOpen(!subOpen)
 
   const signOut = () => {
     setToken(null)
@@ -83,6 +88,16 @@ function UserDropdown(props) {
       </DropdownToggle>
       <DropdownMenu right>
         <DropdownLink to="/account">My Account</DropdownLink>
+
+        <Dropdown isOpen={subOpen} toggle={subToggle} direction="left">
+          <ClearClasses nClassName="dropdown-item">
+            <DropdownToggle caret>Invitations</DropdownToggle>
+          </ClearClasses>
+          <DropdownMenu>
+            <DropdownItem>Hello</DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+
         <DropdownItem divider />
         <DropdownLink to="/settings">Settings</DropdownLink>
         <DropdownItem divider />
