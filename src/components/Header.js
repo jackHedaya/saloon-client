@@ -1,15 +1,19 @@
 import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import { GoSearch } from 'react-icons/go'
+import { GoSearch, GoCheck, GoX } from 'react-icons/go'
 import {
   Dropdown,
   DropdownMenu,
   DropdownToggle,
   DropdownItem,
+  Badge,
+  Button,
 } from 'reactstrap'
 
 import ClearClasses from '../_helpers/ClearClasses'
+
+import { acceptInvite } from '../services/user.service'
 
 import useUser from '../hooks/useUser'
 import useAuth from '../hooks/useAuth'
@@ -36,7 +40,8 @@ function Header(props) {
       )}
       {isLoggedIn ? (
         <UserDropdown
-          name={user ? user.first_name : undefined}
+          name={user?.first_name}
+          invites={user?.invites}
           redirect={props.history.push}
         />
       ) : (
@@ -62,46 +67,116 @@ function Search(props) {
   )
 }
 
-function UserDropdown(props) {
+function UserDropdown({ name, invites, redirect }) {
   const [open, setOpen] = useState(false)
   const { setIsLoggedIn, setToken } = useAuth()
 
-  const [subOpen, setSubOpen] = useState(false)
-
   const toggle = () => setOpen(!open)
-  const subToggle = () => setSubOpen(!subOpen)
 
   const signOut = () => {
     setToken(null)
     setIsLoggedIn(false)
-    props.redirect('/')
+    redirect('/')
   }
 
   const DropdownLink = ({ to, ...other }) => (
-    <DropdownItem onClick={() => props.redirect(to)} {...other} />
+    <DropdownItem onClick={() => redirect(to)} {...other} />
   )
 
   return (
     <Dropdown isOpen={open} toggle={toggle} nav>
       <DropdownToggle caret className="login-account">
-        Hey, {props.name}
+        {name ? `Hey, ${name}` : 'Hey!'}
       </DropdownToggle>
       <DropdownMenu right>
         <DropdownLink to="/account">My Account</DropdownLink>
 
-        <Dropdown isOpen={subOpen} toggle={subToggle} direction="left">
-          <ClearClasses nClassName="dropdown-item">
-            <DropdownToggle caret>Invitations</DropdownToggle>
-          </ClearClasses>
-          <DropdownMenu>
-            <DropdownItem>Hello</DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
+        <InvitesDropdown
+          invites={invites}
+          redirect={to => {
+            toggle()
+            redirect(to)
+          }}
+        />
 
         <DropdownItem divider />
         <DropdownLink to="/settings">Settings</DropdownLink>
         <DropdownItem divider />
         <DropdownItem onClick={signOut}>Log Out</DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
+  )
+}
+
+function InvitesDropdown({ invites = [], redirect }) {
+  const [open, setOpen] = useState(false)
+  const { token } = useAuth()
+
+  const toggle = () => {
+    if (invites?.length < 1) {
+      setOpen(false)
+      return
+    }
+
+    setOpen(!open)
+  }
+
+  function InviteItem({ children: name, id }) {
+    return (
+      <div
+        className="sub-item dropdown-item"
+        onClick={() => {
+          toggle()
+          redirect(`/conversation/${id}`)
+        }}
+      >
+        <div className="title">{name}</div>
+        <span className="buttons">
+          <Button
+            outline
+            size="sm"
+            color="success"
+            style={{ marginRight: '5px' }}
+            onClick={e => {
+              acceptInvite(token, id)
+
+              e.stopPropagation()
+            }}
+          >
+            <GoCheck />
+          </Button>
+          <Button
+            outline
+            size="sm"
+            color="danger"
+            onClick={e => {
+              e.stopPropagation()
+            }}
+          >
+            <GoX />
+          </Button>
+        </span>
+      </div>
+    )
+  }
+
+  return (
+    <Dropdown isOpen={open} toggle={toggle} direction="left">
+      <ClearClasses nClassName="dropdown-item">
+        <DropdownToggle>
+          Invitations
+          <Badge style={{ marginLeft: '20px' }}>{invites?.length ?? 0}</Badge>
+        </DropdownToggle>
+      </ClearClasses>
+      <DropdownMenu>
+        {invites.map(invite => (
+          <InviteItem
+            key={`Notification/${invite.convo_id}`}
+            id={invite.convo_id}
+          >
+            {invite.title}
+          </InviteItem>
+        ))}
       </DropdownMenu>
     </Dropdown>
   )
