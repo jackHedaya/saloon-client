@@ -1,18 +1,38 @@
 .card-row {
-  position: relative;
-  display: flex;
-  justify-content: space-around;
   margin-bottom: 80px;
 
-  &:first-of-type {
-    margin-top: 40px;
+  &.flex {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+
+    &:first-of-type {
+      margin-top: 40px;
+    }
+
+    &:last-of-type {
+      margin-bottom: 40px;
+    }
   }
 
-  &:last-of-type {
-    margin-bottom: 40px;
+  &.noflex {
+    white-space: nowrap;
+    overflow: scroll;
+    padding: 5px;
+
+    .xcard {
+      vertical-align: top;
+      white-space: normal;
+      display: inline-block;
+      margin-right: 35px;
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+    }
   }
 
-  .home-card {
+  .xcard {
     position: relative;
     width: 290px;
     height: 200px;
@@ -75,6 +95,7 @@
     .views {
       left: 10px;
     }
+
     .age {
       right: 10px;
     }

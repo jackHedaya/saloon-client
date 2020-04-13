@@ -2,8 +2,8 @@
 $main-color: #1f1f1f
 $secondary-color: #1954c6
 
-$header-color: #ffffff;
-$navigation-color: #FAFAFA;
+$header-color: #ffffff
+$navigation-color: #FAFAFA
 
 // Global fonts
 $main-font: Arial, Helvetica, sans-serif
@@ -18,35 +18,43 @@ $header-height: 90px
   font-family: $main-font
 
 @mixin submit-button
-    max-width: 150px;
-    padding: 10px 15px;
-    border-style: none;
-    border-radius: 5px;
-    background-color: $main-color;
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
-    font-size: 17px;
-    font-weight: 500;
-    color: #fff;
-    display: block;
-    cursor: pointer;
-    outline: none;
-    -webkit-appearance: none;
+  max-width: 150px
+  padding: 10px 15px
+  border-style: none
+  border-radius: 5px
+  background-color: $main-color
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15)
+  font-size: 17px
+  font-weight: 500
+  color: #fff
+  display: block
+  cursor: pointer
+  outline: none
+  -webkit-appearance: none
 
-    &:hover 
-      background-color: $secondary-color;
-    
-.clear-input 
-  display: block;
-  box-shadow: none;
-  outline: none;
-  border: none;
+  &:hover
+    background-color: $secondary-color
+
+.clear-input
+  display: block
+  box-shadow: none
+  outline: none
+  border: none
+
+.column-page
+  margin: auto auto 0 auto
+  padding-bottom: 20px
+  display: flex
+  flex-direction: column
+  width: 90%
+  
 @mixin counter-bootstrap
-  color: inherit !important;
-  box-shadow: inherit !important;
-  border: none !important;
-  padding: 0 !important;
-  cursor: pointer !important;
-  outline: inherit !important;
+  color: inherit !important
+  box-shadow: inherit !important
+  border: none !important
+  padding: 0 !important
+  cursor: pointer !important
+  outline: inherit !important
 
 body
-  margin: 0;
+  margin: 0

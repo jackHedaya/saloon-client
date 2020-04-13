@@ -5,11 +5,15 @@ import { useHistory } from 'react-router-dom'
 
 import './styles/CardRow.scss'
 
-function CardRow(props) {
+/**
+ *
+ * @param {{ cards: Object[] noflex: Boolean }} props
+ */
+function CardRow({ cards = [], noflex = false }) {
   return (
-    <div className="card-row">
-      {props.cards?.length > 1 ? <div className="connector" /> : null}
-      {props.cards?.map(card => (
+    <div className={`card-row ${noflex ? 'noflex' : 'flex'}`}>
+      {cards?.length > 1 && !noflex ? <div className="connector" /> : null}
+      {cards?.map(card => (
         <Card {...card} key={`CardRow/${card.convo_id}`} />
       ))}
     </div>
@@ -24,7 +28,7 @@ function Card(props) {
 
   return (
     <div
-      className="home-card"
+      className="xcard"
       onClick={() => navigate(`/conversation/${props.convo_id}`)}
     >
       <div className="title">{props.title}</div>
