@@ -11,13 +11,14 @@ function Account() {
 
   return (
     <div className="column-page">
-      <div className="user-name">{`${user?.first_name} ${user?.last_name}`}</div>
+      <div className="user-name">{`${user?.first_name ??
+        'John'} ${user?.last_name ?? 'Smith'}`}</div>
 
       <div>History</div>
       <CardRow />
 
       <div>Liked Posts</div>
-      <CardRow />
+      <CardRow cards={user?.convos} noflex />
 
       <div>My Posts</div>
       <CardRow />
