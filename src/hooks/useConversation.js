@@ -14,7 +14,7 @@ export default function useConversation(id, { reload, token } = {}) {
     conversationService
       .getConversation(id, { token })
       .then((u) => setConvo(u))
-      .catch((_) => {})
+      .catch((_) => setConvo(null))
   }, [id, reload, token, didPersistLoad])
 
   return conversation

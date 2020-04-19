@@ -30,7 +30,7 @@ function Conversation(props) {
   const comments = useComments(id, { reload: commentReload, token })
 
   const [post, setPost] = useState('')
-  const [invited, setInvited] = useState(convo.contributors || [])
+  const [invited, setInvited] = useState(convo?.contributors || [])
 
   const inviteContributor = (newUser) => {
     setInvited([...invited, newUser])
@@ -69,24 +69,27 @@ function Conversation(props) {
       .catch((_) => {}) // Handle erroring later
   }
 
+  // If conversation doesn't exist redirect to home
+  if (!convo) props.history.push('/home')
+
   return (
     <div className="conversation">
       <Discussion
-        posts={convo.posts}
+        posts={convo?.posts}
         submit={postConvoPost}
         body={post}
         setBody={setPost}
         isLoggedIn={isLoggedIn}
-        isContributor={convo.isContributor}
+        isContributor={convo?.isContributor}
       />
       <Title
-        title={convo.title}
-        views={convo.views}
-        votes={convo.votes}
-        userVote={convo.vote}
+        title={convo?.title}
+        views={convo?.views}
+        votes={convo?.votes}
+        userVote={convo?.vote}
         updateVote={updateVote}
         isLoggedIn={isLoggedIn}
-        isContributor={convo.isContributor}
+        isContributor={convo?.isContributor}
         navigate={props.history.push}
         id={id}
       />
@@ -103,7 +106,7 @@ function Conversation(props) {
           style={{ width: '100px', transition: 'all 0.5s ease-in' }}
           sections={['active', 'invited']}
           invited={invited}
-          active={convo.contributors}
+          active={convo?.contributors}
           onInvite={inviteContributor}
           noTitle
         />
