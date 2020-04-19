@@ -4,7 +4,7 @@ import * as userService from '../services/user.service'
 
 import useAuth from './useAuth'
 
-export default function useUser({ reload }) {
+export default function useUser({ reload } = {}) {
   const { token, setToken, isLoggedIn, setIsLoggedIn } = useAuth()
   const [user, setUser] = useState(null)
 
