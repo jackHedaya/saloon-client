@@ -60,7 +60,10 @@ function Header(props) {
 function Search(props) {
   return (
     <div className="search-wrapper">
-      <input placeholder="Search..." />
+      <input
+        placeholder="Out for lunch, come back later  –Searchbar"
+        disabled
+      />
       <div className="i-wrapper">
         <div className="body">
           <GoSearch size={20} className="icon" color="white" />
