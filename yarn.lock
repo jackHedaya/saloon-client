@@ -9079,10 +9079,10 @@ react-app-polyfill@^1.0.6:
     regenerator-runtime "^0.13.3"
     whatwg-fetch "^3.0.0"
 
-react-avatar@^3.9.2:
-  version "3.9.2"
-  resolved "https://registry.yarnpkg.com/react-avatar/-/react-avatar-3.9.2.tgz#9c8366cbcd0ef94392c143f28a201abf4eefbac5"
-  integrity sha512-ow20ap4guO/3OVgo50gu3GJTGzjFiswuVVEJja1zFpw7H9cj/DeqAELVfEb5zgsi81Cq3progilPlypxtpPZiQ==
+react-avatar@^3.9.3:
+  version "3.9.3"
+  resolved "https://registry.yarnpkg.com/react-avatar/-/react-avatar-3.9.3.tgz#c131533f2b5c89b6ede4b47f976aed88776f46b9"
+  integrity sha512-DWx15KK44dZQRM9HGk+l8aF/5ghZW1OaB62Gj9i9ekDZ46mXRc+4zVK37rr17Gigi96riOwVxEVaWC0JaMCj8w==
   dependencies:
     core-js "^3.6.1"
     is-retina "^1.0.3"
