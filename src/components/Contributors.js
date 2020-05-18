@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { FiArrowRightCircle } from 'react-icons/fi'
 import Avatar from 'react-avatar'
 
-import useUser from '../hooks/useUser'
+import { useUser } from '../hooks/useUser'
 
 import { randomColor } from '../_helpers'
 
@@ -26,7 +26,7 @@ export default function Contributors(props) {
     active: ActiveSection,
   }
 
-  const invite = newUser => {
+  const invite = (newUser) => {
     if (
       !props.invited.includes(newUser) &&
       newUser.toLowerCase() !== (user ? user.username.toLowerCase() : null) &&
@@ -78,7 +78,7 @@ function ContributorSection(props) {
     <div className="section">
       <div className="title">{children}</div>
       <div className="users">
-        {(contributors || []).map(invite => (
+        {(contributors || []).map((invite) => (
           <Contributor key={`invite/${invite}`} color={color}>
             {invite}
           </Contributor>
@@ -125,9 +125,9 @@ function InviteBar(props) {
           placeholder="username"
           autoComplete="off"
           value={user}
-          onChange={e => setUser(e.currentTarget.value)}
-          onKeyDown={e => (e.key === 'Enter' ? inviteUser() : null)}
-          ref={input => (inputRef = input)}
+          onChange={(e) => setUser(e.currentTarget.value)}
+          onKeyDown={(e) => (e.key === 'Enter' ? inviteUser() : null)}
+          ref={(input) => (inputRef = input)}
         />
         <FiArrowRightCircle className="submit" onClick={inviteUser} />
       </div>

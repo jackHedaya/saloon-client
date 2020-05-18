@@ -4,7 +4,7 @@ import * as userService from '../services/user.service'
 
 import useAuth from './useAuth'
 
-export default function useUser() {
+export function useUser({ reload } = {}) {
   const { token, setToken, isLoggedIn, setIsLoggedIn } = useAuth()
   const [user, setUser] = useState(null)
 
@@ -19,9 +19,25 @@ export default function useUser() {
 
     userService
       .getUser(token)
-      .then(u => setUser(u))
-      .catch(_ => logout())
+      .then((u) => setUser(u))
+      .catch((_) => logout())
   }, [token, setToken, isLoggedIn, setIsLoggedIn])
 
   return user
+}
+
+export function useLiked({ reload } = {}) {
+  const { token, isLoggedIn } = useAuth()
+  const [liked, setLiked] = useState(null)
+
+  useEffect(() => {
+    if (!token || !isLoggedIn) return
+
+    userService
+      .getLiked(token)
+      .then((liked) => setLiked(liked))
+      .catch((_) => setLiked(null))
+  }, [token, isLoggedIn, reload])
+
+  return liked
 }

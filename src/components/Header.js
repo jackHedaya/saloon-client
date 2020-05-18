@@ -15,8 +15,9 @@ import ClearClasses from '../_helpers/ClearClasses'
 
 import { acceptInvite } from '../services/user.service'
 
-import useUser from '../hooks/useUser'
 import useAuth from '../hooks/useAuth'
+import useReload from '../hooks/useReload'
+import { useUser } from '../hooks/useUser'
 
 import './styles/Header.scss'
 
@@ -93,7 +94,7 @@ function UserDropdown({ name, invites, redirect }) {
 
         <InvitesDropdown
           invites={invites}
-          redirect={to => {
+          redirect={(to) => {
             toggle()
             redirect(to)
           }}
@@ -137,7 +138,7 @@ function InvitesDropdown({ invites = [], redirect }) {
             size="sm"
             color="success"
             style={{ marginRight: '5px' }}
-            onClick={e => {
+            onClick={(e) => {
               acceptInvite(token, id)
 
               e.stopPropagation()
@@ -149,7 +150,7 @@ function InvitesDropdown({ invites = [], redirect }) {
             outline
             size="sm"
             color="danger"
-            onClick={e => {
+            onClick={(e) => {
               e.stopPropagation()
             }}
           >
@@ -169,7 +170,7 @@ function InvitesDropdown({ invites = [], redirect }) {
         </DropdownToggle>
       </ClearClasses>
       <DropdownMenu>
-        {invites.map(invite => (
+        {invites.map((invite) => (
           <InviteItem
             key={`Notification/${invite.convo_id}`}
             id={invite.convo_id}
