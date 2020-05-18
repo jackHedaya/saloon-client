@@ -4,7 +4,8 @@ import * as userService from '../services/user.service'
 
 import useAuth from './useAuth'
 
-export function useUser({ reload } = {}) {
+
+export default function useUser({ reload } = {}) {
   const { token, setToken, isLoggedIn, setIsLoggedIn } = useAuth()
   const [user, setUser] = useState(null)
 
@@ -21,7 +22,7 @@ export function useUser({ reload } = {}) {
       .getUser(token)
       .then((u) => setUser(u))
       .catch((_) => logout())
-  }, [token, setToken, isLoggedIn, setIsLoggedIn])
+  }, [token, setToken, isLoggedIn, setIsLoggedIn, reload])
 
   return user
 }

@@ -23,7 +23,8 @@ import './styles/Header.scss'
 
 function Header(props) {
   const { isLoggedIn } = useAuth()
-  const user = useUser()
+  const [reload, reloadUser] = useReload()
+  const user = useUser({ reload })
 
   return (
     <div className="header">
@@ -44,6 +45,7 @@ function Header(props) {
           name={user?.first_name}
           invites={user?.invites}
           redirect={props.history.push}
+          reload={reloadUser}
         />
       ) : (
         <div className="login-account">
@@ -58,7 +60,10 @@ function Header(props) {
 function Search(props) {
   return (
     <div className="search-wrapper">
-      <input placeholder="Search..." />
+      <input
+        placeholder="Out for lunch, come back later  –Searchbar"
+        disabled
+      />
       <div className="i-wrapper">
         <div className="body">
           <GoSearch size={20} className="icon" color="white" />
@@ -68,7 +73,7 @@ function Search(props) {
   )
 }
 
-function UserDropdown({ name, invites, redirect }) {
+function UserDropdown({ name, invites, redirect, reload }) {
   const [open, setOpen] = useState(false)
   const { setIsLoggedIn, setToken } = useAuth()
 
@@ -98,6 +103,7 @@ function UserDropdown({ name, invites, redirect }) {
             toggle()
             redirect(to)
           }}
+          reload={reload}
         />
 
         <DropdownItem divider />
@@ -109,7 +115,7 @@ function UserDropdown({ name, invites, redirect }) {
   )
 }
 
-function InvitesDropdown({ invites = [], redirect }) {
+function InvitesDropdown({ invites = [], redirect, reload }) {
   const [open, setOpen] = useState(false)
   const { token } = useAuth()
 
@@ -120,6 +126,22 @@ function InvitesDropdown({ invites = [], redirect }) {
     }
 
     setOpen(!open)
+  }
+
+  const acceptInviteClick = (e, token, id) => {
+    acceptInvite(token, id)
+      .then((_) => reload())
+      .catch((_) => reload()) // Send little popup in the future
+
+    e.stopPropagation()
+  }
+
+  const rejectInviteClick = (e, token, id) => {
+    // rejectInvite(token, id)
+    // .then(_ => reload())
+    // .catch(_ => reload()) // Send little popup in the future
+
+    e.stopPropagation()
   }
 
   function InviteItem({ children: name, id }) {
@@ -138,11 +160,7 @@ function InvitesDropdown({ invites = [], redirect }) {
             size="sm"
             color="success"
             style={{ marginRight: '5px' }}
-            onClick={(e) => {
-              acceptInvite(token, id)
-
-              e.stopPropagation()
-            }}
+            onClick={(e) => acceptInviteClick(e, token, id)}
           >
             <GoCheck />
           </Button>
@@ -150,9 +168,7 @@ function InvitesDropdown({ invites = [], redirect }) {
             outline
             size="sm"
             color="danger"
-            onClick={(e) => {
-              e.stopPropagation()
-            }}
+            onClick={(e) => rejectInviteClick(e, token, id)}
           >
             <GoX />
           </Button>

@@ -3,6 +3,8 @@ import Avatar from 'react-avatar'
 
 import { useHistory } from 'react-router-dom'
 
+import { randomColor } from '../_helpers'
+
 import './styles/CardRow.scss'
 
 /**
@@ -13,7 +15,7 @@ function CardRow({ cards = [], noflex = false }) {
   return (
     <div className={`card-row ${noflex ? 'noflex' : 'flex'}`}>
       {cards?.length > 1 && !noflex ? <div className="connector" /> : null}
-      {cards?.map(card => (
+      {cards?.map((card) => (
         <Card {...card} key={`CardRow/${card.convo_id}`} />
       ))}
     </div>
@@ -32,9 +34,19 @@ function Card(props) {
       onClick={() => navigate(`/conversation/${props.convo_id}`)}
     >
       <div className="title">{props.title}</div>
-      <Avatar name={props.contributors?.[0]} round size={AVATAR_SIZE} />
+      <Avatar
+        name={props.contributors?.[0]}
+        round
+        size={AVATAR_SIZE}
+        color={randomColor(props.contributors?.[0])}
+      />
       {props.contributors.length > 1 && (
-        <Avatar name={props.contributors[1]} round size={AVATAR_SIZE} />
+        <Avatar
+          name={props.contributors[1]}
+          round
+          size={AVATAR_SIZE}
+          color={randomColor(props.contributors?.[1])}
+        />
       )}
       <DiscussedBy contributors={props.contributors || []} />
       <div className="age">{props.age}</div>
@@ -44,7 +56,7 @@ function Card(props) {
 }
 
 function DiscussedBy({ contributors }) {
-  const format = list => {
+  const format = (list) => {
     if (list.length === 1) return list[0]
     else if (list.length === 2) return `${list[0]} and ${list[1]}`
     else if (list.length === 3) return `${list[0]}, ${list[1]} and ${list[2]}`

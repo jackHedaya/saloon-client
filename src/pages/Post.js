@@ -18,7 +18,7 @@ export default function Post(props) {
   const [body, setBody] = useState('')
 
   const [invited, setInvited] = useState([])
-  const addInvited = newUser => setInvited([...invited, newUser])
+  const addInvited = (newUser) => setInvited([...invited, newUser])
 
   const [submitting, setSubmitting] = useState(false)
 
@@ -27,11 +27,18 @@ export default function Post(props) {
 
     conversationService
       .postConversation(token, { title, body })
-      .then(data => {
-        setSubmitting(false)
-        props.history.push(`/conversation/${data.convo_id}`)
+      .then(({ convo_id }) => {
+        return conversationService
+          .postContributor(invited, { convo_id, token })
+          .then((_) => convo_id)
+          .catch((_) => Promise.reject())
       })
-      .catch(_ => {
+      .then((convo_id) => {
+        setSubmitting(false)
+
+        props.history.push(`/conversation/${convo_id}`)
+      })
+      .catch((_) => {
         setSubmitting(false)
       })
   }
@@ -73,9 +80,9 @@ function Editor(props) {
         className="post-title"
         placeholder="Title"
         value={title}
-        onChange={e => setTitle(e.currentTarget.value)}
+        onChange={(e) => setTitle(e.currentTarget.value)}
       />
-      <ConfiguredQuill value={body} onChange={val => setBody(val)} />
+      <ConfiguredQuill value={body} onChange={(val) => setBody(val)} />
     </div>
   )
 }

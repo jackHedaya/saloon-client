@@ -30,15 +30,15 @@ function Conversation(props) {
   const comments = useComments(id, { reload: commentReload, token })
 
   const [post, setPost] = useState('')
-  const [invited, setInvited] = useState(convo.contributors || [])
+  const [invited, setInvited] = useState(convo?.contributors || [])
 
-  const inviteContributor = newUser => {
+  const inviteContributor = (newUser) => {
     setInvited([...invited, newUser])
 
     conversationService
       .postContributor(newUser, { token, convo_id: id })
-      .then(_ => reloadConvo())
-      .catch(_ => {}) // Handle erroring later
+      .then((_) => reloadConvo())
+      .catch((_) => {}) // Handle erroring later
   }
 
   const postConvoPost = () => {
@@ -48,45 +48,48 @@ function Conversation(props) {
         reloadConvo()
         setPost('')
       })
-      .catch(_ => {}) // Handle erroring later
+      .catch((_) => {}) // Handle erroring later
   }
 
   function postComment(comment) {
     return commentService
       .postComment(token, { convo_id: id, comment })
       .then(() => reloadComments())
-      .catch(_ => {}) // Handle erroring later
+      .catch((_) => {}) // Handle erroring later
   }
 
   /**
    *
    * @param {'1' | '0' | '-1'} vote
    */
-  const updateVote = vote => {
+  const updateVote = (vote) => {
     conversationService
       .putVote(id, { token, vote })
       .then(() => reloadConvo())
-      .catch(_ => {}) // Handle erroring later
+      .catch((_) => {}) // Handle erroring later
   }
+
+  // If conversation doesn't exist redirect to home
+  if (!convo) props.history.push('/home')
 
   return (
     <div className="conversation">
       <Discussion
-        posts={convo.posts}
+        posts={convo?.posts}
         submit={postConvoPost}
         body={post}
         setBody={setPost}
         isLoggedIn={isLoggedIn}
-        isContributor={convo.isContributor}
+        isContributor={convo?.isContributor}
       />
       <Title
-        title={convo.title}
-        views={convo.views}
-        votes={convo.votes}
-        userVote={convo.vote}
+        title={convo?.title}
+        views={convo?.views}
+        votes={convo?.votes}
+        userVote={convo?.vote}
         updateVote={updateVote}
         isLoggedIn={isLoggedIn}
-        isContributor={convo.isContributor}
+        isContributor={convo?.isContributor}
         navigate={props.history.push}
         id={id}
       />
@@ -103,7 +106,7 @@ function Conversation(props) {
           style={{ width: '100px', transition: 'all 0.5s ease-in' }}
           sections={['active', 'invited']}
           invited={invited}
-          active={convo.contributors}
+          active={convo?.contributors}
           onInvite={inviteContributor}
           noTitle
         />
@@ -112,20 +115,18 @@ function Conversation(props) {
   )
 }
 
-function Title(props) {
-  const {
-    title,
-    views,
-    votes,
-    userVote,
-    updateVote,
-    isLoggedIn,
-    isContributor,
-    navigate,
-    id,
-  } = props
-
-  const handleVote = nVote => {
+function Title({
+  title,
+  views,
+  votes,
+  userVote,
+  updateVote,
+  isLoggedIn,
+  isContributor,
+  navigate,
+  id,
+}) {
+  const handleVote = (nVote) => {
     if (nVote === userVote) updateVote(0)
     else updateVote(nVote)
   }
@@ -139,7 +140,7 @@ function Title(props) {
           <div
             className="join"
             onClick={() =>
-              isContributor
+              isLoggedIn
                 ? false // Handle contributor request
                 : navigate({
                     pathname: '/login',
@@ -160,9 +161,7 @@ function Title(props) {
   )
 }
 
-function TitleVote(props) {
-  const { votes = '0', userVote, setVote } = props
-
+function TitleVote({ votes = '0', userVote, setVote }) {
   return (
     <div className="vote">
       <FiThumbsUp
@@ -178,9 +177,14 @@ function TitleVote(props) {
   )
 }
 
-function Discussion(props) {
-  const { posts, body, setBody, submit, isLoggedIn, isContributor } = props
-
+function Discussion({
+  posts,
+  body,
+  setBody,
+  submit,
+  isLoggedIn,
+  isContributor,
+}) {
   return (
     <div className="discussion">
       <div className="inner">
@@ -204,9 +208,7 @@ function Discussion(props) {
   )
 }
 
-function DiscussionItem(props) {
-  const { contributor, post } = props
-
+function DiscussionItem({ contributor, post }) {
   return (
     <>
       <div className="item">
@@ -226,7 +228,7 @@ function Comments(props) {
     if (isSubmitting) return
     setIsSubmitting(true)
 
-    props.postComment(newComment).then(_ => {
+    props.postComment(newComment).then((_) => {
       setIsSubmitting(false)
       setNewComment('')
     })
@@ -245,7 +247,7 @@ function Comments(props) {
       <div className="add">
         <textarea
           value={newComment}
-          onChange={e => setNewComment(e.currentTarget.value)}
+          onChange={(e) => setNewComment(e.currentTarget.value)}
         />
         <button type="submit" onClick={postComment}>
           {!isSubmitting ? 'Submit' : 'Posting'}
@@ -255,8 +257,7 @@ function Comments(props) {
   )
 }
 
-function Comment(props) {
-  const { age, username, comment, votes } = props
+function Comment({ age, username, comment, votes }) {
   const [upvoted, setUpvoted] = useState(false)
 
   return (

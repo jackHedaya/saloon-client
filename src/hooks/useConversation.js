@@ -4,7 +4,7 @@ import useAuth from './useAuth'
 
 import * as conversationService from '../services/conversation.service'
 
-export default function useConversation(id, { reload, token }) {
+export default function useConversation(id, { reload, token } = {}) {
   const [conversation, setConvo] = useState({})
   const { didPersistLoad } = useAuth()
 
@@ -13,8 +13,8 @@ export default function useConversation(id, { reload, token }) {
 
     conversationService
       .getConversation(id, { token })
-      .then(u => setConvo(u))
-      .catch(_ => {})
+      .then((u) => setConvo(u))
+      .catch((_) => setConvo(null))
   }, [id, reload, token, didPersistLoad])
 
   return conversation
