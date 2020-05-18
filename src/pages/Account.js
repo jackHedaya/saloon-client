@@ -16,9 +16,6 @@ function Account() {
         user?.last_name ?? 'Smith'
       }`}</div>
 
-      <div className="section">History</div>
-      <CardRow />
-
       <div className="section">Liked Posts</div>
       <CardRow cards={liked?.convos} noflex />
 
