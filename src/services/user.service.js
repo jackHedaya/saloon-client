@@ -11,3 +11,7 @@ export function acceptInvite(token, convo_id) {
     body: { convo_id },
   })
 }
+
+export function getLiked(token) {
+  return fetch('/user/liked', { headers: { Authorization: token } })
+}

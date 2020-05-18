@@ -17,7 +17,7 @@ import { acceptInvite } from '../services/user.service'
 
 import useAuth from '../hooks/useAuth'
 import useReload from '../hooks/useReload'
-import useUser from '../hooks/useUser'
+import { useUser } from '../hooks/useUser'
 
 import './styles/Header.scss'
 
