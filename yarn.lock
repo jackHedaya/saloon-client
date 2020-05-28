@@ -1155,17 +1155,30 @@
   resolved "https://registry.yarnpkg.com/@react-hook/debounce/-/debounce-2.0.3.tgz#46b346580a19b41e9f25faad0a4103d7c7e5e1ba"
   integrity sha512-G1RStTQ5NJvy0N/Wydn+wdahpEJpdKe/KzTVEkGZ7DTKCixjbOD5TtBJfnkajQzfQUrgLely2JE65W58F2hb1A==
 
+"@react-hook/event@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@react-hook/event/-/event-1.1.0.tgz#c25034160ded4652d679b3994c96118057dc8d0b"
+  integrity sha512-jaVePoJXqQtQE4umQifLz+Uom4yC5GYTd5K/LrUVRnu0iMXtoIU5qiN4WIVwE6304P9VcBJTcMKtB/5iCC7brg==
+  dependencies:
+    "@react-hook/passive-layout-effect" "^1.0.3"
+
+"@react-hook/passive-layout-effect@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@react-hook/passive-layout-effect/-/passive-layout-effect-1.0.3.tgz#55faac3bce2ad2b4a12eb0c6a52903da32fdc006"
+  integrity sha512-VFUvBBSYWRigI/YhMRp28tncMWYVgzsUdmdIdZyJ3CpKgj5sLmm4RmJdIoKIfWO/WRX5XQ+83GW2E6VmqTHZ3g==
+
 "@react-hook/throttle@^2.1.2":
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/@react-hook/throttle/-/throttle-2.1.2.tgz#ff2b342655896dd210246f382e156cdb2ab599cf"
   integrity sha512-AmZX4wUXHJe/jN33elneFDt5zJN6f4uB9ruTDrBaUcA+Yroh+hjqBlL4/N3IL2sf6oyDRmL2eMQUgJoJN+akIg==
 
-"@react-hook/window-size@^2.0.4":
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/@react-hook/window-size/-/window-size-2.0.4.tgz#e6eb73a7c3b78f9ad79634ce47432905af830855"
-  integrity sha512-7Eo44fLY1ryiL6pOjcCUTxPqsBjVrj0TpJNCGaoqMc88KWYYI6p2micKCVGqIRqTY5HontZFrlkAL3ZoOVic9Q==
+"@react-hook/window-size@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@react-hook/window-size/-/window-size-2.1.1.tgz#4254b804facaa002aae9b01bb04eabd931ffd2f4"
+  integrity sha512-W9qr9kUt5pJU82XWUBxcGc2P2kFJPB3xSqmwanFKhiih26y7PmRUa01ZnaARyHZwrmfP/MQGEXBTliCgXc7Gfg==
   dependencies:
     "@react-hook/debounce" "^2.0.3"
+    "@react-hook/event" "^1.1.0"
     "@react-hook/throttle" "^2.1.2"
 
 "@svgr/babel-plugin-add-jsx-attribute@^4.2.0":
