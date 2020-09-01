@@ -1,4 +1,4 @@
-@import "../../globals.sass";
+@import '../../globals.sass';
 
 // Comment Pane Variables
 $sliding-speed: 0.5s;
@@ -34,7 +34,7 @@ $sliding-speed: 0.5s;
 
     .icon {
       background-color: white;
-      border: 1px solid rgba(136, 136, 136, 0.4);
+      //border: 1px solid rgba(136, 136, 136, 0.4);
       border-right: none;
       transform: translate(1px, 0);
       position: relative; // Done to force z-index
