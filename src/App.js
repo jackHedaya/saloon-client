@@ -53,7 +53,9 @@ function App() {
       <Router>
         <div>
           <Header />
-          {window.innerWidth >= 500 && <Navigation />}
+          <div className="nav">
+            <Navigation />
+          </div>
           <div className="content">
             <Switch>
               <Redirect exact from="/" to="/home" />

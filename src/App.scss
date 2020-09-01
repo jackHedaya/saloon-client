@@ -20,4 +20,8 @@ $edge-padding: 20px;
     width: calc(100vw - #{$edge-padding});
     height: calc(100vh - #{$edge-padding} - #{$header-height});
   }
+
+  .nav {
+    display: none;
+  }
 }
