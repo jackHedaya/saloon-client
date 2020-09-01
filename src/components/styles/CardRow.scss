@@ -113,3 +113,9 @@
     z-index: -5;
   }
 }
+
+@media (max-width: 499px) {
+  .card-row {
+    margin-bottom: 50px;
+  }
+}
