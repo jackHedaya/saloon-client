@@ -34,8 +34,8 @@ function Header(props) {
         </Link>
         <span id="slogan">Conversation Reimagined</span>
       </span>
-      <Search />
-      {isLoggedIn && (
+      {window.innerWidth >= 500 && <Search />}
+      {isLoggedIn && window.innerWidth >= 500 && (
         <Link to="/post" className="login-account">
           Post
         </Link>
@@ -95,6 +95,10 @@ function UserDropdown({ name, invites, redirect, reload }) {
         {name ? `Hey, ${name}` : 'Hey!'}
       </DropdownToggle>
       <DropdownMenu right>
+        {window.innerWidth < 500 && (
+          <DropdownLink to="/post">Post</DropdownLink>
+        )}
+
         <DropdownLink to="/account">My Account</DropdownLink>
 
         <InvitesDropdown
