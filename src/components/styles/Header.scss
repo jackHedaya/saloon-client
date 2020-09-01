@@ -34,7 +34,7 @@
 
     clear: both;
     font-weight: normal;
-    font-size: 0.9em;
+    font-size: 0.75em;
     font-style: italic;
     float: right;
   }
@@ -68,8 +68,6 @@
       color: $main-color !important;
       background: none !important;
     }
-
-
   }
 
   .dropdown-item {
@@ -89,7 +87,7 @@
       top: 50%;
       transform: translate(0, -50%);
       left: 5%;
-      
+
       width: 60px;
       display: inline-block;
       text-overflow: ellipsis;
@@ -152,5 +150,23 @@ a {
 
   &:hover {
     text-decoration: none;
+  }
+}
+
+@media (max-width: 499px) {
+  .header {
+    height: calc($header-height);
+
+    #logo {
+      margin-left: 20px;
+    }
+
+    .login-account {
+      margin-right: 20px;
+    }
+  }
+
+  a {
+    color: black;
   }
 }
