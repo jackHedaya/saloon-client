@@ -155,7 +155,7 @@ a {
 
 @media (max-width: 499px) {
   .header {
-    height: calc($header-height);
+    height: calc(#{$header-height} - 10px);
 
     #logo {
       margin-left: 20px;
