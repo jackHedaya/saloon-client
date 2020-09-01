@@ -34,12 +34,14 @@ function Header(props) {
         </Link>
         <span id="slogan">Conversation Reimagined</span>
       </span>
-      {window.innerWidth >= 500 && <Search />}
-      {isLoggedIn && window.innerWidth >= 500 && (
-        <Link to="/post" className="login-account">
-          Post
-        </Link>
-      )}
+      <div className="search">
+        <Search />
+        {isLoggedIn && (
+          <Link to="/post" className="login-account">
+            Post
+          </Link>
+        )}
+      </div>
       {isLoggedIn ? (
         <UserDropdown
           name={user?.first_name}
