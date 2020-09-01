@@ -240,3 +240,36 @@ $content-width: calc(100% - 60px - #{$panel-padding});
     color: $main-color;
   }
 }
+
+@media (max-width: 750px) {
+  $panel-padding: 20px;
+
+  $content-width: calc(100% - 15px - #{$panel-padding});
+
+  .conversation {
+    .discussion {
+      width: $content-width;
+
+      .inner {
+        box-sizing: content-box;
+        margin: 0 auto;
+        flex-direction: column;
+        display: flex;
+        max-width: 85%;
+        margin-top: 30px;
+        justify-content: space-evenly;
+      }
+    }
+
+    .d-title {
+      margin-left: 10px;
+      //width: calc(#{$content-width} + 40px);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-around;
+      border-top: 2px solid rgb(175, 175, 175);
+      text-align: center;
+    }
+  }
+}
