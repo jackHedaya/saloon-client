@@ -1,4 +1,4 @@
-@import "./globals.sass";
+@import './globals.sass';
 
 $edge-padding: 20px;
 
@@ -8,4 +8,16 @@ $edge-padding: 20px;
 
   width: calc(100vw - #{$edge-padding} - #{$navigation-width});
   height: calc(100vh - #{$edge-padding} - #{$header-height});
+}
+
+@media (max-width: 499px) {
+  $edge-padding: 10px;
+
+  .content {
+    margin-left: calc(#{$edge-padding});
+    margin-top: calc(#{$header-height} + #{$edge-padding});
+
+    width: calc(100vw - #{$edge-padding});
+    height: calc(100vh - #{$edge-padding} - #{$header-height});
+  }
 }

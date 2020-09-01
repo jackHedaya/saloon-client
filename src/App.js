@@ -44,7 +44,7 @@ function App() {
       <Persist
         data={{ token, isLoggedIn }}
         debounce={500}
-        onMount={data => {
+        onMount={(data) => {
           setIsLoggedIn(data.isLoggedIn)
           setToken(data.token)
         }}
@@ -53,7 +53,7 @@ function App() {
       <Router>
         <div>
           <Header />
-          <Navigation />
+          {window.innerWidth >= 500 && <Navigation />}
           <div className="content">
             <Switch>
               <Redirect exact from="/" to="/home" />
@@ -86,7 +86,7 @@ function SecuredRoute({ component: Component, authenticated, ...rest }) {
   return (
     <Route
       {...rest}
-      render={props =>
+      render={(props) =>
         authenticated === true ? (
           <Component {...props} {...rest} />
         ) : (
