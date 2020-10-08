@@ -38,8 +38,10 @@ export default function Post(props) {
 
         props.history.push(`/conversation/${convo_id}`)
       })
-      .catch((_) => {
+      .catch((convo_id) => {
         setSubmitting(false)
+
+        props.history.push(`/conversation/${convo_id}`)
       })
   }
 
