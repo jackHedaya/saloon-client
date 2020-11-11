@@ -15,6 +15,7 @@ import About from './pages/About'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Account from './pages/Account'
+import Profile from './pages/Profile'
 import Conversation from './pages/Conversation'
 import Post from './pages/Post'
 
@@ -64,6 +65,7 @@ function App() {
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/conversation/:id" component={Conversation} />
+              <Route exact path="/profile/:id" component={Profile} />
               <SecuredRoute
                 exact
                 path="/account"
