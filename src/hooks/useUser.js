@@ -41,3 +41,16 @@ export function useLiked({ reload } = {}) {
 
   return liked
 }
+
+export function useProfile(id) {
+  const [profile, setProfile] = useState(null)
+
+  useEffect(() => {
+    userService
+      .getProfile(id)
+      .then((u) => setProfile(u))
+      .catch((_) => setProfile(null))
+  })
+
+  return profile
+}
